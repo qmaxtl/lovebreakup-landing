@@ -1,86 +1,107 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Your AI Healing Companion After a Breakup" />
-  <meta property="og:title" content="LoveBreakup.com" />
-  <meta property="og:description" content="Your AI Healing Companion After a Breakup" />
-  <meta property="og:image" content="/preview.png" />
-  <title>LoveBreakup.com</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <title>LoveBreakup.com</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffe0e6, #f3a6b1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: auto;
+        }
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left;
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.6rem;
+            color: #c0392b;
+        }
+        .card p {
+            font-size: 1rem;
+            margin: 16px 0;
+        }
+        .card .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+        }
+        .card button {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .card button:hover {
+            background-color: #e85c50;
+        }
+    </style>
 </head>
-
-<body class="bg-gradient-to-b from-pink-100 to-pink-200 font-sans">
-  <!-- Top Navbar -->
-  <header class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-50">
-    <div class="text-xl font-bold text-pink-600">💔 LoveBreakup</div>
-    <nav class="space-x-4 text-gray-700">
-      <a href="#" class="hover:text-pink-600">Home</a>
-      <a href="#about" class="hover:text-pink-600">About</a>
-      <a href="#faq" class="hover:text-pink-600">FAQ</a>
-      <a href="#contact" class="hover:text-pink-600">Contact</a>
-      <a href="#blog" class="hover:text-pink-600">Blog</a>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="text-center py-10">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Your AI Healing Companion After a Breakup 💔</h1>
-    <p class="text-gray-600 text-lg">Let AI guide you day by day toward emotional recovery.</p>
-  </section>
-
-  <!-- Feature Blocks -->
-  <main class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6 mb-12">
-    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-      <h2 class="text-xl font-bold text-pink-600 mb-2">💻 Morning Prompts</h2>
-      <p class="text-gray-700">Start your day with clarity & calm — generated just for you by AI.</p>
-      <button class="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg">Get Prompt</button>
+<body>
+    <div class="grid">
+        <div class="card">
+            <h2>💻 Morning Prompts</h2>
+            <p>Start your day with clarity & calm — generated just for you by AI.</p>
+            <div class="button-container">
+                <button>Get Today’s Prompt</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>📘 30-Day Healing Plan</h2>
+            <p>A day-by-day guided journey to emotional recovery.</p>
+            <div class="button-container">
+                <button>Start Plan</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>📊 Emotion Tracker</h2>
+            <p>Track your feelings daily and visualize your healing progress.</p>
+            <div class="button-container">
+                <button>Track Now</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>🧘‍♂️ Mindfulness Reminders</h2>
+            <p>Receive daily nudges to practice mindfulness and self-care.</p>
+            <div class="button-container">
+                <button>Enable Reminders</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>🔐 Privacy-First</h2>
+            <p>All your data stays private. No tracking, ever.</p>
+            <div class="button-container">
+                <button>Learn More</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>🎯 Daily Mission</h2>
+            <p>Get daily challenges to motivate healing and self-discovery.</p>
+            <div class="button-container">
+                <button>View Mission</button>
+            </div>
+        </div>
     </div>
-    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-      <h2 class="text-xl font-bold text-pink-600 mb-2">📘 30-Day Healing Plan</h2>
-      <p class="text-gray-700">A day-by-day guided journey to emotional recovery.</p>
-      <button class="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg">Start Plan</button>
-    </div>
-    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-      <h2 class="text-xl font-bold text-pink-600 mb-2">📊 Emotion Tracker</h2>
-      <p class="text-gray-700">Track your feelings daily and visualize your healing progress.</p>
-      <button class="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg">Track Now</button>
-    </div>
-    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-      <h2 class="text-xl font-bold text-pink-600 mb-2">🧘 Mindfulness Reminders</h2>
-      <p class="text-gray-700">Daily nudges to stay present and grounded.</p>
-      <button class="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg">Enable</button>
-    </div>
-    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-      <h2 class="text-xl font-bold text-pink-600 mb-2">🔐 Privacy-First</h2>
-      <p class="text-gray-700">Your data is yours. No tracking, ever.</p>
-      <button class="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg">Learn More</button>
-    </div>
-    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-      <h2 class="text-xl font-bold text-pink-600 mb-2">🎯 Daily Mission</h2>
-      <p class="text-gray-700">Get daily challenges to build strength and confidence.</p>
-      <button class="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg">View Mission</button>
-    </div>
-  </main>
-
-  <!-- Testimonials -->
-  <section class="bg-white py-10" id="testimonials">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">What People Are Saying</h2>
-      <div class="grid md:grid-cols-3 gap-6 text-gray-600">
-        <blockquote><em>“This helped me through a really rough time.”</em></blockquote>
-        <blockquote><em>“Felt like someone finally understood me. Thank you!”</em></blockquote>
-        <blockquote><em>“The prompts gave me the clarity I needed.”</em></blockquote>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="text-center py-6 text-gray-600 text-sm">
-    &copy; 2025 LoveBreakup.com. All rights reserved.
-  </footer>
 </body>
-
 </html>
