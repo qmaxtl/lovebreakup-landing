@@ -1,47 +1,135 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LoveBreakup.com – AI Healing After Heartbreak</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  </head>
-  <body class="bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 min-h-screen font-sans">
-    <div class="max-w-4xl mx-auto text-center py-20 px-4">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-red-600 mb-2">LoveBreakup.com</h1>
-      <p class="text-lg text-gray-700">Your AI Healing Partner After a Breakup 💔</p>
-      <p class="text-md text-gray-600 mt-1 mb-6">Custom recovery plans, daily prompts & emotional clarity.</p>
-      <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-full transition">Start Healing Today</a>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 pb-20">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white shadow-lg rounded-xl p-6">
-          <h3 class="text-xl font-semibold text-red-500 mb-2">💻 Morning Prompts</h3>
-          <p class="text-gray-600">Start your day with clarity & calm — generated just for you by AI.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-xl p-6">
-          <h3 class="text-xl font-semibold text-red-500 mb-2">📘 30-Day Healing Plan</h3>
-          <p class="text-gray-600">A personal journey crafted by AI to guide you out of the pain.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-xl p-6">
-          <h3 class="text-xl font-semibold text-red-500 mb-2">📈 Emotion Tracker</h3>
-          <p class="text-gray-600">Visualize your growth. Watch your progress unfold daily.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-xl p-6">
-          <h3 class="text-xl font-semibold text-red-500 mb-2">🧘 Mindfulness Reminders</h3>
-          <p class="text-gray-600">Gentle nudges to breathe, reflect, and heal without pressure.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-xl p-6">
-          <h3 class="text-xl font-semibold text-red-500 mb-2">🔒 Privacy-First</h3>
-          <p class="text-gray-600">No signups, no judgment. 100% private and anonymous healing.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-xl p-6">
-          <h3 class="text-xl font-semibold text-red-500 mb-2">🎯 Daily Mission</h3>
-          <p class="text-gray-600">One small task daily to rebuild confidence and regain peace.</p>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LoveBreakup.com</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fce4ec, #e1f5fe);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #d32f2f;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      width: 300px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #e53935;
+      margin-bottom: 0.5rem;
+    }
+    .desc {
+      font-size: 1rem;
+      color: #333;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 80%;
+    }
+    .close-btn {
+      float: right;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>LoveBreakup.com</h1>
+    <p>Your AI Healing Partner After a Breakup 💔</p>
+    <div class="cards">
+      <div class="card" onclick="openModal('morning')">
+        <div class="title">💻 Morning Prompts</div>
+        <div class="desc">Start your day with clarity & calm — generated just for you by AI.</div>
+      </div>
+      <div class="card" onclick="openModal('healing')">
+        <div class="title">📘 30-Day Healing Plan</div>
+        <div class="desc">A personal journey crafted by AI to guide you out of the pain.</div>
+      </div>
+      <div class="card" onclick="openModal('emotion')">
+        <div class="title">📈 Emotion Tracker</div>
+        <div class="desc">Visualize your growth. Watch your progress unfold daily.</div>
+      </div>
+      <div class="card" onclick="openModal('mindfulness')">
+        <div class="title">🧘‍♀️ Mindfulness Reminders</div>
+        <div class="desc">Gentle nudges to breathe, reflect, and heal without pressure.</div>
+      </div>
+      <div class="card" onclick="openModal('privacy')">
+        <div class="title">🔐 Privacy-First</div>
+        <div class="desc">No signups, no judgment. 100% private and anonymous healing.</div>
+      </div>
+      <div class="card" onclick="openModal('mission')">
+        <div class="title">🎯 Daily Mission</div>
+        <div class="desc">One small task daily to rebuild confidence and regain peace.</div>
       </div>
     </div>
-  </body>
+  </div>
+
+  <div id="modal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <p id="modal-text">...</p>
+    </div>
+  </div>
+
+  <script>
+    const content = {
+      morning: "Start your day with a powerful prompt to reflect, feel, and grow stronger.",
+      healing: "Follow a simple 30-day plan with daily healing steps and check-ins.",
+      emotion: "Track your emotions each day to visualize progress and self-awareness.",
+      mindfulness: "Receive calming reminders to pause and reconnect with your breath.",
+      privacy: "Your journey stays private—everything happens locally, no logins.",
+      mission: "Each day, get one small but meaningful mission to move forward."
+    };
+
+    function openModal(type) {
+      document.getElementById("modal-text").innerText = content[type];
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+</body>
 </html>
