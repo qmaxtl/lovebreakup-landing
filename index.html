@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,110 +7,128 @@
   <title>LoveBreakup.com</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(to right, #fbd3e9, #bbd2c5);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fce4ec, #e1f5fe);
       margin: 0;
-      padding: 2em;
+      padding: 0;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
     }
     h1 {
-      color: #c50032;
+      font-size: 2.5rem;
+      color: #d32f2f;
     }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 2em;
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
     }
     .card {
-      background: #fff;
+      background: white;
       border-radius: 12px;
-      padding: 1.5em;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      width: 300px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: left;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
     }
     .card:hover {
       transform: translateY(-5px);
     }
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #e53935;
+      margin-bottom: 0.5rem;
+    }
+    .desc {
+      font-size: 1rem;
+      color: #333;
+    }
     .modal {
+      display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      display: none;
-      justify-content: center;
+      background-color: rgba(0,0,0,0.5);
       align-items: center;
+      justify-content: center;
     }
     .modal-content {
-      background: #fff;
-      padding: 2em;
-      border-radius: 8px;
-      max-width: 600px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      position: relative;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 80%;
     }
-    .close {
-      position: absolute;
-      top: 10px; right: 10px;
-      font-size: 1.2em;
+    .close-btn {
+      float: right;
+      font-size: 1.2rem;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>LoveBreakup.com</h1>
-  <p>Your AI Healing Partner After a Breakup 💔</p>
-
-  <div class="card-grid">
-    <div class="card" onclick="getPrompt('morning')">
-      💻 <strong>Morning Prompts</strong><br/>
-      Start your day with clarity & calm — generated just for you by AI.
+  <div class="container">
+    <h1>LoveBreakup.com</h1>
+    <p>Your AI Healing Partner After a Breakup 💔</p>
+    <div class="cards">
+      <div class="card" onclick="openModal('morning')">
+        <div class="title">💻 Morning Prompts</div>
+        <div class="desc">Start your day with clarity & calm — generated just for you by AI.</div>
+      </div>
+      <div class="card" onclick="openModal('healing')">
+        <div class="title">📘 30-Day Healing Plan</div>
+        <div class="desc">A personal journey crafted by AI to guide you out of the pain.</div>
+      </div>
+      <div class="card" onclick="openModal('emotion')">
+        <div class="title">📈 Emotion Tracker</div>
+        <div class="desc">Visualize your growth. Watch your progress unfold daily.</div>
+      </div>
+      <div class="card" onclick="openModal('mindfulness')">
+        <div class="title">🧘‍♀️ Mindfulness Reminders</div>
+        <div class="desc">Gentle nudges to breathe, reflect, and heal without pressure.</div>
+      </div>
+      <div class="card" onclick="openModal('privacy')">
+        <div class="title">🔐 Privacy-First</div>
+        <div class="desc">No signups, no judgment. 100% private and anonymous healing.</div>
+      </div>
+      <div class="card" onclick="openModal('mission')">
+        <div class="title">🎯 Daily Mission</div>
+        <div class="desc">One small task daily to rebuild confidence and regain peace.</div>
+      </div>
     </div>
-    <div class="card">📘 <strong>30-Day Healing Plan</strong><br/>Coming soon...</div>
-    <div class="card">📈 <strong>Emotion Tracker</strong><br/>Coming soon...</div>
-    <div class="card">🧘‍♂️ <strong>Mindfulness Reminders</strong><br/>Coming soon...</div>
-    <div class="card">🔒 <strong>Privacy-First</strong><br/>Coming soon...</div>
-    <div class="card">🎯 <strong>Daily Mission</strong><br/>Coming soon...</div>
   </div>
 
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <div id="modalText">Loading prompt...</div>
+  <div id="modal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <p id="modal-text">...</p>
     </div>
   </div>
 
   <script>
-    function openModal(content) {
-      document.getElementById('modalText').innerText = content;
-      document.getElementById('modal').style.display = 'flex';
+    const content = {
+      morning: "Start your day with a powerful prompt to reflect, feel, and grow stronger.",
+      healing: "Follow a simple 30-day plan with daily healing steps and check-ins.",
+      emotion: "Track your emotions each day to visualize progress and self-awareness.",
+      mindfulness: "Receive calming reminders to pause and reconnect with your breath.",
+      privacy: "Your journey stays private—everything happens locally, no logins.",
+      mission: "Each day, get one small but meaningful mission to move forward."
+    };
+
+    function openModal(type) {
+      document.getElementById("modal-text").innerText = content[type];
+      document.getElementById("modal").style.display = "flex";
     }
 
     function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
-
-    async function getPrompt(type) {
-      openModal("Generating your prompt... Please wait ⏳");
-
-      try {
-        const res = await fetch("/api/prompt", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ type })
-        });
-
-        const data = await res.json();
-        if (data.text) {
-          openModal(data.text);
-        } else {
-          openModal("Error: No response from AI.");
-        }
-      } catch (err) {
-        openModal("An error occurred while fetching the prompt.");
-        console.error(err);
-      }
+      document.getElementById("modal").style.display = "none";
     }
   </script>
 </body>
