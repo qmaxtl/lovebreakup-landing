@@ -1,121 +1,106 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LoveBreakup.com</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom, #ffe0e6, #eca6ae);
-      color: #333;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 1rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-block {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 2rem;
-      border-radius: 1.5rem;
-      background: white;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    }
-
-    .feature-block h2 {
-      color: #c0392b;
-      margin-bottom: 1rem;
-    }
-
-    .feature-block p {
-      flex-grow: 1;
-    }
-
-    .feature-button {
-      background-color: #ff6f61;
-      colour: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      align-self: centre;
-      margin-top: 1.5rem;
-    }
-
-    .feature-button:hover {
-      background-color: #ff4c3b;
-    }
-
-    header {
-      text-align: centre;
-      margin-top: 2rem;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      color: #2c3e50;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: #7f8c8d;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoveBreakup.com – Your AI Healing Companion After a Breakup</title>
+  <meta name="description" content="AI-powered healing prompts and guidance for those navigating a breakup.">
+  <meta property="og:title" content="LoveBreakup.com – Your AI Healing Companion After a Breakup">
+  <meta property="og:description" content="Start your healing journey with AI support.">
+  <meta property="og:image" content="https://yourdomain.com/preview.png">
+  <meta property="og:url" content="https://yourdomain.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <h1>LoveBreakup.com</h1>
-    <p>Your AI Healing Companion After a Breakup 💔</p>
+<body class="bg-pink-100 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <img src="logo.png" alt="Logo" class="h-8 w-8" />
+      <span class="text-xl font-bold text-rose-600">LoveBreakup.com</span>
+    </div>
+    <ul class="flex space-x-6 font-medium text-gray-700">
+      <li><a href="/">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#blog">Blog</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header class="text-center py-12">
+    <h1 class="text-4xl font-bold text-gray-900">Your AI Healing Companion After a Breakup 💔</h1>
+    <p class="mt-2 text-lg text-gray-600">Let AI guide you day by day toward emotional recovery.</p>
   </header>
 
-  <div class="container">
-    <div class="feature-block">
-      <h2>💻 Morning Prompts</h2>
-      <p>Start your day with clarity & calm — generated just for you by AI.</p>
-      <button class="feature-button">Get Today's Prompt</button>
+  <!-- Cards -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 pb-12">
+    <!-- Card -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg flex flex-col justify-between">
+      <h2 class="text-2xl font-bold text-rose-600 mb-2">💻 Morning Prompts</h2>
+      <p class="flex-grow">Start your day with clarity & calm — generated just for you by AI.</p>
+      <button class="bg-rose-500 text-white py-2 px-4 rounded-lg mt-6 mx-auto transition-all hover:bg-rose-600 transform hover:-translate-y-1 shadow">
+        Get Today’s Prompt
+      </button>
     </div>
 
-    <div class="feature-block">
-      <h2>📘 30-Day Healing Plan</h2>
-      <p>A day-by-day guided journey to emotional recovery.</p>
-      <button class="feature-button">Start Plan</button>
+    <div class="bg-white rounded-2xl p-6 shadow-lg flex flex-col justify-between">
+      <h2 class="text-2xl font-bold text-rose-600 mb-2">📘 30-Day Healing Plan</h2>
+      <p class="flex-grow">A day-by-day guided journey to emotional recovery.</p>
+      <button class="bg-rose-500 text-white py-2 px-4 rounded-lg mt-6 mx-auto transition-all hover:bg-rose-600 transform hover:-translate-y-1 shadow">
+        Start Plan
+      </button>
     </div>
 
-    <div class="feature-block">
-      <h2>📊 Emotion Tracker</h2>
-      <p>Track your feelings daily and visualise your healing progress.</p>
-      <button class="feature-button">Track Now</button>
+    <div class="bg-white rounded-2xl p-6 shadow-lg flex flex-col justify-between">
+      <h2 class="text-2xl font-bold text-rose-600 mb-2">📊 Emotion Tracker</h2>
+      <p class="flex-grow">Track your feelings daily and visualize your healing progress.</p>
+      <button class="bg-rose-500 text-white py-2 px-4 rounded-lg mt-6 mx-auto transition-all hover:bg-rose-600 transform hover:-translate-y-1 shadow">
+        Track Now
+      </button>
     </div>
 
-    <div class="feature-block">
-      <h2>🧘‍♂️ Mindfulness Reminders</h2>
-      <p>Receive daily nudges to practice mindfulness and self-care.</p>
-      <button class="feature-button">Enable Reminders</button>
+    <div class="bg-white rounded-2xl p-6 shadow-lg flex flex-col justify-between">
+      <h2 class="text-2xl font-bold text-rose-600 mb-2">🧘 Mindfulness Reminders</h2>
+      <p class="flex-grow">Receive daily nudges to practice mindfulness and self-care.</p>
+      <button class="bg-rose-500 text-white py-2 px-4 rounded-lg mt-6 mx-auto transition-all hover:bg-rose-600 transform hover:-translate-y-1 shadow">
+        Enable Reminders
+      </button>
     </div>
 
-    <div class="feature-block">
-      <h2>🔐 Privacy-First</h2>
-      <p>All your data stays private. No tracking, ever.</p>
-      <button class="feature-button">Learn More</button>
+    <div class="bg-white rounded-2xl p-6 shadow-lg flex flex-col justify-between">
+      <h2 class="text-2xl font-bold text-rose-600 mb-2">🔐 Privacy-First</h2>
+      <p class="flex-grow">All your data stays private. No tracking, ever.</p>
+      <button class="bg-rose-500 text-white py-2 px-4 rounded-lg mt-6 mx-auto transition-all hover:bg-rose-600 transform hover:-translate-y-1 shadow">
+        Learn More
+      </button>
     </div>
 
-    <div class="feature-block">
-      <h2>🎯 Daily Mission</h2>
-      <p>Get daily challenges to motivate healing and self-discovery.</p>
-      <button class="feature-button">View Mission</button>
+    <div class="bg-white rounded-2xl p-6 shadow-lg flex flex-col justify-between">
+      <h2 class="text-2xl font-bold text-rose-600 mb-2">🎯 Daily Mission</h2>
+      <p class="flex-grow">Get daily challenges to motivate healing and self-discovery.</p>
+      <button class="bg-rose-500 text-white py-2 px-4 rounded-lg mt-6 mx-auto transition-all hover:bg-rose-600 transform hover:-translate-y-1 shadow">
+        View Mission
+      </button>
     </div>
-  </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-white py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold mb-6 text-rose-600">What People Are Saying</h2>
+    <div class="flex flex-col md:flex-row gap-8 justify-center">
+      <blockquote class="italic text-gray-600 max-w-md mx-auto">“This helped me through a really rough time.”</blockquote>
+      <blockquote class="italic text-gray-600 max-w-md mx-auto">“Felt like someone finally understood me. Thank you!”</blockquote>
+      <blockquote class="italic text-gray-600 max-w-md mx-auto">“The prompts gave me the clarity I needed.”</blockquote>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-gray-500">
+    © 2025 LoveBreakup.com. All rights reserved.
+  </footer>
+
 </body>
 </html>
