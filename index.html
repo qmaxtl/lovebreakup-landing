@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,88 +10,93 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #ffe0e6, #eba1ad);
+      background: linear-gradient(to bottom, #ffd1dc, #efa1ac);
       color: #333;
-      text-align: center;
     }
     h1 {
-      color: #2c2c2c;
-      margin-top: 40px;
+      text-align: center;
+      padding-top: 40px;
+      font-size: 3rem;
+      color: #333;
     }
-    .subheading {
-      margin-top: 10px;
+    p.tagline {
+      text-align: center;
+      margin-top: -10px;
       font-size: 1.2rem;
+      color: #5e5e5e;
     }
     .grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 40px auto;
-      max-width: 1200px;
+      gap: 24px;
+      padding: 40px;
     }
     .card {
-      background: #fff;
+      background: white;
       border-radius: 20px;
       padding: 30px;
-      margin: 15px;
-      flex: 1 1 280px;
-      max-width: 300px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 300px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
     }
     .card h2 {
-      margin-bottom: 15px;
+      font-size: 1.4rem;
       color: #c0392b;
     }
-    button {
+    .card p {
+      font-size: 1rem;
+      color: #444;
+    }
+    .card button {
       background: #ff6f61;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 20px;
       font-size: 1rem;
       border-radius: 10px;
       cursor: pointer;
-    }
-    #promptBox {
-      margin-top: 20px;
-      font-style: italic;
-      font-size: 1rem;
-      color: #333;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <h1>LoveBreakup.com</h1>
-  <p class="subheading">Your AI Healing Companion After a Breakup 💔</p>
+  <p class="tagline">Your AI Healing Companion After a Breakup 💔</p>
   <div class="grid">
     <div class="card">
       <h2>💻 Morning Prompts</h2>
       <p>Start your day with clarity & calm — generated just for you by AI.</p>
-      <button onclick="getPrompt()">Get Today’s Prompt</button>
-      <div id="promptBox"></div>
+      <button>Get Today’s Prompt</button>
     </div>
-    <div class="card"><h2>📘 30-Day Healing Plan</h2><p>Coming soon...</p></div>
-    <div class="card"><h2>📊 Emotion Tracker</h2><p>Coming soon...</p></div>
-    <div class="card"><h2>🧘 Mindfulness Reminders</h2><p>Coming soon...</p></div>
-    <div class="card"><h2>🔐 Privacy-First</h2><p>Coming soon...</p></div>
-    <div class="card"><h2>🎯 Daily Mission</h2><p>Coming soon...</p></div>
+    <div class="card">
+      <h2>📘 30-Day Healing Plan</h2>
+      <p>A day-by-day guided journey to emotional recovery.</p>
+      <button>Start Plan</button>
+    </div>
+    <div class="card">
+      <h2>📊 Emotion Tracker</h2>
+      <p>Track your feelings daily and visualize your healing progress.</p>
+      <button>Track Now</button>
+    </div>
+    <div class="card">
+      <h2>🧘‍♂️ Mindfulness Reminders</h2>
+      <p>Receive daily nudges to practice mindfulness and self-care.</p>
+      <button>Enable Reminders</button>
+    </div>
+    <div class="card">
+      <h2>🔐 Privacy-First</h2>
+      <p>All your data stays private. No tracking, ever.</p>
+      <button>Learn More</button>
+    </div>
+    <div class="card">
+      <h2>🎯 Daily Mission</h2>
+      <p>Get daily challenges to motivate healing and self-discovery.</p>
+      <button>View Mission</button>
+    </div>
   </div>
-
-  <script>
-    async function getPrompt() {
-      const btn = document.querySelector("button");
-      const box = document.getElementById("promptBox");
-      btn.disabled = true;
-      box.textContent = "Generating...";
-      try {
-        const res = await fetch("/api/prompt");
-        const data = await res.json();
-        box.textContent = data.prompt || "No prompt received.";
-      } catch (e) {
-        box.textContent = "Server not responding. Please check API status.";
-      } finally {
-        btn.disabled = false;
-      }
-    }
-  </script>
 </body>
 </html>
