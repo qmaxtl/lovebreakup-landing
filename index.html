@@ -1,107 +1,92 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LoveBreakup.com</title>
-    <style>
-        body {
-            background: linear-gradient(to bottom, #ffe0e6, #f3a6b1);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 40px;
-            color: #333;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            max-width: 1300px;
-            margin: auto;
-        }
-        .card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 28px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: left;
-        }
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.6rem;
-            color: #c0392b;
-        }
-        .card p {
-            font-size: 1rem;
-            margin: 16px 0;
-        }
-        .card .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: auto;
-        }
-        .card button {
-            background-color: #ff6f61;
-            border: none;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .card button:hover {
-            background-color: #e85c50;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LoveBreakup – AI Healing Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #ffe4e6, #fce7f3);
+      color: #1f2937;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #e11d48;
+    }
+
+    textarea {
+      width: 100%;
+      font-size: 1rem;
+      padding: 1rem;
+      border: 2px solid #fca5a5;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #ec4899;
+      color: white;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 9999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #db2777;
+    }
+
+    pre {
+      background-color: #fef2f2;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-top: 1.5rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #111827;
+    }
+  </style>
 </head>
 <body>
-    <div class="grid">
-        <div class="card">
-            <h2>💻 Morning Prompts</h2>
-            <p>Start your day with clarity & calm — generated just for you by AI.</p>
-            <div class="button-container">
-                <button>Get Today’s Prompt</button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>📘 30-Day Healing Plan</h2>
-            <p>A day-by-day guided journey to emotional recovery.</p>
-            <div class="button-container">
-                <button>Start Plan</button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>📊 Emotion Tracker</h2>
-            <p>Track your feelings daily and visualize your healing progress.</p>
-            <div class="button-container">
-                <button>Track Now</button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>🧘‍♂️ Mindfulness Reminders</h2>
-            <p>Receive daily nudges to practice mindfulness and self-care.</p>
-            <div class="button-container">
-                <button>Enable Reminders</button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>🔐 Privacy-First</h2>
-            <p>All your data stays private. No tracking, ever.</p>
-            <div class="button-container">
-                <button>Learn More</button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>🎯 Daily Mission</h2>
-            <p>Get daily challenges to motivate healing and self-discovery.</p>
-            <div class="button-container">
-                <button>View Mission</button>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+    <h1>💔 AI Support for Healing</h1>
+
+    <textarea id="userPrompt" rows="4" placeholder="Type something emotional..."></textarea><br>
+    <button onclick="generateReply()">Get AI Response</button>
+    <pre id="output">Your response will appear here...</pre>
+  </div>
+
+  <script>
+    async function generateReply() {
+      const prompt = document.getElementById('userPrompt').value;
+      const res = await fetch('/api/gemini-reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      document.getElementById('output').innerText = data.reply;
+    }
+  </script>
 </body>
 </html>
