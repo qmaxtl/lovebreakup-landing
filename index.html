@@ -3,87 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LoveBreakup – AI Healing Support</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>AI Support – LoveBreakup</title>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom right, #ffe4e6, #fce7f3);
-      color: #1f2937;
+      font-family: Arial, sans-serif;
+      background: #fff0f5;
       padding: 2rem;
-      margin: 0;
     }
 
-    .container {
-      max-width: 800px;
+    .box {
+      max-width: 600px;
       margin: auto;
       background: white;
+      border-radius: 12px;
       padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: #e11d48;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     textarea {
       width: 100%;
-      font-size: 1rem;
       padding: 1rem;
-      border: 2px solid #fca5a5;
-      border-radius: 0.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
       margin-bottom: 1rem;
-      resize: vertical;
     }
 
     button {
-      background-color: #ec4899;
+      background: #e11d48;
       color: white;
-      padding: 0.75rem 2rem;
       border: none;
-      border-radius: 9999px;
+      padding: 0.8rem 2rem;
       font-size: 1rem;
-      font-weight: 600;
+      border-radius: 9999px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #db2777;
+      background: #be123c;
     }
 
     pre {
-      background-color: #fef2f2;
+      background: #fdf2f8;
       padding: 1rem;
-      border-radius: 0.5rem;
+      border-radius: 8px;
       margin-top: 1.5rem;
       white-space: pre-wrap;
-      word-wrap: break-word;
-      color: #111827;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>💔 AI Support for Healing</h1>
+  <div class="box">
+    <h2>💔 Need Support?</h2>
+    <p>Tell us how you're feeling. Our AI will gently respond.</p>
 
-    <textarea id="userPrompt" rows="4" placeholder="Type something emotional..."></textarea><br>
+    <textarea id="userPrompt" rows="4" placeholder="Type something emotional..."></textarea>
     <button onclick="generateReply()">Get AI Response</button>
-    <pre id="output">Your response will appear here...</pre>
+    <pre id="output">Your reply will appear here.</pre>
   </div>
 
   <script>
     async function generateReply() {
       const prompt = document.getElementById('userPrompt').value;
+      document.getElementById('output').innerText = 'Thinking...';
+
       const res = await fetch('/api/gemini-reply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
       });
+
       const data = await res.json();
       document.getElementById('output').innerText = data.reply;
     }
