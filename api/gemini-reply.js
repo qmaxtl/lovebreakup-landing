@@ -7,21 +7,19 @@ export default async function handler(req, res) {
   const prompt = req.body.prompt;
 
   try {
-    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [
           {
             role: 'user',
-            parts: [
-              { text: prompt }
-            ]
+            parts: [{ text: `You are an empathetic assistant helping people who feel sad or heartbroken. Respond with kind and gentle words.\n\nUser: ${prompt}` }]
           }
         ],
         generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 200
+          temperature: 0.9,
+          maxOutputTokens: 250
         },
         safetySettings: [
           { category: 'HARM_CATEGORY_DEROGATORY', threshold: 3 },
@@ -32,10 +30,11 @@ export default async function handler(req, res) {
       })
     });
 
-    const data = await geminiRes.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response from Gemini.';
+    const data = await response.json();
+
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Gemini returned an empty response. Try rephrasing your input.';
     res.status(200).json({ reply });
   } catch (err) {
-    res.status(500).json({ error: 'Server Error', details: err.message });
+    res.status(500).json({ error: 'Server error', details: err.message });
   }
 }
