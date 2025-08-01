@@ -13,30 +13,25 @@
       color: #333;
       text-align: center;
     }
-
     header {
       padding: 40px 20px 20px;
     }
-
     .logo {
       font-size: 3rem;
       font-weight: bold;
       color: #f92672;
     }
-
     .subheadline {
       font-size: 1.3rem;
       margin-top: 10px;
       color: #555;
     }
-
     .tagline {
       margin: 20px auto 40px;
       max-width: 600px;
       font-size: 1rem;
       color: #666;
     }
-
     .cta-buttons {
       display: flex;
       justify-content: center;
@@ -44,7 +39,6 @@
       margin-bottom: 50px;
       flex-wrap: wrap;
     }
-
     .cta-buttons button {
       padding: 14px 24px;
       background-color: #f92672;
@@ -57,17 +51,14 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: background-color 0.3s ease;
     }
-
     .cta-buttons button:hover {
       background-color: #e91e63;
     }
-
     h2 {
       font-size: 2rem;
       margin-bottom: 30px;
       color: #f92672;
     }
-
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -76,7 +67,6 @@
       max-width: 1100px;
       margin: 0 auto;
     }
-
     .feature-box {
       background: white;
       padding: 20px;
@@ -84,28 +74,53 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.05);
       text-align: left;
     }
-
     .feature-box h3 {
       color: #f92672;
       margin-bottom: 10px;
       font-size: 1.1rem;
     }
-
     .feature-box p {
       font-size: 0.95rem;
       color: #555;
     }
-
     @media screen and (max-width: 600px) {
       .cta-buttons {
         flex-direction: column;
         gap: 12px;
       }
     }
+    #chatbox {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      text-align: left;
+    }
+    #chatlog {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 200px;
+      margin-bottom: 10px;
+    }
+    #promptInput {
+      width: 80%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    #sendBtn {
+      padding: 10px 16px;
+      font-size: 1rem;
+      background-color: #f92672;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">LoveBreakup</div>
     <div class="subheadline">Your AI Healing Partner & Virtual Therapist</div>
@@ -113,7 +128,7 @@
       Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.
     </div>
     <div class="cta-buttons">
-      <button>Talk to LoveBreakup AI</button>
+      <button onclick="document.getElementById('chatbox').scrollIntoView({ behavior: 'smooth' });">Talk to LoveBreakup AI</button>
       <button>Start Your Journal</button>
     </div>
   </header>
@@ -148,5 +163,33 @@
     </div>
   </section>
 
+  <section id="chatbox">
+    <div id="chatlog"></div>
+    <input type="text" id="promptInput" placeholder="Type your feelings..."/>
+    <button id="sendBtn">Send</button>
+  </section>
+
+  <script>
+    const chatlog = document.getElementById('chatlog');
+    const promptInput = document.getElementById('promptInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    sendBtn.addEventListener('click', async () => {
+      const prompt = promptInput.value;
+      if (!prompt.trim()) return;
+      chatlog.innerHTML += `<p><strong>You:</strong> ${prompt}</p>`;
+      promptInput.value = '';
+
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await res.json();
+      chatlog.innerHTML += `<p><strong>LoveBreakup AI:</strong> ${data.reply}</p>`;
+    });
+  </script>
 </body>
 </html>
+
