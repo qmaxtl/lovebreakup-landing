@@ -13,25 +13,30 @@
       color: #333;
       text-align: center;
     }
+
     header {
       padding: 40px 20px 20px;
     }
+
     .logo {
       font-size: 3rem;
       font-weight: bold;
       color: #f92672;
     }
+
     .subheadline {
       font-size: 1.3rem;
       margin-top: 10px;
       color: #555;
     }
+
     .tagline {
       margin: 20px auto 40px;
       max-width: 600px;
       font-size: 1rem;
       color: #666;
     }
+
     .cta-buttons {
       display: flex;
       justify-content: center;
@@ -39,6 +44,7 @@
       margin-bottom: 50px;
       flex-wrap: wrap;
     }
+
     .cta-buttons button {
       padding: 14px 24px;
       background-color: #f92672;
@@ -51,14 +57,17 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: background-color 0.3s ease;
     }
+
     .cta-buttons button:hover {
       background-color: #e91e63;
     }
+
     h2 {
       font-size: 2rem;
       margin-bottom: 30px;
       color: #f92672;
     }
+
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -67,6 +76,7 @@
       max-width: 1100px;
       margin: 0 auto;
     }
+
     .feature-box {
       background: white;
       padding: 20px;
@@ -74,40 +84,44 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.05);
       text-align: left;
     }
+
     .feature-box h3 {
       color: #f92672;
       margin-bottom: 10px;
       font-size: 1.1rem;
     }
+
     .feature-box p {
       font-size: 0.95rem;
       color: #555;
     }
-    @media screen and (max-width: 600px) {
-      .cta-buttons {
-        flex-direction: column;
-        gap: 12px;
-      }
-    }
+
     #chatbox {
-      max-width: 600px;
-      margin: 0 auto 40px;
+      max-width: 700px;
+      margin: 40px auto;
       text-align: left;
+      display: none;
     }
+
     #chatlog {
       background: white;
       border-radius: 10px;
       padding: 20px;
-      min-height: 200px;
+      min-height: 250px;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
       margin-bottom: 10px;
     }
+
     #promptInput {
-      width: 80%;
+      width: 75%;
       padding: 10px;
       font-size: 1rem;
       border-radius: 8px;
       border: 1px solid #ccc;
     }
+
     #sendBtn {
       padding: 10px 16px;
       font-size: 1rem;
@@ -118,9 +132,21 @@
       margin-left: 10px;
       cursor: pointer;
     }
+
+    @media screen and (max-width: 600px) {
+      .cta-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      #promptInput {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">LoveBreakup</div>
     <div class="subheadline">Your AI Healing Partner & Virtual Therapist</div>
@@ -128,7 +154,7 @@
       Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.
     </div>
     <div class="cta-buttons">
-      <button onclick="document.getElementById('chatbox').scrollIntoView({ behavior: 'smooth' });">Talk to LoveBreakup AI</button>
+      <button onclick="startChat()">Talk to LoveBreakup AI</button>
       <button>Start Your Journal</button>
     </div>
   </header>
@@ -170,26 +196,48 @@
   </section>
 
   <script>
+    const chatbox = document.getElementById('chatbox');
     const chatlog = document.getElementById('chatlog');
     const promptInput = document.getElementById('promptInput');
     const sendBtn = document.getElementById('sendBtn');
 
+    function startChat() {
+      chatbox.style.display = 'block';
+      chatbox.scrollIntoView({ behavior: 'smooth' });
+      promptInput.focus();
+    }
+
     sendBtn.addEventListener('click', async () => {
-      const prompt = promptInput.value;
-      if (!prompt.trim()) return;
-      chatlog.innerHTML += `<p><strong>You:</strong> ${prompt}</p>`;
+      const userInput = promptInput.value.trim();
+      if (!userInput) return;
+
+      chatlog.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
       promptInput.value = '';
+      chatlog.scrollTop = chatlog.scrollHeight;
 
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
-      });
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: userInput })
+        });
 
-      const data = await res.json();
-      chatlog.innerHTML += `<p><strong>LoveBreakup AI:</strong> ${data.reply}</p>`;
+        const data = await response.json();
+        const reply = data.reply || 'Sorry, something went wrong.';
+        chatlog.innerHTML += `<p><strong>LoveBreakup AI:</strong> ${reply}</p>`;
+        chatlog.scrollTop = chatlog.scrollHeight;
+      } catch (error) {
+        console.error("Error:", error);
+        chatlog.innerHTML += `<p><strong>LoveBreakup AI:</strong> I'm here, but something went wrong. Try again later.</p>`;
+      }
+    });
+
+    promptInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        sendBtn.click();
+      }
     });
   </script>
+
 </body>
 </html>
-
