@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency SOS Mode</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff5fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+    }
+    .card h2 {
+      color: #e6005c;
+      margin-bottom: 15px;
+    }
+    .card p {
+      color: #333;
+      font-size: 1rem;
+      margin-bottom: 25px;
+    }
+    .card button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #e6005c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .card button:hover {
+      background-color: #cc0052;
+    }
+    .breathe {
+      font-size: 2rem;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Emergency SOS Mode</h2>
+    <p>Feel overwhelmed? One click gives you instant breathing guidance and emotional relief.</p>
+    <button onclick="startBreathing()">Start SOS</button>
+    <div class="breathe" id="breatheText">Breathe In...</div>
+  </div>
+
+  <script>
+    let breatheText = document.getElementById("breatheText");
+    let steps = ["Breathe In...", "Hold...", "Breathe Out...", "Hold..."];
+    let index = 0;
+    let interval;
+
+    function startBreathing() {
+      breatheText.style.display = "block";
+      breatheText.textContent = steps[index];
+      interval = setInterval(() => {
+        index = (index + 1) % steps.length;
+        breatheText.textContent = steps[index];
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
 
