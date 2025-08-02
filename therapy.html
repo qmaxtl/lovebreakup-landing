@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talk to LoveBreakup AI</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffeef5;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .header {
+      background-color: #f92672;
+      color: white;
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background-color: #f92672;
+      color: white;
+    }
+
+    .ai-message {
+      align-self: flex-start;
+      background-color: #ffffff;
+      color: #333;
+      border: 1px solid #eee;
+    }
+
+    .input-container {
+      display: flex;
+      padding: 1rem;
+      background-color: #ffeef5;
+      border-top: 1px solid #ddd;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      outline: none;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #f92672;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">💬 Talk to LoveBreakup AI</div>
+
+  <div class="chat-container" id="chatContainer">
+    <div class="message ai-message">I'm here for you, always.</div>
+  </div>
+
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Type your feelings...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const userInput = document.getElementById('userInput');
+      const chatContainer = document.getElementById('chatContainer');
+
+      const userMessage = document.createElement('div');
+      userMessage.className = 'message user-message';
+      userMessage.innerText = userInput.value;
+      chatContainer.appendChild(userMessage);
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: userInput.value })
+      });
+
+      const data = await response.json();
+      const aiMessage = document.createElement('div');
+      aiMessage.className = 'message ai-message';
+      aiMessage.innerText = data.reply;
+      chatContainer.appendChild(aiMessage);
+
+      userInput.value = '';
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  </script>
+</body>
+</html>
 
