@@ -1,58 +1,46 @@
-// pages/index.js
-
-import Link from 'next/link';
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>💔 Welcome to LoveBreakup AI</h1>
-      <p style={styles.subheading}>Choose where you want to begin your healing journey:</p>
+  const [messages, setMessages] = useState(["I'm here for you, always."]);
+  const [input, setInput] = useState("");
 
-      <ul style={styles.list}>
-        <li><Link href="/chat"><a style={styles.link}>💬 Talk to LoveBreakup AI</a></Link></li>
-        <li><Link href="/recovery"><a style={styles.link}>🧘‍♀️ Recovery Plan</a></Link></li>
-        <li><Link href="/journal"><a style={styles.link}>📓 Journal</a></Link></li>
-        <li><Link href="/sos"><a style={styles.link}>🚨 SOS Support</a></Link></li>
-        <li><Link href="/therapy"><a style={styles.link}>🧠 Therapy Guide</a></Link></li>
-        <li><Link href="/nojugdement"><a style={styles.link}>🤝 No Judgement Zone</a></Link></li>
-        <li><Link href="/plan-7day"><a style={styles.link}>📅 7-Day Plan</a></Link></li>
-        <li><Link href="/plan-30day"><a style={styles.link}>📅 30-Day Plan</a></Link></li>
-        <li><Link href="/plan-90day"><a style={styles.link}>📅 90-Day Plan</a></Link></li>
-      </ul>
+  const sendMessage = async () => {
+    if (!input.trim()) return;
+    const userInput = input.trim();
+    setMessages(prev => [...prev, userInput]);
+    setInput("");
+
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: userInput })
+    });
+
+    const data = await res.json();
+    setMessages(prev => [...prev, data.reply]);
+  };
+
+  return (
+    <div style={{ backgroundColor: "#ffe6f0", minHeight: "100vh", padding: "2rem", fontFamily: "Arial, sans-serif" }}>
+      <div style={{ backgroundColor: "#fff0f5", padding: "2rem", borderRadius: "10px", maxWidth: "600px", margin: "0 auto" }}>
+        {messages.map((msg, idx) => (
+          <div key={idx} style={{ margin: "10px 0", padding: "10px", backgroundColor: "#ffd6e8", borderRadius: "10px" }}>
+            {msg}
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}>
+        <input
+          type="text"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          placeholder="Say something..."
+          style={{ width: "60%", padding: "10px", borderRadius: "5px", border: "1px solid #ccc" }}
+        />
+        <button onClick={sendMessage} style={{ marginLeft: "10px", padding: "10px 20px", borderRadius: "5px", backgroundColor: "#ff99bb", color: "#fff", border: "none" }}>
+          Send
+        </button>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    fontFamily: `'Segoe UI', sans-serif`,
-    background: 'linear-gradient(135deg, #ffe6f0, #fddde6)',
-    minHeight: '100vh',
-    padding: '3rem',
-    color: '#333',
-  },
-  heading: {
-    fontSize: '2.5rem',
-    color: '#ff2c83',
-    marginBottom: '1rem',
-  },
-  subheading: {
-    fontSize: '1.2rem',
-    marginBottom: '2rem',
-  },
-  list: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  link: {
-    display: 'inline-block',
-    marginBottom: '1rem',
-    fontSize: '1.1rem',
-    color: '#ff007f',
-    textDecoration: 'none',
-    border: '1px solid #ff007f',
-    padding: '10px 20px',
-    borderRadius: '8px',
-    backgroundColor: '#fff0f5',
-  }
-};
