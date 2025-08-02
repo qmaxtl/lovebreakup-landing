@@ -3,219 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoveBreakup AI</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>LoveBreakup | Your Healing Partner</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #ffeff6;
+      background-color: #ffeef5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
       color: #333;
-    }
-    header {
-      padding: 40px 20px 20px;
       text-align: center;
     }
+
     .logo {
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: 3rem;
+      font-weight: bold;
       color: #f92672;
+      margin-top: 40px;
     }
+
     .subheadline {
-      font-size: 1.2rem;
-      margin-top: 8px;
+      font-size: 1.3rem;
+      color: #444;
+      margin-top: 10px;
     }
+
     .tagline {
-      margin: 15px auto 30px;
-      max-width: 600px;
-      font-size: 1rem;
+      max-width: 700px;
+      margin: 20px auto 30px;
       color: #555;
+      font-size: 1rem;
     }
+
     .cta-buttons {
       display: flex;
       justify-content: center;
       gap: 20px;
+      margin-bottom: 60px;
       flex-wrap: wrap;
     }
-    .cta-buttons button {
-      padding: 12px 20px;
+
+    .cta-buttons a {
+      padding: 14px 24px;
       background-color: #f92672;
       color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    .cta-buttons button:hover {
-      background-color: #e91e63;
-    }
+
     h2 {
-      font-size: 1.8rem;
-      margin: 40px 0 20px;
-      text-align: center;
       color: #f92672;
+      margin-bottom: 30px;
+      font-size: 2rem;
     }
+
     .features {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px 40px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
     }
+
     .feature-box {
       background: white;
+      padding: 20px;
       border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      text-align: left;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
     }
+
+    .feature-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+
     .feature-box h3 {
-      font-size: 1.1rem;
-      color: #f92672;
-      margin-bottom: 8px;
-    }
-    .feature-box p {
-      font-size: 0.95rem;
-      color: #555;
-    }
-    #chatModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #ffeff6;
-      z-index: 9999;
-      padding: 20px;
-      flex-direction: column;
-    }
-    #chatHeader {
-      font-weight: bold;
-      font-size: 1.3rem;
       color: #f92672;
       margin-bottom: 10px;
     }
-    #chatlog {
-      flex: 1;
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      overflow-y: auto;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+    .feature-box p {
+      color: #555;
+      font-size: 0.95rem;
     }
-    #chatForm {
-      display: flex;
-      margin-top: 10px;
-      gap: 10px;
-    }
-    #promptInput {
-      flex: 1;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    #sendBtn {
-      background-color: #f92672;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #888;
+
+    .feature-box:link, .feature-box:visited, .feature-box:hover, .feature-box:active {
+      text-decoration: none;
+      color: inherit;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">LoveBreakup</div>
-    <div class="subheadline">Your AI Healing Partner & Virtual Therapist</div>
-    <div class="tagline">Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.</div>
-    <div class="cta-buttons">
-      <button onclick="openChat()">Talk to LoveBreakup AI</button>
-      <button>Start Your Journal</button>
-    </div>
-  </header>
+  <div class="logo">LoveBreakup</div>
+  <div class="subheadline">Your AI Healing Partner & Virtual Therapist</div>
+  <div class="tagline">
+    Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.
+  </div>
+
+  <div class="cta-buttons">
+    <a href="chat.html">Talk to LoveBreakup AI</a>
+    <a href="journal.html">Start Your Journal</a>
+  </div>
 
   <h2>What You'll Get</h2>
   <div class="features">
-    <div class="feature-box">
+    <a class="feature-box" href="therapy.html">
       <h3>AI Therapy Chat</h3>
       <p>Daily conversations with a compassionate AI trained to help you heal and grow emotionally.</p>
-    </div>
-    <div class="feature-box">
+    </a>
+    <a class="feature-box" href="recovery.html">
       <h3>Breakup Recovery Plan</h3>
       <p>Personalized 7-day, 30-day, and 90-day routines for recovery based on your pain level.</p>
-    </div>
-    <div class="feature-box">
+    </a>
+    <a class="feature-box" href="journal.html">
       <h3>Your Healing Journal</h3>
       <p>Guided entries and prompts that help you reflect, release, and rebuild.</p>
-    </div>
-    <div class="feature-box">
+    </a>
+    <a class="feature-box" href="voicememo.html">
       <h3>Voice Memo Journaling</h3>
       <p>Speak your heart out. The AI will listen and guide you back to emotional stability.</p>
-    </div>
-    <div class="feature-box">
+    </a>
+    <a class="feature-box" href="sos.html">
       <h3>Emergency SOS Mode</h3>
       <p>Feel overwhelmed? One click gives you instant breathing guidance and emotional relief.</p>
-    </div>
-    <div class="feature-box">
+    </a>
+    <a class="feature-box" href="nojugdement.html">
       <h3>No Judgment, Ever</h3>
       <p>You're not alone. You're not broken. You're healing and this AI is here 24/7 to help.</p>
-    </div>
+    </a>
   </div>
-
-  <!-- Chat Modal -->
-  <div id="chatModal">
-    <div class="close-btn" onclick="closeChat()">&times;</div>
-    <div id="chatHeader">💬 LoveBreakup AI Chat</div>
-    <div id="chatlog"></div>
-    <form id="chatForm">
-      <input type="text" id="promptInput" placeholder="Type your feelings..." required />
-      <button type="submit" id="sendBtn">Send</button>
-    </form>
-  </div>
-
-  <script>
-    const chatModal = document.getElementById('chatModal');
-    const chatlog = document.getElementById('chatlog');
-    const chatForm = document.getElementById('chatForm');
-    const promptInput = document.getElementById('promptInput');
-
-    function openChat() {
-      chatModal.style.display = 'flex';
-    }
-    function closeChat() {
-      chatModal.style.display = 'none';
-      chatlog.innerHTML = '';
-    }
-
-    chatForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const prompt = promptInput.value.trim();
-      if (!prompt) return;
-      chatlog.innerHTML += `<p><strong>You:</strong> ${prompt}</p>`;
-      promptInput.value = '';
-
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
-      });
-
-      const data = await res.json();
-      chatlog.innerHTML += `<p><strong>LoveBreakup AI:</strong> ${data.reply || 'Sorry, no response'}</p>`;
-      chatlog.scrollTop = chatlog.scrollHeight;
-    });
-  </script>
 </body>
 </html>
