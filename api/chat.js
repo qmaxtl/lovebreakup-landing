@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   const { prompt } = req.body;
-  const apiKey = process.env.OpenRouter; // exact case match
+  const apiKey = process.env.OPENROUTER_API_KEY;
 
   if (!apiKey) {
     return res.status(500).json({ reply: "API key missing in environment variables." });
