@@ -1,125 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Talk to LoveBreakup AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LoveBreakup AI Chat</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #ffeef5;
+      background: linear-gradient(135deg, #ffe8f0, #ffd5e5);
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
       height: 100vh;
     }
 
-    .header {
+    header {
       background-color: #f92672;
       color: white;
+      text-align: center;
       padding: 1rem;
       font-size: 1.5rem;
       font-weight: bold;
-      text-align: center;
     }
 
-    .chat-container {
+    #chat-window {
       flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 1rem;
-      overflow-y: auto;
+      gap: 1rem;
     }
 
     .message {
-      max-width: 80%;
-      padding: 10px 15px;
+      max-width: 70%;
+      padding: 1rem;
       border-radius: 20px;
-      margin: 10px 0;
-      font-size: 1rem;
+      line-height: 1.4;
+      word-wrap: break-word;
     }
 
-    .user-message {
-      align-self: flex-end;
-      background-color: #f92672;
-      color: white;
-    }
-
-    .ai-message {
-      align-self: flex-start;
+    .user {
       background-color: #ffffff;
-      color: #333;
-      border: 1px solid #eee;
+      align-self: flex-end;
     }
 
-    .input-container {
+    .ai {
+      background-color: #fff0f5;
+      align-self: flex-start;
+    }
+
+    #input-container {
       display: flex;
       padding: 1rem;
       background-color: #ffeef5;
-      border-top: 1px solid #ddd;
+      gap: 1rem;
     }
 
-    input[type="text"] {
+    input {
       flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 20px;
+      padding: 1rem;
       font-size: 1rem;
-      outline: none;
-      margin-right: 10px;
+      border-radius: 25px;
+      border: 1px solid #ddd;
     }
 
     button {
       background-color: #f92672;
       color: white;
       border: none;
-      border-radius: 20px;
-      padding: 12px 20px;
+      padding: 0 1.5rem;
       font-size: 1rem;
+      border-radius: 25px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="header">💬 Talk to LoveBreakup AI</div>
+  <header>💬 Talk to LoveBreakup AI</header>
 
-  <div class="chat-container" id="chatContainer">
-    <div class="message ai-message">I'm here for you, always.</div>
+  <div id="chat-window">
+    <div class="message ai">I'm here for you, always.</div>
   </div>
 
-  <div class="input-container">
-    <input type="text" id="userInput" placeholder="Type your feelings...">
+  <div id="input-container">
+    <input type="text" id="user-input" placeholder="Type your feelings..." />
     <button onclick="sendMessage()">Send</button>
   </div>
 
   <script>
     async function sendMessage() {
-      const userInput = document.getElementById('userInput');
-      const chatContainer = document.getElementById('chatContainer');
+      const input = document.getElementById('user-input');
+      const text = input.value.trim();
+      if (!text) return;
 
-      const userMessage = document.createElement('div');
-      userMessage.className = 'message user-message';
-      userMessage.innerText = userInput.value;
-      chatContainer.appendChild(userMessage);
+      // User message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user';
+      userMsg.textContent = text;
+      document.getElementById('chat-window').appendChild(userMsg);
+      input.value = '';
+      scrollToBottom();
 
+      // Bot response placeholder
+      const botMsg = document.createElement('div');
+      botMsg.className = 'message ai';
+      botMsg.textContent = 'Typing...';
+      document.getElementById('chat-window').appendChild(botMsg);
+      scrollToBottom();
+
+      // API call
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: userInput.value })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ prompt: text })
       });
 
       const data = await response.json();
-      const aiMessage = document.createElement('div');
-      aiMessage.className = 'message ai-message';
-      aiMessage.innerText = data.reply;
-      chatContainer.appendChild(aiMessage);
+      botMsg.textContent = data.reply || "Something went wrong.";
+      scrollToBottom();
+    }
 
-      userInput.value = '';
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+    function scrollToBottom() {
+      const chatWindow = document.getElementById('chat-window');
+      chatWindow.scrollTop = chatWindow.scrollHeight;
     }
   </script>
 </body>
 </html>
-
