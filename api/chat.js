@@ -1,34 +1,40 @@
 export default async function handler(req, res) {
-  const prompt = req.body.prompt;
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const { prompt } = req.body;
+  const apiKey = process.env.OpenRouter; // exact case match
+
+  if (!apiKey) {
+    return res.status(500).json({ reply: "API key missing in environment variables." });
+  }
 
   try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: 'openai/gpt-3.5-turbo',
+        model: "openai/gpt-3.5-turbo",
         messages: [
           {
-            role: 'system',
-            content: 'You are a kind and empathetic breakup support AI.',
+            role: "system",
+            content: "You are a kind, non-judgmental emotional support AI that helps users process heartbreak, sadness, or loneliness. Be warm, safe, and validating."
           },
           {
-            role: 'user',
-            content: prompt,
+            role: "user",
+            content: prompt
           }
         ],
-        temperature: 0.7,
-        max_tokens: 300
+        temperature: 0.8,
+        max_tokens: 400
       })
     });
 
     const data = await response.json();
-    res.status(200).json({ reply: data.choices?.[0]?.message?.content });
-  } catch (err) {
-    res.status(500).json({ reply: "Sorry, I couldn’t respond right now." });
+
+    const reply = data?.choices?.[0]?.message?.content || "No reply generated.";
+    res.status(200).json({ reply });
+  } catch (error) {
+    res.status(500).json({ reply: "Something went wrong talking to the AI." });
   }
 }
