@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Memo Journaling</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff4fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      text-align: center;
+    }
+    .title {
+      color: #e91e63;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .description {
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 25px;
+    }
+    .buttons button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .buttons button:disabled {
+      background-color: #f8a3c0;
+      cursor: not-allowed;
+    }
+    audio {
+      margin-top: 20px;
+      width: 100%;
+    }
+    a#downloadLink {
+      display: block;
+      margin-top: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Voice Memo Journaling</div>
+    <div class="description">
+      Speak your heart out. The AI will listen and guide you back to emotional stability.
+    </div>
+    <div class="buttons">
+      <button id="recordBtn">Start Recording</button>
+      <button id="stopBtn" disabled>Stop</button>
+    </div>
+    <audio id="audioPlayback" controls></audio>
+    <a id="downloadLink" download="memo.wav">Download Memo</a>
+  </div>
+
+  <script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    const recordBtn = document.getElementById("recordBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const audio = document.getElementById("audioPlayback");
+    const downloadLink = document.getElementById("downloadLink");
+
+    recordBtn.onclick = async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.start();
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = (e) => {
+        audioChunks.push(e.data);
+      };
+
+      recordBtn.disabled = true;
+      stopBtn.disabled = false;
+    };
+
+    stopBtn.onclick = () => {
+      mediaRecorder.stop();
+      stopBtn.disabled = true;
+      recordBtn.disabled = false;
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks);
+        const audioUrl = URL.createObjectURL(audioBlob);
+        audio.src = audioUrl;
+        downloadLink.href = audioUrl;
+      };
+    };
+  </script>
+</body>
+</html>
 
