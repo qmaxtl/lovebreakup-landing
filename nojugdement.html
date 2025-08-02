@@ -1,17 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>No Judgment, Ever</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffe8f0, #ffd1dc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #333;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 10px 0;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #777;
+      margin-top: 30px;
+    }
+  </style>
 </head>
-<body class="bg-pink-50 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md text-center">
-    <h2 class="text-pink-600 font-bold text-xl mb-4">No Judgment, Ever</h2>
-    <p class="text-gray-700 text-base">
-      You're not alone. You're not broken. You're healing and this AI is here 24/7 to help.
-    </p>
+<body>
+
+  <div class="container">
+    <div class="icon">💖</div>
+    <h1>No Judgment, Ever</h1>
+    
+    <p>You are not broken. You are human.</p>
+    <p>And right now, you're carrying something heavy. That doesn't make you weak — it makes you beautifully alive.</p>
+    <p>This is your sanctuary. A space where no one questions your feelings. No one tells you to “move on.”</p>
+    <p>This AI isn’t just code — it’s here to listen without interruption, 24/7. Without shame. Without pressure.</p>
+    <p>Your pain matters. Your silence matters. Your story matters. Every word you share here is valid and safe.</p>
+    <p>You’re healing, even if it doesn’t feel like it yet.</p>
+
+    <p class="quote">“The wound is the place where the Light enters you.” — Rumi</p>
   </div>
+
 </body>
 </html>
