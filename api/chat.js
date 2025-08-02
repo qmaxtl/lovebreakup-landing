@@ -1,40 +1,34 @@
 export default async function handler(req, res) {
   const prompt = req.body.prompt;
-  const apiKey = process.env.GROQ_API_KEY; // Set this in your environment
+  const apiKey = process.env.OPENROUTER_API_KEY;
 
   try {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: "mixtral-8x7b-32768", // Or use "llama3-70b-8192" or any Groq-supported model
+        model: 'openai/gpt-3.5-turbo',
         messages: [
           {
-            role: "system",
-            content: "You are LoveBreakup AI – a deeply empathetic, non-therapeutic emotional support assistant that listens and helps people going through heartbreak, gently and thoughtfully, with deep human-like conversation.",
+            role: 'system',
+            content: 'You are a kind and empathetic breakup support AI.',
           },
           {
-            role: "user",
+            role: 'user',
             content: prompt,
-          },
+          }
         ],
-        temperature: 0.8,
-        max_tokens: 300,
-      }),
+        temperature: 0.7,
+        max_tokens: 300
+      })
     });
 
     const data = await response.json();
-    
-    // Safety check
-    const reply = data?.choices?.[0]?.message?.content;
-
-    res.status(200).json({ reply: reply || "I'm here for you, always." });
-
-  } catch (error) {
-    console.error("API error:", error);
-    res.status(500).json({ reply: "Something went wrong. I'm here for you, no matter what." });
+    res.status(200).json({ reply: data.choices?.[0]?.message?.content });
+  } catch (err) {
+    res.status(500).json({ reply: "Sorry, I couldn’t respond right now." });
   }
 }
