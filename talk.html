@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Talk to LoveBreakup AI</title>
   <style>
     body {
@@ -90,35 +90,58 @@
   </div>
 
   <div class="input-container">
-    <input type="text" id="userInput" placeholder="Type your feelings...">
-    <button onclick="sendMessage()">Send</button>
+    <input type="text" id="userInput" placeholder="Type your feelings..." />
+    <button id="sendButton">Send</button>
   </div>
 
   <script>
+    const userInput = document.getElementById('userInput');
+    const chatContainer = document.getElementById('chatContainer');
+    const sendButton = document.getElementById('sendButton');
+
     async function sendMessage() {
-      const userInput = document.getElementById('userInput');
-      const chatContainer = document.getElementById('chatContainer');
+      const prompt = userInput.value.trim();
+      if (!prompt) return;
 
       const userMessage = document.createElement('div');
       userMessage.className = 'message user-message';
-      userMessage.innerText = userInput.value;
+      userMessage.innerText = prompt;
       chatContainer.appendChild(userMessage);
 
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: userInput.value })
-      });
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt }),
+        });
 
-      const data = await response.json();
-      const aiMessage = document.createElement('div');
-      aiMessage.className = 'message ai-message';
-      aiMessage.innerText = data.reply;
-      chatContainer.appendChild(aiMessage);
+        const data = await response.json();
+        const aiMessage = document.createElement('div');
+        aiMessage.className = 'message ai-message';
+        aiMessage.innerText = data.reply || 'No response.';
+        chatContainer.appendChild(aiMessage);
+      } catch (err) {
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'message ai-message';
+        errorMsg.innerText = 'Error: Failed to connect to AI.';
+        chatContainer.appendChild(errorMsg);
+        console.error(err);
+      }
 
       userInput.value = '';
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+
+    // Enter to send
+    userInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Button click to send
+    sendButton.addEventListener('click', sendMessage);
   </script>
 </body>
 </html>
