@@ -15,11 +15,9 @@ export default async function handler(req, res) {
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://lovebreakup.com',
-        'X-Title': 'LoveBreakup AI'
       },
       body: JSON.stringify({
-        model: 'openchat/openchat-3.5-1210',
+        model: 'deepseek/deepseek-chat-v3-0324:free',
         messages: [
           {
             role: 'system',
@@ -36,6 +34,7 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+
     const reply = data.choices?.[0]?.message?.content || 'Sorry, no response from AI.';
     res.status(200).json({ reply });
   } catch (error) {
