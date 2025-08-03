@@ -15,18 +15,21 @@
       overflow: hidden; /* Prevents scrollbars */
     }
 
-    /* This is the magic CSS to make the Botpress widget full-screen */
-    /* We are targeting the container Botpress creates */
-    #botpress-webchat-container .bp-widget-web {
+    /*
+      ==================================================================
+      !!! NEW & MORE POWERFUL CSS !!!
+      This targets the container Botpress creates, making it full-screen.
+      ==================================================================
+    */
+    #botpress-webchat-container {
         width: 100vw !important;
         height: 100vh !important;
         max-height: 100vh !important;
         top: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
         left: 0 !important;
         margin: 0 !important;
-        border-radius: 0 !important;
+        padding: 0 !important;
+        border: none !important;
         box-shadow: none !important;
     }
   </style>
