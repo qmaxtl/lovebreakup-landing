@@ -1,12 +1,14 @@
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ reply: 'Method not allowed' });
+  }
+
   const prompt = req.body.prompt;
   const apiKey = process.env.OPENROUTER_API_KEY;
+  const model = process.env.MODEL_NAME;
 
-  console.log("Prompt received:", prompt);
-  console.log("API Key Loaded:", apiKey ? "✅ Yes" : "❌ No");
-
-  if (!apiKey) {
-    return res.status(500).json({ reply: "API key is missing" });
+  if (!apiKey || !model) {
+    return res.status(500).json({ reply: 'Missing API key or model name' });
   }
 
   try {
@@ -17,11 +19,11 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'deepseek/deepseek-chat-v3-0324:free',
+        model: model,
         messages: [
           {
             role: 'system',
-            content: 'You are a supportive AI assistant who helps users dealing with heartbreak. Respond with kind, empathetic, and helpful advice.',
+            content: 'You are a supportive AI companion who helps users dealing with heartbreak.',
           },
           {
             role: 'user',
@@ -29,16 +31,22 @@ export default async function handler(req, res) {
           },
         ],
         temperature: 0.8,
-        max_tokens: 300,
+        max_tokens: 500,
       }),
     });
 
     const data = await response.json();
 
-    const reply = data.choices?.[0]?.message?.content || 'Sorry, no response from AI.';
-    res.status(200).json({ reply });
+    if (!response.ok) {
+      console.error('OpenRouter error:', data);
+      return res.status(500).json({ reply: 'AI model error: ' + (data?.error?.message || 'Unknown error') });
+    }
+
+    const reply = data.choices?.[0]?.message?.content || 'Sorry, something went wrong.';
+    return res.status(200).json({ reply });
+
   } catch (error) {
-    console.error("OpenRouter API Error:", error);
-    res.status(500).json({ reply: `Error: Failed to connect to AI.` });
+    console.error("API Error:", error);
+    return res.status(500).json({ reply: 'Error: Failed to connect to AI.' });
   }
 }
