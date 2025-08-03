@@ -4,145 +4,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Talk to LoveBreakup AI</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
     body {
+      background-color: #ffeef5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #ffeef5;
+      color: #333;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
-    }
-
-    .header {
-      background-color: #f92672;
-      color: white;
-      padding: 1rem;
-      font-size: 1.5rem;
-      font-weight: bold;
       text-align: center;
     }
-
-    .chat-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1rem;
-      overflow-y: auto;
+    .container {
+      max-width: 600px;
+      padding: 20px;
     }
-
-    .message {
-      max-width: 80%;
-      padding: 10px 15px;
-      border-radius: 20px;
-      margin: 10px 0;
-      font-size: 1rem;
+    h1 {
+      color: #f92672;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
-
-    .user-message {
-      align-self: flex-end;
-      background-color: #f92672;
-      color: white;
+    p {
+      color: #555;
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
-
-    .ai-message {
-      align-self: flex-start;
-      background-color: #ffffff;
-      color: #333;
-      border: 1px solid #eee;
+    .home-link {
+        margin-top: 2rem;
+        display: inline-block;
+        color: #f92672;
+        text-decoration: none;
+        font-weight: bold;
     }
-
-    .input-container {
-      display: flex;
-      padding: 1rem;
-      background-color: #ffeef5;
-      border-top: 1px solid #ddd;
-    }
-
-    input[type="text"] {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 20px;
-      font-size: 1rem;
-      outline: none;
-      margin-right: 10px;
-    }
-
-    button {
-      background-color: #f92672;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 12px 20px;
-      font-size: 1rem;
-      cursor: pointer;
+    .home-link:hover {
+        text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="header">💬 Talk to LoveBreakup AI</div>
 
-  <div class="chat-container" id="chatContainer">
-    <div class="message ai-message">I'm here for you, always.</div>
+  <div class="container">
+    <h1>Your Safe Space to Talk</h1>
+    <p>
+      The chat window is in the bottom-right corner. Click on it to begin. 
+      <br>
+      I'm here to listen, without any judgment.
+    </p>
+    <a href="index.html" class="home-link">← Back to Home</a>
   </div>
 
-  <div class="input-container">
-    <input type="text" id="userInput" placeholder="Type your feelings..." />
-    <button id="sendButton">Send</button>
-  </div>
-
-  <script>
-    const userInput = document.getElementById('userInput');
-    const chatContainer = document.getElementById('chatContainer');
-    const sendButton = document.getElementById('sendButton');
-
-    async function sendMessage() {
-      const prompt = userInput.value.trim();
-      if (!prompt) return;
-
-      const userMessage = document.createElement('div');
-      userMessage.className = 'message user-message';
-      userMessage.innerText = prompt;
-      chatContainer.appendChild(userMessage);
-
-      try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt })
-        });
-
-        const data = await response.json();
-        const aiMessage = document.createElement('div');
-        aiMessage.className = 'message ai-message';
-        aiMessage.innerText = data.reply || 'No response.';
-        chatContainer.appendChild(aiMessage);
-      } catch (error) {
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'message ai-message';
-        errorMessage.innerText = 'Error: Failed to connect to AI.';
-        chatContainer.appendChild(errorMessage);
-        console.error(error);
-      }
-
-      userInput.value = '';
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
-
-    userInput.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-
-    sendButton.addEventListener('click', sendMessage);
-  </script>
-
-  <!-- ✅ Tidio Widget Script Added -->
-  <script src="//code.tidio.co/mhr7u9ip50xxtlagbp7blzofnzaosfvt.js" async></script>
-</body>
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+  <script src="https://files.bpcontent.cloud/2025/08/03/09/20250803090632-9V5YN5UT.js" defer></script>
+  </body>
 </html>
