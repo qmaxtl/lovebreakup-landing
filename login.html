@@ -9,7 +9,7 @@
 <body class="bg-pink-50 flex items-center justify-center min-h-screen font-sans">
 
   <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-md text-center">
-    <h1 class="text-2xl font-extrabold text-pink-600 mb-6">Welcome Back <span class="text-lg">💔</span></h1>
+    <h1 class="text-2xl font-extrabold text-pink-600 mb-6">Welcome Back 💔</h1>
     <form onsubmit="event.preventDefault(); loginUser();" class="space-y-4">
       <input id="email_field" type="email" placeholder="Email" required class="w-full p-3 rounded-xl border border-pink-200 bg-pink-50 focus:outline-none focus:ring-2 focus:ring-pink-300"/>
       <input id="password_field" type="password" placeholder="Password" required class="w-full p-3 rounded-xl border border-pink-200 bg-pink-50 focus:outline-none focus:ring-2 focus:ring-pink-300"/>
@@ -21,6 +21,7 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
@@ -46,7 +47,7 @@
 
       auth.signInWithEmailAndPassword(email, password)
         .then(() => {
-          window.location.href = "recovery.html";
+          window.location.href = "index.html"; // ✅ Redirects to homepage now
         })
         .catch((error) => {
           alert(error.message);
