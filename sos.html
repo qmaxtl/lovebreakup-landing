@@ -2,19 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Emergency SOS Mode</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
     body {
       margin: 0;
       padding: 0;
       background-color: #fff5fa;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding-top: 80px;
     }
+
+    .main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffeef5;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    .nav-left a {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-right span {
+      margin-right: 15px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .nav-right a.login-button {
+      background-color: #f92672;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
+    }
+
+    .nav-right a.login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
+    }
+
+    .nav-right a.logout-link {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
     .card {
       background-color: white;
       padding: 30px;
@@ -22,16 +77,20 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       text-align: center;
       max-width: 400px;
+      margin: 80px auto;
     }
+
     .card h2 {
       color: #e6005c;
       margin-bottom: 15px;
     }
+
     .card p {
       color: #333;
       font-size: 1rem;
       margin-bottom: 25px;
     }
+
     .card button {
       padding: 10px 20px;
       font-size: 1rem;
@@ -42,9 +101,11 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     .card button:hover {
       background-color: #cc0052;
     }
+
     .breathe {
       font-size: 2rem;
       margin-top: 20px;
@@ -53,6 +114,16 @@
   </style>
 </head>
 <body>
+
+  <!-- Top Navigation -->
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+    </div>
+    <div class="nav-right" id="user-status-container" style="display: none;"></div>
+  </nav>
+
+  <!-- SOS Card -->
   <div class="card">
     <h2>Emergency SOS Mode</h2>
     <p>Feel overwhelmed? One click gives you instant breathing guidance and emotional relief.</p>
@@ -60,6 +131,7 @@
     <div class="breathe" id="breatheText">Breathe In...</div>
   </div>
 
+  <!-- Breathing Script -->
   <script>
     let breatheText = document.getElementById("breatheText");
     let steps = ["Breathe In...", "Hold...", "Breathe Out...", "Hold..."];
@@ -75,6 +147,44 @@
       }, 4000);
     }
   </script>
+
+  <!-- Firebase Auth Script -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.appspot.com",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(function(user) {
+      const userStatusContainer = document.getElementById('user-status-container');
+      userStatusContainer.style.display = 'flex';
+      if (user) {
+        const username = user.email.split('@')[0];
+        userStatusContainer.innerHTML = `
+          <span>Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
+        `;
+      } else {
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => console.error("Sign out error", error));
+    }
+  </script>
+
 </body>
 </html>
-
