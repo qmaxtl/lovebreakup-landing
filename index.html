@@ -3,180 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoveBreakup</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #ffeaf4;
-      color: #333;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
-
-    .login-link {
-      background-color: #f92672;
-      color: white;
-      padding: 0.6rem 1rem;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease;
-    }
-
-    .login-link:hover {
-      background-color: #d81b60;
-    }
-
-    .header {
-      text-align: center;
-      padding: 1rem 1rem 0;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      color: #f92672;
-      margin-bottom: 0.2rem;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: #444;
-      margin-bottom: 1rem;
-    }
-
-    .buttons {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .buttons a {
-      background-color: #f92672;
-      color: white;
-      padding: 0.8rem 1.6rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      transition: background 0.2s ease;
-    }
-
-    .buttons a:hover {
-      background-color: #d81b60;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      color: #f92672;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      max-width: 900px;
-      margin: 0 auto 4rem;
-      padding: 0 1rem;
-    }
-
-    .feature-box {
-      background-color: white;
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      text-decoration: none;
-      color: #333;
-      transition: transform 0.2s ease;
-    }
-
-    .feature-box:hover {
-      transform: translateY(-4px);
-    }
-
-    .feature-box h3 {
-      color: #f92672;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-box p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 600px) {
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .buttons {
-        flex-direction: column;
-        gap: 0.8rem;
-      }
-
-      .topbar {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-end;
-      }
-    }
-  </style>
+  <title>LoveBreakup.com</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-pink-50 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-pink-600 text-white p-4 flex justify-between items-center shadow sticky top-0 z-50">
+    <h1 class="text-xl font-bold">💔 LoveBreakup</h1>
+    <nav>
+      <a href="index.html" class="mx-2 hover:underline">Home</a>
+      <a href="journal.html" class="mx-2 hover:underline">Journal</a>
+      <a href="chat.html" class="mx-2 hover:underline">AI Chat</a>
+      <a href="login.html" class="mx-2 hover:underline">Login</a>
+    </nav>
+  </header>
 
-  <!-- Top Bar with Login -->
-  <div class="topbar">
-    <div></div>
-    <a href="login.html" class="login-link">Login</a>
-  </div>
-
-  <!-- Header Section -->
-  <div class="header">
-    <h1>LoveBreakup</h1>
-    <div class="subtitle">Your AI Healing Partner & Virtual Therapist</div>
-    <p>Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.</p>
-
-    <div class="buttons">
-      <a href="recovery.html">Start Healing Now</a>
-      <a href="journal.html">Start Your Journal</a>
+  <!-- Hero Section -->
+  <section class="text-center py-20 px-4 bg-gradient-to-r from-pink-50 to-pink-100">
+    <h2 class="text-4xl font-bold text-pink-700 mb-4">You're Not Alone Anymore.</h2>
+    <p class="max-w-xl mx-auto text-lg">Your 24/7 AI companion for emotional healing, voice journaling, SOS breathing, and growth plans. No therapy labels, just real help.</p>
+    <div class="mt-6 space-x-4">
+      <a href="chat.html" class="bg-pink-600 hover:bg-pink-700 transition px-6 py-2 rounded-lg shadow text-white font-semibold animate-bounce">Start Healing Now</a>
+      <a href="upgrade.html" class="bg-white text-pink-600 px-6 py-2 rounded-lg border border-pink-600 hover:bg-pink-100">Go Premium</a>
     </div>
-  </div>
-
-  <!-- Features Section -->
-  <div class="section-title">What You'll Get</div>
-  <section class="features-grid">
-    <a class="feature-box" href="recovery.html">
-      <h3>Personal Healing Tracks</h3>
-      <p>Personalized 7-day, 30-day, and 90-day routines for recovery based on your pain level.</p>
-    </a>
-
-    <a class="feature-box" href="journal.html">
-      <h3>Voice Memo Journaling</h3>
-      <p>Speak your heart out. The AI will listen and guide you back to emotional stability.</p>
-    </a>
-
-    <a class="feature-box" href="sos.html">
-      <h3>Emergency SOS Mode</h3>
-      <p>Feel overwhelmed? One click gives you instant breathing guidance and emotional relief.</p>
-    </a>
-
-    <a class="feature-box" href="nojudgement.html">
-      <h3>No Judgment, Ever</h3>
-      <p>You're not alone. You're not broken. You’re healing — and this AI is here 24/7 to help.</p>
-    </a>
   </section>
 
+  <!-- Features -->
+  <section class="bg-white py-16 px-4">
+    <h3 class="text-2xl font-bold text-center text-pink-600 mb-10">✨ What You’ll Get</h3>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8">
+      <div class="p-6 bg-pink-100 rounded-xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-2">🧠 AI Chat</h4>
+        <p class="text-gray-700">Emotionally intelligent AI trained to guide you through heartbreak.</p>
+      </div>
+      <div class="p-6 bg-pink-100 rounded-xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-2">📓 Voice Journal</h4>
+        <p class="text-gray-700">Safe space to record your feelings anytime.</p>
+      </div>
+      <div class="p-6 bg-pink-100 rounded-xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-2">🧘 SOS Mode</h4>
+        <p class="text-gray-700">Guided breathing for emotional regulation.</p>
+      </div>
+      <div class="p-6 bg-pink-100 rounded-xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-2">❤️ No Judgment, Ever</h4>
+        <p class="text-gray-700">You're not broken — you're healing. This AI is here 24/7 to guide you through.</p>
+      </div>
+      <div class="p-6 bg-pink-100 rounded-xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-2">🎤 Voice Agent</h4>
+        <p class="text-gray-700">AI listens to your spoken words and guides you back to emotional stability.</p>
+      </div>
+      <div class="p-6 bg-pink-100 rounded-xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-2">📝 Breakup Daily Journal</h4>
+        <p class="text-gray-700">Track your thoughts, progress, and mood every day after heartbreak.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="py-16 bg-pink-50">
+    <div class="max-w-3xl mx-auto text-center px-4">
+      <h3 class="text-2xl font-bold text-pink-600 mb-4">💬 What People Say</h3>
+      <p class="italic text-gray-600">“This isn’t just another app. It actually helped me cry, heal, and breathe again. Thank you.”</p>
+      <p class="mt-2 text-sm text-gray-500">– Aditi, Delhi</p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-12 text-center bg-white">
+    <h3 class="text-2xl font-bold text-pink-600 mb-4">Ready to Feel Better?</h3>
+    <a href="chat.html" class="bg-pink-600 text-white px-6 py-3 rounded-lg shadow hover:bg-pink-700 font-semibold">Start Now — It’s Free</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-gray-500">
+    &copy; 2025 LoveBreakup.com — All rights reserved.
+  </footer>
 </body>
 </html>
