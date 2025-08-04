@@ -1,80 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Breakup Recovery Plan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breakup Recovery Plan – LoveBreakup</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
     body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffeef5, #ffd6e8);
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffe8f0, #ffd1dc);
+      padding-top: 80px;
     }
 
-    .header {
-      background-color: #f92672;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      font-size: 1.8rem;
+    .main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: transparent;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    .nav-left a, .nav-right a.logout-link {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-right span {
+      margin-right: 15px;
+      font-size: 1rem;
+      color: #333;
       font-weight: bold;
     }
 
-    .plan-section {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .plan-section h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
+    .nav-right a.login-button {
+      background-color: #f92672;
       color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
     }
 
-    .plan-card {
-      display: block;
-      background: white;
-      color: #d63384;
-      margin: 20px auto;
-      padding: 20px 30px;
-      border-radius: 15px;
-      width: 70%;
+    .nav-right a.login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      color: #f92672;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .plan-buttons {
       max-width: 500px;
-      font-size: 1.3rem;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .plan-buttons a {
+      display: inline-block;
+      width: 100%;
+      padding: 15px 20px;
+      background-color: white;
+      color: #f92672;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-align: center;
+      border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 10px 25px rgba(213, 51, 132, 0.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.05);
       transition: all 0.3s ease;
     }
 
-    .plan-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(213, 51, 132, 0.2);
-      background: #ffe5f1;
-    }
-
-    .emoji {
-      margin-right: 10px;
+    .plan-buttons a:hover {
+      background-color: #fce4ec;
+      transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
 
-  <div class="header">📅 Breakup Recovery Plan</div>
+  <!-- Top Nav -->
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="index.html">← Home</a>
+    </div>
+    <div class="nav-right" id="user-status-container" style="display: none;"></div>
+  </nav>
 
-  <div class="plan-section">
-    <a href="plan-7day.html" class="plan-card">
-      🗓️ <strong>7-Day Recovery Plan</strong>
-    </a>
+  <!-- Page Heading -->
+  <h1>📅 Breakup Recovery Plan</h1>
 
-    <a href="plan-30day.html" class="plan-card">
-      📅 <strong>30-Day Growth Plan</strong>
-    </a>
-
-    <a href="plan-90day.html" class="plan-card">
-      📆 <strong>90-Day Transformation Plan</strong>
-    </a>
+  <!-- Plan Buttons -->
+  <div class="plan-buttons">
+    <a href="plan-7day.html">📅 7-Day Recovery Plan</a>
+    <a href="plan-30day.html">📅 30-Day Growth Plan</a>
+    <a href="plan-90day.html">📅 90-Day Transformation Plan</a>
   </div>
 
+  <!-- Firebase SDK and Auth Logic -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.firebasestorage.app",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(function(user) {
+      const userStatusContainer = document.getElementById('user-status-container');
+      userStatusContainer.style.display = 'flex';
+      if (user) {
+        const username = user.email.split('@')[0];
+        userStatusContainer.innerHTML = `
+          <span>Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
+        `;
+      } else {
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => console.error("Sign out error", error));
+    }
+  </script>
 </body>
 </html>
