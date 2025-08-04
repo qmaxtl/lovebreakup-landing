@@ -2,103 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoveBreakup - Healing Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LoveBreakup</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #ffedf5;
+      padding: 0;
+      background-color: #ffeaf3;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
     }
 
     header {
       text-align: center;
-      padding: 3rem 1rem 2rem;
+      padding: 2rem 1rem 1rem;
     }
 
     header h1 {
       color: #f92672;
       font-size: 2.5rem;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header h2 {
+      font-weight: 400;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
     }
 
     header p {
-      font-size: 1.1rem;
-      color: #555;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 0 auto 1.5rem;
+      color: #555;
     }
 
-    .cta-buttons {
-      margin-top: 2rem;
+    .btn-group {
       display: flex;
       justify-content: center;
       gap: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .cta-buttons a {
+    .btn-group a {
+      text-decoration: none;
       background-color: #f92672;
       color: white;
-      text-decoration: none;
-      padding: 0.9rem 1.8rem;
+      padding: 0.8rem 1.5rem;
       border-radius: 8px;
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: background 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background 0.2s ease;
     }
 
-    .cta-buttons a:hover {
-      background-color: #d81b60;
+    .btn-group a:hover {
+      background-color: #d61b5f;
     }
 
     .section-title {
       text-align: center;
-      margin-top: 4rem;
       font-size: 1.8rem;
-      color: #c2185b;
+      font-weight: bold;
+      color: #f92672;
+      margin-bottom: 1rem;
     }
 
-    .features {
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      max-width: 800px;
-      margin: 2rem auto 4rem;
-      padding: 0 1rem;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
     }
 
     .feature-box {
-      background-color: #fff;
+      background-color: white;
       padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s;
-      cursor: pointer;
       text-decoration: none;
+      color: #333;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
     }
 
     .feature-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      transform: scale(1.02);
     }
 
     .feature-box h3 {
-      margin-top: 0;
+      margin-bottom: 0.5rem;
       color: #f92672;
-      font-size: 1.2rem;
     }
 
     .feature-box p {
-      margin: 0.5rem 0 0;
-      color: #444;
       font-size: 0.95rem;
-    }
-
-    @media (max-width: 600px) {
-      .features {
-        grid-template-columns: 1fr;
-      }
+      color: #555;
     }
   </style>
 </head>
@@ -106,10 +104,9 @@
 
   <header>
     <h1>LoveBreakup</h1>
-    <p>Your AI Healing Partner & Virtual Therapist</p>
+    <h2>Your AI Healing Partner & Virtual Therapist</h2>
     <p>Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.</p>
-
-    <div class="cta-buttons">
+    <div class="btn-group">
       <a href="recovery.html">Start Healing Now</a>
       <a href="journal.html">Start Your Journal</a>
     </div>
@@ -117,7 +114,7 @@
 
   <div class="section-title">What You'll Get</div>
 
-  <section class="features">
+  <section class="features-grid">
     <a class="feature-box" href="recovery.html">
       <h3>Personal Healing Tracks</h3>
       <p>Personalized 7-day, 30-day, and 90-day routines for recovery based on your pain level.</p>
