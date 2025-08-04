@@ -8,12 +8,13 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #ffeef5;
+      background-color: #fff0f6; /* unified color */
       margin: 0;
       padding: 0;
       padding-top: 80px;
     }
 
+    /* Top Navigation */
     .main-nav {
       position: fixed;
       top: 0;
@@ -28,7 +29,7 @@
       z-index: 1000;
     }
 
-    .nav-left a {
+    .nav-left a.home-link {
       color: #f92672;
       font-weight: bold;
       text-decoration: none;
@@ -124,7 +125,7 @@
   <!-- Top Navigation -->
   <nav class="main-nav">
     <div class="nav-left">
-      <a href="index.html">Home</a>
+      <a href="index.html" class="home-link">Home</a>
     </div>
     <div class="nav-right" id="user-status-container" style="display: none;"></div>
   </nav>
@@ -137,7 +138,7 @@
     <div id="output" class="entry-output" style="display: none;"></div>
   </div>
 
-  <!-- Firebase Scripts -->
+  <!-- Firebase Auth -->
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
   <script>
@@ -147,16 +148,16 @@
       projectId: "lovebreakup-52bac",
       storageBucket: "lovebreakup-52bac.appspot.com",
       messagingSenderId: "367547931480",
-      appId: "1:367547931480:web:65dad44e077d93d093632d",
-      measurementId: "G-NWG6Z8J62T"
+      appId: "1:367547931480:web:65dad44e077d93d093632d"
     };
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged(function(user) {
       const userStatusContainer = document.getElementById('user-status-container');
       userStatusContainer.style.display = 'flex';
+
       if (user) {
         const username = user.email.split('@')[0];
         userStatusContainer.innerHTML = `
@@ -164,24 +165,23 @@
           <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
         `;
       } else {
-        userStatusContainer.innerHTML = `
-          <a href="login.html" class="login-button">Login</a>
-        `;
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
       }
     });
 
     function logoutUser() {
       auth.signOut().then(() => {
         window.location.href = 'index.html';
-      });
+      }).catch((error) => console.error("Sign out error", error));
     }
   </script>
 
-  <!-- Journal Save Script -->
+  <!-- Journal Save Logic -->
   <script>
     function saveEntry() {
       const input = document.getElementById('journalInput').value.trim();
       const output = document.getElementById('output');
+
       if (input) {
         output.style.display = 'block';
         output.textContent = `📝 Journal Entry:\n\n${input}`;
@@ -189,6 +189,5 @@
       }
     }
   </script>
-
 </body>
 </html>
