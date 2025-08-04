@@ -1,5 +1,5 @@
 <!-- ====================================================================== -->
-<!-- FILE: index.html (Final Premium Version) -->
+<!-- FILE: index.html (Final Corrected Version) -->
 <!-- ====================================================================== -->
 <!-- ACTION: Replace your existing 'index.html' code with this. -->
 <!-- ====================================================================== -->
@@ -35,7 +35,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      background-color: transparent; /* White bar removed */
+      background-color: transparent;
       padding: 15px 25px;
       display: flex;
       justify-content: flex-end;
@@ -43,19 +43,19 @@
       box-sizing: border-box;
       z-index: 1000;
     }
-    .nav-right a.login-button { /* Target the login button specifically */
+    .nav-right a.login-button {
       background-color: #f92672;
       color: white;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1rem; /* Font size increased */
-      padding: 10px 20px; /* Padding increased for bigger size */
-      border-radius: 50px; /* Fully rounded corners */
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3); /* Pink shadow */
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
     }
     .nav-right a.login-button:hover {
-        transform: translateY(-2px); /* Slight lift on hover */
+        transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
     }
     .nav-right span {
@@ -64,10 +64,11 @@
       color: #333;
       font-weight: bold;
     }
-    .nav-right a.logout-link { /* Style for the logout link */
+    .nav-right a.logout-link {
         color: #f92672;
         font-weight: bold;
         text-decoration: none;
+        margin-left: 10px; /* Added margin for spacing */
     }
   </style>
 </head>
@@ -88,7 +89,6 @@
     <div class="tagline">
       Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.
     </div>
-    <!-- === MAIN BUTTONS ARE BACK === -->
     <div class="cta-buttons" id="main-cta-buttons">
       <a href="talk.html">Talk to LoveBreakup AI</a>
       <a href="journal.html">Start Your Journal</a>
@@ -180,7 +180,7 @@
 <!-- TEMPLATE for ALL OTHER PAGES (talk.html, journal.html, etc.) -->
 <!-- ====================================================================== -->
 <!-- ACTION: Use this code as a template for all your inner pages. -->
-<!-- This version has a transparent nav and a premium login button. -->
+<!-- This version has the Home button and corrected Login/Logout logic. -->
 <!-- ====================================================================== -->
 
 <!DOCTYPE html>
@@ -199,27 +199,33 @@
       top: 0;
       left: 0;
       width: 100%;
-      background-color: transparent; /* White bar removed */
+      background-color: transparent;
       padding: 15px 25px;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between; /* To allow left and right content */
       align-items: center;
       box-sizing: border-box;
       z-index: 1000;
     }
-    .nav-right a.login-button { /* Target the login button specifically */
+    .nav-left a, .nav-right a.logout-link {
+        color: #f92672;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+    .nav-right a.login-button {
       background-color: #f92672;
       color: white;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1rem; /* Font size increased */
-      padding: 10px 20px; /* Padding increased for bigger size */
-      border-radius: 50px; /* Fully rounded corners */
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3); /* Pink shadow */
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
     }
     .nav-right a.login-button:hover {
-        transform: translateY(-2px); /* Slight lift on hover */
+        transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
     }
     .nav-right span {
@@ -228,12 +234,6 @@
       color: #333;
       font-weight: bold;
     }
-    .nav-right a.logout-link { /* Style for the logout link */
-        color: #f92672;
-        font-weight: bold;
-        text-decoration: none;
-    }
-    /* This is where you will add styles for your page's content */
     .page-content {
         padding: 40px;
         max-width: 900px;
@@ -245,18 +245,16 @@
 
   <!-- Top Navigation Bar -->
   <nav class="main-nav">
+    <div class="nav-left">
+      <a href="index.html">← Home</a>
+    </div>
     <div class="nav-right" id="user-status-container">
       <!-- This will be filled by JavaScript -->
       <a href="login.html" class="login-button">Login</a>
     </div>
   </nav>
 
-  <!-- 
-    ================================================
-    !!! YOUR PAGE CONTENT GOES HERE !!!
-    This section is now empty and ready for your content.
-    ================================================
-  -->
+  <!-- === YOUR PAGE CONTENT GOES HERE === -->
   <div class="page-content">
       <!-- Example for journal.html: -->
       <!-- <h1>My Healing Journal</h1> -->
