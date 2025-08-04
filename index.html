@@ -6,22 +6,99 @@
   <title>LoveBreakup – Your AI Healing Partner</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
-    body { background-color: #ffeef5; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; color: #333; padding-top: 70px; }
-    header { text-align: center; padding: 40px 20px 20px; }
-    .logo { font-size: 3rem; font-weight: bold; color: #f92672; }
-    .subheadline { font-size: 1.3rem; margin-top: 10px; color: #555; }
-    .tagline { margin: 20px auto 40px; max-width: 600px; font-size: 1rem; color: #666; text-align: center; }
-    .cta-buttons { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
-    .cta-buttons a { padding: 14px 24px; background-color: #f92672; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: background-color 0.3s ease; }
-    .cta-buttons a:hover { background-color: #e91e63; }
-    h2 { font-size: 2rem; margin-bottom: 30px; color: #f92672; text-align: center; }
-    .features { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 0 40px 60px; max-width: 900px; margin: 0 auto; }
-    @media screen and (min-width: 768px) { .features { grid-template-columns: repeat(2, 1fr); } }
-    .feature-box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.05); text-align: left; }
-    .feature-box h3 { color: #f92672; margin-bottom: 10px; font-size: 1.1rem; }
-    .feature-box p { font-size: 0.95rem; color: #555; }
-    @media screen and (max-width: 600px) { .cta-buttons { flex-direction: column; gap: 12px; } }
-
+    body {
+      background-color: #ffeef5;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      padding-top: 70px;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    .logo {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #f92672;
+    }
+    .subheadline {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      color: #555;
+    }
+    .tagline {
+      margin: 20px auto 40px;
+      max-width: 600px;
+      font-size: 1rem;
+      color: #666;
+      text-align: center;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    .cta-buttons a {
+      padding: 14px 24px;
+      background-color: #f92672;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .cta-buttons a:hover {
+      background-color: #e91e63;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #f92672;
+      text-align: center;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 40px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media screen and (min-width: 768px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .feature-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+    .feature-box h3 {
+      color: #f92672;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .feature-box p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    @media screen and (max-width: 600px) {
+      .cta-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
     .main-nav {
       position: fixed;
       top: 0;
@@ -36,8 +113,8 @@
       z-index: 1000;
     }
     .nav-right {
-        display: flex;
-        align-items: center;
+      display: flex;
+      align-items: center;
     }
     .nav-right a.login-button {
       background-color: #f92672;
@@ -51,8 +128,8 @@
       box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
     }
     .nav-right a.login-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
     }
     .nav-right span {
       margin-right: 15px;
@@ -61,10 +138,10 @@
       font-weight: bold;
     }
     .nav-right a.logout-link {
-        color: #f92672;
-        font-weight: bold;
-        text-decoration: none;
-        margin-left: 10px;
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 10px;
     }
   </style>
 </head>
@@ -83,7 +160,7 @@
       Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.
     </div>
     <div class="cta-buttons" id="main-cta-buttons" style="display: none;">
-      <!-- Filled dynamically -->
+      <!-- Will be replaced by JS -->
     </div>
   </header>
 
@@ -92,7 +169,7 @@
     <h2>What You'll Get</h2>
     <div class="features">
       <div class="feature-box">
-        <h3><a href="login.html" style="color:#f92672;text-decoration:none;">Breakup Recovery Plan</a></h3>
+        <h3><a href="#" id="plan-link" style="color:#f92672;text-decoration:none;">Breakup Recovery Plan</a></h3>
         <p>Personalized 7-day, 30-day, and 90-day routines for recovery based on your pain level.</p>
       </div>
       <div class="feature-box">
@@ -110,7 +187,7 @@
     </div>
   </section>
 
-  <!-- Scripts -->
+  <!-- Chatbot + Firebase -->
   <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
   <script src="https://files.bpcontent.cloud/2025/08/03/09/20250803090632-9V5YN5UT.js" defer></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
@@ -133,7 +210,8 @@
     auth.onAuthStateChanged(function(user) {
       const userStatusContainer = document.getElementById('user-status-container');
       const ctaContainer = document.getElementById('main-cta-buttons');
-      
+      const planLink = document.getElementById('plan-link');
+
       userStatusContainer.style.display = 'flex';
       ctaContainer.style.display = 'flex';
 
@@ -147,12 +225,14 @@
           <a href="recovery.html">My Recovery Plan</a>
           <a href="journal.html">Start Your Journal</a>
         `;
+        if (planLink) planLink.setAttribute('href', 'recovery.html');
       } else {
-        userStatusContainer.innerHTML = `<a href="login.html" class="login-button">Login</a>`;
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
         ctaContainer.innerHTML = `
           <a href="talk.html">Talk to LoveBreakup AI</a>
           <a href="journal.html">Start Your Journal</a>
         `;
+        if (planLink) planLink.setAttribute('href', 'login.html');
       }
     });
 
