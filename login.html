@@ -1,78 +1,122 @@
-<!-- ====================================================================== -->
-<!-- FILE: login.html -->
-<!-- ====================================================================== -->
-<!-- PURPOSE: Allows existing users to log in using their email and password. -->
-<!-- ACTION: Copy this entire code and paste it into your 'login.html' file. -->
-<!-- ====================================================================== -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login – LoveBreakup</title>
+  <title>Sign Up – LoveBreakup</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
-    body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #ffeef5; font-family: 'Segoe UI', sans-serif; }
-    .login-container { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
-    h1 { color: #f92672; font-weight: bold; font-size: 2rem; margin-bottom: 1.5rem; }
-    .form-group { margin-bottom: 1.5rem; text-align: left; }
-    input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box; }
-    .login-btn { width: 100%; padding: 14px; border-radius: 8px; border: none; background-color: #f92672; color: white; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color .3s ease; margin-top: 1rem; }
-    .login-btn:hover { background-color: #e91e63; }
-    .create-link { margin-top: 1.5rem; font-size: 0.9rem; }
-    .create-link a { color: #f92672; font-weight: bold; text-decoration: none; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #ffeef5;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .signup-container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    h1 {
+      color: #f92672;
+      font-weight: bold;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .signup-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      background-color: #f92672;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color .3s ease;
+      margin-top: 1rem;
+    }
+    .signup-btn:hover {
+      background-color: #e91e63;
+    }
+    .login-link {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .login-link a {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Welcome Back 💔</h1>
-    <form onsubmit="event.preventDefault(); loginUser();">
+  <div class="signup-container">
+    <h1>Create Account 💖</h1>
+    <form onsubmit="event.preventDefault(); registerUser();">
       <div class="form-group">
         <input type="email" id="email_field" placeholder="Email" required>
       </div>
       <div class="form-group">
-        <input type="password" id="password_field" placeholder="Password" required>
+        <input type="password" id="password_field" placeholder="Password (min 6 chars)" required>
       </div>
-      <button type="submit" class="login-btn">Login</button>
+      <button type="submit" class="signup-btn">Sign Up</button>
     </form>
-    <div class="create-link">
-      Don't have an account? <a href="signup.html">Create one</a>
+    <div class="login-link">
+      Already have an account? <a href="login.html">Log in</a>
     </div>
   </div>
 
-  <!-- Firebase SDK Scripts -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-
+  
   <script>
-    // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
       authDomain: "lovebreakup-52bac.firebaseapp.com",
       projectId: "lovebreakup-52bac",
-      storageBucket: "lovebreakup-52bac.firebasestorage.app",
+      storageBucket: "lovebreakup-52bac.appspot.com",
       messagingSenderId: "367547931480",
       appId: "1:367547931480:web:65dad44e077d93d093632d",
       measurementId: "G-NWG6Z8J62T"
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    // Login with Email and Password
-    function loginUser() {
+    function registerUser() {
       const email = document.getElementById('email_field').value;
       const password = document.getElementById('password_field').value;
+
       if (!email || !password) {
-        alert("Please enter email and password.");
+        alert("Please fill in all fields.");
         return;
       }
-      auth.signInWithEmailAndPassword(email, password)
+
+      auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          console.log("Logged in successfully!");
-          window.location.href = 'recovery.html'; // Redirect to premium page
+          console.log("Signup successful");
+          window.location.href = 'recovery.html';
         })
         .catch((error) => {
           alert(error.message);
