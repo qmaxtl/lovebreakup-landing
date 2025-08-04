@@ -1,8 +1,7 @@
 <!-- ====================================================================== -->
-<!-- FILE: index.html (Corrected Code) -->
+<!-- FILE: index.html (Final Clean Version) -->
 <!-- ====================================================================== -->
 <!-- ACTION: Replace your existing 'index.html' code with this. -->
-<!-- This version has ONLY the Login/User Status on the top-right. -->
 <!-- ====================================================================== -->
 
 <!DOCTYPE html>
@@ -13,15 +12,15 @@
   <title>LoveBreakup – Your AI Healing Partner</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
-    /* Your existing CSS... (no changes needed here) */
-    body { background-color: #ffeef5; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; color: #333; padding-top: 60px; /* Added padding for fixed nav */}
+    /* Your existing CSS... */
+    body { background-color: #ffeef5; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; color: #333; padding-top: 60px; }
     header { text-align: center; padding: 40px 20px 20px; }
     .logo { font-size: 3rem; font-weight: bold; color: #f92672; }
     .subheadline { font-size: 1.3rem; margin-top: 10px; color: #555; }
     .tagline { margin: 20px auto 40px; max-width: 600px; font-size: 1rem; color: #666; text-align: center; }
     .cta-buttons { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
-    .cta-buttons a, .logout-btn-home { padding: 14px 24px; background-color: #f92672; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: background-color 0.3s ease; }
-    .cta-buttons a:hover, .logout-btn-home:hover { background-color: #e91e63; }
+    .cta-buttons a { padding: 14px 24px; background-color: #f92672; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: background-color 0.3s ease; }
+    .cta-buttons a:hover { background-color: #e91e63; }
     h2 { font-size: 2rem; margin-bottom: 30px; color: #f92672; text-align: center; }
     .features { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 0 40px 60px; max-width: 900px; margin: 0 auto; }
     @media screen and (min-width: 768px) { .features { grid-template-columns: repeat(2, 1fr); } }
@@ -30,7 +29,7 @@
     .feature-box p { font-size: 0.95rem; color: #555; }
     @media screen and (max-width: 600px) { .cta-buttons { flex-direction: column; gap: 12px; } }
 
-    /* === CORRECTED CSS FOR TOP NAVIGATION BAR === */
+    /* === UPDATED CSS FOR TOP NAVIGATION BAR === */
     .main-nav {
       position: fixed;
       top: 0;
@@ -38,9 +37,9 @@
       width: 100%;
       background-color: white;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 10px 20px;
+      padding: 10px 25px; /* Increased padding slightly */
       display: flex;
-      justify-content: flex-end; /* CORRECTED: This pushes content to the right */
+      justify-content: flex-end; /* Pushes content to the right */
       align-items: center;
       box-sizing: border-box;
       z-index: 1000;
@@ -50,6 +49,12 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 0.9rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .nav-right a:hover {
+        background-color: #ffeef5; /* Light pink hover effect */
     }
     .nav-right span {
       margin-right: 15px;
@@ -60,7 +65,7 @@
 </head>
 <body>
 
-  <!-- === CORRECTED TOP NAVIGATION BAR === -->
+  <!-- === UPDATED TOP NAVIGATION BAR === -->
   <nav class="main-nav">
     <div class="nav-right" id="user-status-container">
       <!-- This will be filled by JavaScript -->
@@ -133,12 +138,12 @@
       if (user) {
         // User is signed in.
         userStatusContainer.innerHTML = `
-          <span>Welcome, ${user.email}</span>
+          <span>Welcome, ${user.email.split('@')[0]}</span>
           <a href="#" onclick="logoutUser()">Logout</a>
         `;
         ctaContainer.innerHTML = `
           <a href="recovery.html">My Recovery Plan</a>
-          <a href="#" onclick="logoutUser()" class="logout-btn-home">Logout</a>
+          <a href="#" onclick="logoutUser()">Logout</a>
         `;
       } else {
         // No user is signed in.
@@ -164,7 +169,7 @@
 <!-- TEMPLATE for ALL OTHER PAGES (talk.html, journal.html, etc.) -->
 <!-- ====================================================================== -->
 <!-- ACTION: Use this code as a template for all your inner pages. -->
-<!-- This version has the "Home" button on the left and Login on the right. -->
+<!-- This version has NO "Home" button and a clean Login/User status. -->
 <!-- ====================================================================== -->
 
 <!DOCTYPE html>
@@ -175,9 +180,9 @@
   <title>Your Page Title – LoveBreakup</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background-color: #ffeef5; margin: 0; padding: 0; padding-top: 60px; /* Added padding for fixed nav */}
+    body { font-family: 'Segoe UI', sans-serif; background-color: #ffeef5; margin: 0; padding: 0; padding-top: 60px; }
     
-    /* === CSS FOR TOP NAVIGATION BAR ON INNER PAGES === */
+    /* === UPDATED CSS FOR TOP NAVIGATION BAR === */
     .main-nav {
       position: fixed;
       top: 0;
@@ -185,18 +190,24 @@
       width: 100%;
       background-color: white;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 10px 20px;
+      padding: 10px 25px; /* Increased padding slightly */
       display: flex;
-      justify-content: space-between; /* CORRECTED: This keeps elements on both sides */
+      justify-content: flex-end; /* Pushes content to the right */
       align-items: center;
       box-sizing: border-box;
       z-index: 1000;
     }
-    .nav-left a, .nav-right a {
+    .nav-right a {
       color: #f92672;
       text-decoration: none;
       font-weight: bold;
       font-size: 0.9rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .nav-right a:hover {
+        background-color: #ffeef5; /* Light pink hover effect */
     }
     .nav-right span {
       margin-right: 15px;
@@ -212,11 +223,8 @@
 </head>
 <body>
 
-  <!-- === TOP NAVIGATION BAR FOR INNER PAGES === -->
+  <!-- === UPDATED TOP NAVIGATION BAR (No "Home" button) === -->
   <nav class="main-nav">
-    <div class="nav-left">
-      <a href="index.html">← Home</a>
-    </div>
     <div class="nav-right" id="user-status-container">
       <!-- This will be filled by JavaScript -->
       <a href="login.html">Login</a>
@@ -253,9 +261,9 @@
     auth.onAuthStateChanged(function(user) {
       const userStatusContainer = document.getElementById('user-status-container');
       if (user) {
-        // User is signed in.
+        // User is signed in. Show user's name (before the @) and logout.
         userStatusContainer.innerHTML = `
-          <span>Welcome, ${user.email}</span>
+          <span>Welcome, ${user.email.split('@')[0]}</span>
           <a href="#" onclick="logoutUser()">Logout</a>
         `;
       } else {
