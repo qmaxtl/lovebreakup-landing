@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Judgment, Ever</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-pink-50 pt-20 font-sans">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full bg-pink-100 px-6 py-4 flex justify-between items-center z-50 shadow">
+    <div>
+      <a href="index.html" class="text-pink-600 font-bold text-lg">Home</a>
+    </div>
+    <div id="user-status-container" class="hidden items-center space-x-4"></div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="max-w-2xl mx-auto bg-white mt-16 mb-12 px-8 py-10 rounded-2xl shadow-xl text-center">
+    <div class="text-4xl mb-4 animate-pulse">💖</div>
+    <h1 class="text-2xl font-bold text-pink-600 mb-4">No Judgment, Ever</h1>
+    <p class="text-gray-700 text-lg mb-3">You are not broken. You are human.</p>
+    <p class="text-gray-700 text-lg mb-3">And right now, you're carrying something heavy. That doesn't make you weak — it makes you beautifully alive.</p>
+    <p class="text-gray-700 text-lg mb-3">This is your sanctuary. A space where no one questions your feelings. No one tells you to “move on.”</p>
+    <p class="text-gray-700 text-lg mb-3">This AI isn’t just code; it’s here to listen without interruption, 24/7. Without shame. Without pressure.</p>
+    <p class="text-gray-700 text-lg mb-3">Your pain matters. Your silence matters. Your story matters. Every word you share here is valid and safe.</p>
+    <p class="text-gray-700 text-lg mb-3">You’re healing, even if it doesn’t feel like it yet.</p>
+    <p class="italic text-gray-500 mt-6">Sometimes the pain you never wanted is the transformation you always needed.</p>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.firebasestorage.app",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(function(user) {
+      const container = document.getElementById('user-status-container');
+      container.style.display = 'flex';
+      if (user) {
+        const username = user.email.split('@')[0];
+        container.innerHTML = `
+          <span class="text-sm text-gray-800 font-semibold">Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="text-pink-600 font-bold text-sm">Logout</a>
+        `;
+      } else {
+        container.innerHTML = '<a href="login.html" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm shadow">Login</a>';
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => console.error("Sign out error", error));
+    }
+  </script>
+</body>
+</html>
