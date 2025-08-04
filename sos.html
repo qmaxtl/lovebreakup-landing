@@ -4,23 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Emergency SOS Mode</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-pink-50 min-h-screen pt-20 font-sans">
 
-  <!-- Navigation -->
-  <nav class="fixed top-0 left-0 w-full bg-pink-100 shadow-sm px-6 py-4 flex justify-between items-center z-50">
-    <a href="index.html" class="text-pink-600 font-bold text-lg">Home</a>
-    <div id="user-status-container" class="hidden flex items-center space-x-4"></div>
-  </nav>
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full bg-pink-600 text-white px-6 py-4 flex justify-between items-center shadow-md z-50">
+    <div class="text-lg font-bold tracking-wide">🧘 SOS Mode</div>
+    <nav class="space-x-6 text-base flex items-center" id="user-status-container">
+      <a href="index.html" class="hover:underline">Home</a>
+      <!-- Login/Logout injected via JS -->
+    </nav>
+  </header>
 
   <!-- SOS Card -->
-  <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 text-center mt-12">
+  <main class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 text-center mt-12">
     <h2 class="text-2xl font-bold text-pink-700 mb-4">Emergency SOS Mode</h2>
     <p class="text-gray-700 mb-6">Feel overwhelmed? One click gives you instant breathing guidance and emotional relief.</p>
     <button onclick="startBreathing()" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-full font-semibold shadow-md transition">Start SOS</button>
     <div id="breatheText" class="text-2xl text-gray-800 font-semibold mt-8 hidden">Breathe In...</div>
-  </div>
+  </main>
 
   <!-- Breathing Logic -->
   <script>
@@ -56,15 +59,16 @@
 
     auth.onAuthStateChanged(user => {
       const container = document.getElementById("user-status-container");
-      container.classList.remove("hidden");
       if (user) {
         const username = user.email.split('@')[0];
-        container.innerHTML = `
-          <span class="text-gray-800 font-bold">Welcome, ${username}</span>
-          <a href="#" onclick="logoutUser()" class="text-pink-600 font-semibold">Logout</a>
+        container.innerHTML += `
+          <span class="text-white font-bold">Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="hover:underline">Logout</a>
         `;
       } else {
-        container.innerHTML = `<a href="login.html" class="bg-pink-600 text-white px-4 py-2 rounded-full font-semibold shadow hover:bg-pink-700">Login</a>`;
+        container.innerHTML += `
+          <a href="login.html" class="hover:underline">Login</a>
+        `;
       }
     });
 
