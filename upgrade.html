@@ -4,57 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Upgrade Your Healing</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffe6f0, #fff4fa);
-      color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    .container {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      max-width: 700px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #e60073;
-      margin-bottom: 10px;
-      font-size: 2rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      color: #555;
-      margin-bottom: 20px;
-    }
-
-    .benefits {
-      margin: 20px 0 30px;
-      text-align: left;
-      line-height: 1.6;
-      color: #444;
-    }
-
-    .benefits li {
-      margin-bottom: 10px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
     .buttons a {
       background-color: #e60073;
       color: white;
@@ -64,6 +15,8 @@
       text-decoration: none;
       transition: background-color 0.3s;
       min-width: 160px;
+      display: inline-block;
+      text-align: center;
     }
 
     .buttons a:hover {
@@ -71,23 +24,38 @@
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Unlock the Full Recovery Journey 💖</h1>
-    <p>You’ve started healing. Now go deeper, faster, and stronger — with premium access.</p>
+<body class="bg-pink-50 font-sans">
 
-    <ul class="benefits">
+  <!-- Navigation -->
+  <header class="bg-pink-600 text-white px-6 py-4 flex justify-between items-center shadow-md">
+    <div class="text-lg font-bold flex items-center space-x-2">
+      <span>💎</span>
+      <span>Upgrade Plan</span>
+    </div>
+    <nav class="flex items-center space-x-4">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="login.html" class="hover:underline">Login</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-2xl mx-auto bg-white mt-16 mb-12 px-8 py-10 rounded-2xl shadow-xl text-center">
+    <h1 class="text-2xl font-bold text-pink-600 mb-3">Unlock the Full Recovery Journey 💖</h1>
+    <p class="text-gray-700 text-base mb-5">You’ve started healing. Now go deeper, faster, and stronger — with premium access.</p>
+
+    <ul class="text-left text-gray-800 mb-8 space-y-2 leading-relaxed">
       <li>✅ Unlimited AI conversations (no time limits)</li>
       <li>✅ Save your voice & journal entries forever</li>
       <li>✅ Get daily emotional check-ins + recovery tips</li>
       <li>✅ Access exclusive tools like SOS mode, growth plans, and more</li>
     </ul>
 
-    <div class="buttons">
+    <div class="buttons flex flex-wrap justify-center gap-4">
       <a href="payment.html?plan=onetime">One-Time Unlock</a>
       <a href="payment.html?plan=monthly">Monthly Plan</a>
       <a href="payment.html?plan=fullaccess">Get Full Access</a>
     </div>
   </div>
+
 </body>
 </html>
