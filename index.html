@@ -2,115 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LoveBreakup</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: #ffeaf3;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffeaf4;
       color: #333;
+      text-align: center;
     }
 
-    header {
-      text-align: center;
+    .header {
       padding: 2rem 1rem 1rem;
     }
 
-    header h1 {
-      color: #f92672;
+    h1 {
       font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      color: #f92672;
+      margin-bottom: 0.2rem;
     }
 
-    header h2 {
-      font-weight: 400;
-      font-size: 1.2rem;
+    .subtitle {
+      font-size: 1.1rem;
+      color: #444;
       margin-bottom: 1rem;
     }
 
-    header p {
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-      color: #555;
-    }
-
-    .btn-group {
+    .buttons {
+      margin-top: 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin-bottom: 2rem;
     }
 
-    .btn-group a {
-      text-decoration: none;
+    .buttons a {
       background-color: #f92672;
       color: white;
-      padding: 0.8rem 1.5rem;
+      padding: 0.8rem 1.6rem;
       border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       transition: background 0.2s ease;
     }
 
-    .btn-group a:hover {
-      background-color: #d61b5f;
+    .buttons a:hover {
+      background-color: #d81b60;
     }
 
     .section-title {
-      text-align: center;
       font-size: 1.8rem;
-      font-weight: bold;
       color: #f92672;
+      margin-top: 3rem;
       margin-bottom: 1rem;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
       max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
+      margin: 0 auto 4rem;
+      padding: 0 1rem;
     }
 
     .feature-box {
       background-color: white;
+      border-radius: 10px;
       padding: 1.5rem;
-      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      text-align: left;
       text-decoration: none;
       color: #333;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       transition: transform 0.2s ease;
     }
 
     .feature-box:hover {
-      transform: scale(1.02);
+      transform: translateY(-4px);
     }
 
     .feature-box h3 {
-      margin-bottom: 0.5rem;
       color: #f92672;
+      margin-bottom: 0.5rem;
     }
 
     .feature-box p {
       font-size: 0.95rem;
-      color: #555;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <div class="header">
     <h1>LoveBreakup</h1>
-    <h2>Your AI Healing Partner & Virtual Therapist</h2>
+    <div class="subtitle">Your AI Healing Partner & Virtual Therapist</div>
     <p>Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.</p>
-    <div class="btn-group">
+
+    <div class="buttons">
       <a href="recovery.html">Start Healing Now</a>
       <a href="journal.html">Start Your Journal</a>
     </div>
-  </header>
+  </div>
 
   <div class="section-title">What You'll Get</div>
 
