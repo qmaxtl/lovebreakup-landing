@@ -11,11 +11,33 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #ffeaf4;
       color: #333;
-      text-align: center;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .login-link {
+      background-color: #f92672;
+      color: white;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    .login-link:hover {
+      background-color: #d81b60;
     }
 
     .header {
-      padding: 2rem 1rem 1rem;
+      text-align: center;
+      padding: 1rem 1rem 0;
     }
 
     h1 {
@@ -35,6 +57,7 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .buttons a {
@@ -57,6 +80,7 @@
       color: #f92672;
       margin-top: 3rem;
       margin-bottom: 1rem;
+      text-align: center;
     }
 
     .features-grid {
@@ -73,7 +97,6 @@
       border-radius: 10px;
       padding: 1.5rem;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      text-align: left;
       text-decoration: none;
       color: #333;
       transition: transform 0.2s ease;
@@ -102,11 +125,24 @@
         flex-direction: column;
         gap: 0.8rem;
       }
+
+      .topbar {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-end;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Top Bar with Login -->
+  <div class="topbar">
+    <div></div>
+    <a href="login.html" class="login-link">Login</a>
+  </div>
+
+  <!-- Header Section -->
   <div class="header">
     <h1>LoveBreakup</h1>
     <div class="subtitle">Your AI Healing Partner & Virtual Therapist</div>
@@ -118,8 +154,8 @@
     </div>
   </div>
 
+  <!-- Features Section -->
   <div class="section-title">What You'll Get</div>
-
   <section class="features-grid">
     <a class="feature-box" href="recovery.html">
       <h3>Personal Healing Tracks</h3>
