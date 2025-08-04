@@ -12,51 +12,153 @@
       margin: 0;
       padding: 0;
       color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+      padding-top: 80px;
     }
+
+    .main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: transparent;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    .nav-left a,
+    .nav-right a.logout-link {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-right span {
+      margin-right: 15px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .nav-right a.login-button {
+      background-color: #f92672;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
+    }
+
+    .nav-right a.login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
+    }
+
     .container {
       max-width: 600px;
+      margin: auto;
       padding: 20px;
+      text-align: center;
     }
+
     h1 {
       color: #f92672;
       font-size: 2.5rem;
       margin-bottom: 1rem;
     }
+
     p {
       color: #555;
       font-size: 1.2rem;
       line-height: 1.6;
     }
+
     .home-link {
-        margin-top: 2rem;
-        display: inline-block;
-        color: #f92672;
-        text-decoration: none;
-        font-weight: bold;
+      margin-top: 2rem;
+      display: inline-block;
+      color: #f92672;
+      text-decoration: none;
+      font-weight: bold;
     }
+
     .home-link:hover {
-        text-decoration: underline;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
+  <!-- Top Navigation -->
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+    </div>
+    <div class="nav-right" id="user-status-container" style="display: none;"></div>
+  </nav>
+
+  <!-- Page Content -->
   <div class="container">
     <h1>Your Safe Space to Talk</h1>
     <p>
-      The chat window is in the bottom-right corner. Click on it to begin. 
-      <br>
+      The chat window is in the bottom-right corner. Click on it to begin. <br>
       I'm here to listen, without any judgment.
     </p>
-    <a href="index.html" class="home-link">← Back to Home</a>
+    <a href="index.html" class="home-link">Back to Home</a>
   </div>
 
+  <!-- Botpress Chat Widget -->
   <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
   <script src="https://files.bpcontent.cloud/2025/08/03/09/20250803090632-9V5YN5UT.js" defer></script>
-  </body>
+
+  <!-- Firebase Auth Integration -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.firebasestorage.app",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(function(user) {
+      const userStatusContainer = document.getElementById('user-status-container');
+      userStatusContainer.style.display = 'flex';
+
+      if (user) {
+        const username = user.email.split('@')[0];
+        userStatusContainer.innerHTML = `
+          <span>Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
+        `;
+      } else {
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => console.error("Sign out error", error));
+    }
+  </script>
+
+</body>
 </html>
