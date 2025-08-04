@@ -32,8 +32,7 @@
       projectId: "lovebreakup-52bac",
       storageBucket: "lovebreakup-52bac.appspot.com",
       messagingSenderId: "367547931480",
-      appId: "1:367547931480:web:65dad44e077d93d093632d",
-      measurementId: "G-NWG6Z8J62T"
+      appId: "1:367547931480:web:65dad44e077d93d093632d"
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -42,15 +41,14 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      // ✅ PERSIST login session
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+          return firebase.auth().signInWithEmailAndPassword(email, password);
+        })
         .then((userCredential) => {
-          const user = userCredential.user;
-          if (user) {
-            alert("Login successful ✅");
-            window.location.href = "index.html";
-          } else {
-            alert("Something went wrong. Try again.");
-          }
+          alert("Login successful ✅");
+          window.location.href = "index.html";
         })
         .catch((error) => {
           alert("Login failed ❌\n" + error.message);
