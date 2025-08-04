@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartbreak Personality Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-pink-50 text-gray-800 font-sans">
+
+  <header class="bg-pink-600 text-white p-4 flex justify-between items-center shadow-md sticky top-0 z-50">
+    <div class="text-lg font-bold tracking-wide">💔 Heartbreak Type Quiz</div>
+    <nav class="space-x-4 text-base">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="login.html" class="hover:underline">Login</a>
+    </nav>
+  </header>
+
+  <main class="max-w-2xl mx-auto mt-12 bg-white p-8 rounded-2xl shadow-lg">
+    <h1 class="text-2xl font-bold text-pink-600 mb-4 text-center">Discover Your Heartbreak Personality</h1>
+    <p class="text-gray-600 mb-6 text-center">Answer 5 quick questions to unlock a custom healing path based on your emotional style.</p>
+
+    <form id="quizForm" class="space-y-6">
+      <div class="question">
+        <label class="block font-semibold mb-2">1. How do you usually process pain?</label>
+        <select class="w-full border rounded px-4 py-2" name="q1">
+          <option value="silent">I keep it to myself</option>
+          <option value="talker">I talk to friends</option>
+          <option value="distract">I distract myself with work or fun</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label class="block font-semibold mb-2">2. What’s your biggest struggle post-breakup?</label>
+        <select class="w-full border rounded px-4 py-2" name="q2">
+          <option value="overthink">Overthinking everything</option>
+          <option value="lonely">Feeling lonely</option>
+          <option value="trust">Trusting people again</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label class="block font-semibold mb-2">3. How do you feel when you're alone?</label>
+        <select class="w-full border rounded px-4 py-2" name="q3">
+          <option value="safe">Peaceful and calm</option>
+          <option value="anxious">Anxious or sad</option>
+          <option value="restless">Bored or restless</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label class="block font-semibold mb-2">4. What do you need most right now?</label>
+        <select class="w-full border rounded px-4 py-2" name="q4">
+          <option value="clarity">Clarity and closure</option>
+          <option value="support">Emotional support</option>
+          <option value="hope">Hope and motivation</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label class="block font-semibold mb-2">5. If your heart could speak, what would it say?</label>
+        <select class="w-full border rounded px-4 py-2" name="q5">
+          <option value="why">Why wasn't I enough?</option>
+          <option value="help">Please help me heal</option>
+          <option value="next">I want to feel love again</option>
+        </select>
+      </div>
+
+      <button type="submit" class="bg-pink-600 text-white font-semibold px-6 py-2 rounded hover:bg-pink-700 w-full">Reveal My Result</button>
+    </form>
+
+    <div id="resultBox" class="hidden mt-8 bg-pink-100 border-l-4 border-pink-500 p-6 rounded text-gray-700"></div>
+  </main>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const answers = new FormData(e.target);
+
+      const resultBox = document.getElementById("resultBox");
+      let score = {
+        silent: 0,
+        overthink: 0,
+        lonely: 0,
+        anxious: 0,
+        support: 0,
+        help: 0
+      };
+
+      for (let [key, value] of answers.entries()) {
+        if (score[value] !== undefined) score[value]++;
+      }
+
+      let result = "";
+      if (score.silent >= 2 || score.overthink >= 2) {
+        result = `🧠 <strong>The Overthinker</strong><br>You replay everything in your mind and blame yourself too much. You need mental stillness, not more questions.`;
+      } else if (score.lonely >= 2 || score.support >= 2 || score.help >= 2) {
+        result = `💔 <strong>The Silent Struggler</strong><br>You crave support but don’t always know how to ask. You need daily check-ins and emotional reminders that you matter.`;
+      } else if (score.anxious >= 2) {
+        result = `😟 <strong>The Anxious Heart</strong><br>Loneliness hits hard and unpredictably. You need grounding practices like journaling, breathing, and safe connection.`;
+      } else {
+        result = `🌱 <strong>The Rebuilder</strong><br>You’re ready to grow. With the right structure, you can bounce back stronger and wiser than ever.`;
+      }
+
+      resultBox.innerHTML = result;
+      resultBox.classList.remove("hidden");
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
