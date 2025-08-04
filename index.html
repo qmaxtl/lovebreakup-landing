@@ -2,245 +2,125 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LoveBreakup – Your AI Healing Partner</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoveBreakup - Healing Assistant</title>
   <style>
     body {
-      background-color: #ffeef5;
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffedf5;
       color: #333;
-      padding-top: 70px;
     }
+
     header {
       text-align: center;
-      padding: 40px 20px 20px;
+      padding: 3rem 1rem 2rem;
     }
-    .logo {
-      font-size: 3rem;
-      font-weight: bold;
+
+    header h1 {
       color: #f92672;
+      font-size: 2.5rem;
+      margin-bottom: 0.3rem;
     }
-    .subheadline {
-      font-size: 1.3rem;
-      margin-top: 10px;
+
+    header p {
+      font-size: 1.1rem;
       color: #555;
-    }
-    .tagline {
-      margin: 20px auto 40px;
       max-width: 600px;
-      font-size: 1rem;
-      color: #666;
-      text-align: center;
-    }
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 50px;
-      flex-wrap: wrap;
-    }
-    .cta-buttons a {
-      padding: 14px 24px;
-      background-color: #f92672;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease;
-    }
-    .cta-buttons a:hover {
-      background-color: #e91e63;
-    }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-      color: #f92672;
-      text-align: center;
-    }
-    .features {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 0 40px 60px;
-      max-width: 900px;
       margin: 0 auto;
     }
-    @media screen and (min-width: 768px) {
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    .feature-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
-      text-align: left;
-    }
-    .feature-box h3 {
-      color: #f92672;
-      margin-bottom: 10px;
-      font-size: 1.1rem;
-    }
-    .feature-box p {
-      font-size: 0.95rem;
-      color: #555;
-    }
-    @media screen and (max-width: 600px) {
-      .cta-buttons {
-        flex-direction: column;
-        gap: 12px;
-      }
-    }
-    .main-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: transparent;
-      padding: 15px 25px;
+
+    .cta-buttons {
+      margin-top: 2rem;
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      box-sizing: border-box;
-      z-index: 1000;
+      justify-content: center;
+      gap: 1rem;
     }
-    .nav-right {
-      display: flex;
-      align-items: center;
-    }
-    .nav-right a.login-button {
+
+    .cta-buttons a {
       background-color: #f92672;
       color: white;
       text-decoration: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 8px;
       font-weight: bold;
-      font-size: 1rem;
-      padding: 10px 20px;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: background 0.3s;
     }
-    .nav-right a.login-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
+
+    .cta-buttons a:hover {
+      background-color: #d81b60;
     }
-    .nav-right span {
-      margin-right: 15px;
-      font-size: 1rem;
-      color: #333;
-      font-weight: bold;
+
+    .section-title {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 1.8rem;
+      color: #c2185b;
     }
-    .nav-right a.logout-link {
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+
+    .feature-box {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature-box h3 {
+      margin-top: 0;
       color: #f92672;
-      font-weight: bold;
-      text-decoration: none;
-      margin-left: 10px;
+      font-size: 1.2rem;
+    }
+
+    .feature-box p {
+      margin: 0.5rem 0 0;
+      color: #444;
+      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
-  <nav class="main-nav">
-    <div class="nav-right" id="user-status-container" style="display: none;"></div>
-  </nav>
-
-  <!-- Header section -->
   <header>
-    <div class="logo">LoveBreakup</div>
-    <div class="subheadline">Your AI Healing Partner & Virtual Therapist</div>
-    <div class="tagline">
-      Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.
-    </div>
-    <div class="cta-buttons" id="main-cta-buttons" style="display: none;">
-      <!-- Will be replaced by JS -->
+    <h1>LoveBreakup</h1>
+    <p>Your AI Healing Partner & Virtual Therapist</p>
+    <p>Get emotional support that listens, understands, and helps you recover one loving step at a time. No judgment, just pure empathy and guidance.</p>
+
+    <div class="cta-buttons">
+      <a href="recovery.html">Start Healing Now</a>
+      <a href="journal.html">Start Your Journal</a>
     </div>
   </header>
 
-  <!-- Features section -->
-  <section>
-    <h2>What You'll Get</h2>
-    <div class="features">
-      <div class="feature-box">
-        <h3><a href="#" id="plan-link" style="color:#f92672;text-decoration:none;">Breakup Recovery Plan</a></h3>
-        <p>Personalized 7-day, 30-day, and 90-day routines for recovery based on your pain level.</p>
-      </div>
-      <div class="feature-box">
-        <h3><a href="voice.html" style="color:#f92672;text-decoration:none;">Voice Memo Journaling</a></h3>
-        <p>Speak your heart out. The AI will listen and guide you back to emotional stability.</p>
-      </div>
-      <div class="feature-box">
-        <h3><a href="sos.html" style="color:#f92672;text-decoration:none;">Emergency SOS Mode</a></h3>
-        <p>Feel overwhelmed? One click gives you instant breathing guidance and emotional relief.</p>
-      </div>
-      <div class="feature-box">
-        <h3><a href="nojudgement.html" style="color:#f92672;text-decoration:none;">No Judgment, Ever</a></h3>
-        <p>You're not alone. You're not broken. You're healing — and this AI is here 24/7 to help.</p>
-      </div>
+  <div class="section-title">What You'll Get</div>
+
+  <section class="features">
+    <div class="feature-box">
+      <h3>Personal Healing Tracks</h3>
+      <p>Personalized 7-day, 30-day, and 90-day routines for recovery based on your pain level.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Voice Memo Journaling</h3>
+      <p>Speak your heart out. The AI will listen and guide you back to emotional stability.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Emergency SOS Mode</h3>
+      <p>Feel overwhelmed? One click gives you instant breathing guidance and emotional relief.</p>
+    </div>
+    <div class="feature-box">
+      <h3>No Judgment, Ever</h3>
+      <p>You're not alone. You're not broken. You’re healing — and this AI is here 24/7 to help.</p>
     </div>
   </section>
 
-  <!-- Chatbot + Firebase -->
-  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
-  <script src="https://files.bpcontent.cloud/2025/08/03/09/20250803090632-9V5YN5UT.js" defer></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
-      authDomain: "lovebreakup-52bac.firebaseapp.com",
-      projectId: "lovebreakup-52bac",
-      storageBucket: "lovebreakup-52bac.firebasestorage.app",
-      messagingSenderId: "367547931480",
-      appId: "1:367547931480:web:65dad44e077d93d093632d",
-      measurementId: "G-NWG6Z8J62T"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    auth.onAuthStateChanged(function(user) {
-      const userStatusContainer = document.getElementById('user-status-container');
-      const ctaContainer = document.getElementById('main-cta-buttons');
-      const planLink = document.getElementById('plan-link');
-
-      userStatusContainer.style.display = 'flex';
-      ctaContainer.style.display = 'flex';
-
-      if (user) {
-        const username = user.email.split('@')[0];
-        userStatusContainer.innerHTML = `
-          <span>Welcome, ${username}</span>
-          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
-        `;
-        ctaContainer.innerHTML = `
-          <a href="recovery.html">My Recovery Plan</a>
-          <a href="journal.html">Start Your Journal</a>
-        `;
-        if (planLink) planLink.setAttribute('href', 'recovery.html');
-      } else {
-        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
-        ctaContainer.innerHTML = `
-          <a href="talk.html">Talk to LoveBreakup AI</a>
-          <a href="journal.html">Start Your Journal</a>
-        `;
-        if (planLink) planLink.setAttribute('href', 'login.html');
-      }
-    });
-
-    function logoutUser() {
-      auth.signOut().then(() => {
-        window.location.href = 'index.html';
-      }).catch((error) => console.error("Sign out error", error));
-    }
-  </script>
 </body>
 </html>
