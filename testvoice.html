@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vapi Voice Agent Test</title>
+  <script src="https://unpkg.com/@vapi-ai/web-sdk"></script>
+</head>
+<body style="font-family: sans-serif; padding: 40px; background: #fff3f8;">
+
+  <h1>🎙️ Talk to Aira</h1>
+  <p>Click the button below and start speaking.</p>
+
+  <button id="micBtn" style="padding: 15px 25px; background: #ec4899; color: white; font-size: 18px; border: none; border-radius: 10px; cursor: pointer;">
+    🎙️ Tap to Talk
+  </button>
+
+  <div id="transcript" style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ddd;">
+    <i>Transcript will appear here...</i>
+  </div>
+
+  <script>
+    const micBtn = document.getElementById('micBtn');
+    const transcriptDiv = document.getElementById('transcript');
+    let isListening = false;
+
+    const vapi = new Vapi({
+      apiKey: "75c64877-597f-4833-ab36-9261f74dc5ea",
+      assistant: { id: "a039c975-4660-4630-92e3-51582df6b41f" },
+    });
+
+    micBtn.addEventListener('click', () => {
+      if (!isListening) {
+        vapi.start();
+        micBtn.innerText = '🛑 Stop';
+        transcriptDiv.innerHTML = `<i>Listening...</i>`;
+        isListening = true;
+      } else {
+        vapi.stop();
+        micBtn.innerText = '🎙️ Tap to Talk';
+        isListening = false;
+      }
+    });
+
+    vapi.on('transcript', (data) => {
+      transcriptDiv.innerHTML = `<b>You said:</b><br>${data.transcript}`;
+    });
+
+    vapi.on('end', () => {
+      micBtn.innerText = '🎙️ Tap to Talk';
+      isListening = false;
+    });
+
+    vapi.on('error', (err) => {
+      transcriptDiv.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
+      micBtn.innerText = '🎙️ Tap to Talk';
+      isListening = false;
+    });
+  </script>
+</body>
+</html>
