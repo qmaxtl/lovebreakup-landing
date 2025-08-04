@@ -5,18 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LoveBreakup.com</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.appspot.com",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </head>
 <body class="bg-gradient-to-br from-pink-100 via-pink-200 to-pink-50 text-gray-800 font-sans">
 
   <!-- Header -->
   <header class="bg-gradient-to-r from-pink-700 to-pink-500 text-white p-4 flex justify-between items-center shadow-md sticky top-0 z-50">
     <h1 class="text-xl font-extrabold tracking-wide">💔 LoveBreakup</h1>
-    <nav class="space-x-4">
-      <a href="index.html" class="hover:underline">Home</a>
-      <a href="journal.html" class="hover:underline">Journal</a>
-      <a href="chat.html" class="hover:underline">AI Chat</a>
-      <a href="store.html" class="hover:underline">Recovery Store</a>
-      <a href="login.html" class="hover:underline">Login</a>
+    <nav class="space-x-4 text-lg font-medium flex items-center" id="user-status-container">
+      <!-- Filled by Firebase -->
     </nav>
   </header>
 
@@ -99,5 +109,35 @@
     &copy; 2025 LoveBreakup.com — All rights reserved.
   </footer>
 
+  <!-- Firebase Auth UI -->
+  <script>
+    firebase.auth().onAuthStateChanged(function(user) {
+      const container = document.getElementById('user-status-container');
+      if (user) {
+        const name = user.email.split('@')[0];
+        container.innerHTML = `
+          <a href="index.html" class="hover:underline">Home</a>
+          <a href="journal.html" class="hover:underline">Journal</a>
+          <a href="chat.html" class="hover:underline">AI Chat</a>
+          <a href="store.html" class="hover:underline">Recovery Store</a>
+          <span class="hidden sm:inline">Welcome, ${name}</span>
+          <a href="#" onclick="logoutUser()" class="hover:underline ml-4">Logout</a>
+        `;
+      } else {
+        container.innerHTML = `
+          <a href="index.html" class="hover:underline">Home</a>
+          <a href="journal.html" class="hover:underline">Journal</a>
+          <a href="chat.html" class="hover:underline">AI Chat</a>
+          <a href="store.html" class="hover:underline">Recovery Store</a>
+          <a href="login.html" class="hover:underline">Login</a>
+        `;
+      }
+    });
+    function logoutUser() {
+      firebase.auth().signOut().then(() => {
+        location.href = "index.html";
+      });
+    }
+  </script>
 </body>
 </html>
