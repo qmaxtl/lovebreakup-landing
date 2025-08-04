@@ -27,9 +27,8 @@
       <span>💬</span>
       <span>LoveBreakup AI</span>
     </div>
-    <nav class="flex items-center space-x-4">
-      <a href="index.html" class="hover:underline">Home</a>
-      <a href="login.html" class="hover:underline">Login</a>
+    <nav class="flex items-center space-x-4 text-sm font-medium" id="user-status-container">
+      <!-- Injected by Firebase -->
     </nav>
   </header>
 
@@ -38,6 +37,51 @@
     src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/08/03/09/20250803090632-7BMOWAAQ.json&hideHeader=true&showTitle=false&showPoweredBy=false"
     title="LoveBreakup AI Chat">
   </iframe>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.appspot.com",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(function(user) {
+      const container = document.getElementById('user-status-container');
+      container.innerHTML = '';
+
+      if (user) {
+        const username = user.email.split('@')[0];
+        container.innerHTML = `
+          <a href="index.html" class="hover:underline">Home</a>
+          <span>|</span>
+          <span class="hidden sm:inline">Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="hover:underline ml-3">Logout</a>
+        `;
+      } else {
+        container.innerHTML = `
+          <a href="index.html" class="hover:underline">Home</a>
+          <a href="login.html" class="hover:underline ml-4">Login</a>
+        `;
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => {
+        console.error("Sign out error", error);
+      });
+    }
+  </script>
 
 </body>
 </html>
