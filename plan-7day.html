@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7-Day Recovery Plan</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
     body {
       margin: 0;
@@ -11,7 +12,60 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #ffeef5;
       line-height: 1.6;
+      padding-top: 80px;
     }
+
+    .main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffeef5;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    .nav-left a {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-right span {
+      margin-right: 15px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .nav-right a.login-button {
+      background-color: #f92672;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
+    }
+
+    .nav-right a.logout-link {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
     .header {
       background-color: #f92672;
       color: white;
@@ -20,23 +74,37 @@
       font-weight: bold;
       text-align: center;
     }
+
     .container {
       padding: 2rem;
       max-width: 800px;
       margin: 0 auto;
     }
+
     h2 {
       color: #f92672;
       margin-top: 2rem;
     }
+
     ul {
       padding-left: 1.2rem;
     }
   </style>
 </head>
 <body>
+
+  <!-- Navigation Bar -->
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+    </div>
+    <div class="nav-right" id="user-status-container" style="display: none;"></div>
+  </nav>
+
+  <!-- Header -->
   <div class="header">🗓 7-Day Recovery Plan</div>
 
+  <!-- Recovery Plan -->
   <div class="container">
     <p>This 7-day plan is designed to help you stabilize your emotions, gain clarity, and take the first step towards healing after a breakup.</p>
 
@@ -82,5 +150,43 @@
       <li>Do something fun and lighthearted—comedy, art, food, or music.</li>
     </ul>
   </div>
+
+  <!-- Firebase Auth -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.appspot.com",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(function(user) {
+      const userStatusContainer = document.getElementById('user-status-container');
+      userStatusContainer.style.display = 'flex';
+      if (user) {
+        const username = user.email.split('@')[0];
+        userStatusContainer.innerHTML = `
+          <span>Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
+        `;
+      } else {
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => console.error("Sign out error", error));
+    }
+  </script>
 </body>
 </html>
