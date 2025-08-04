@@ -1,5 +1,5 @@
 <!-- ====================================================================== -->
-<!-- FILE: index.html (Final Version with Main Buttons Removed) -->
+<!-- FILE: index.html (Final Premium Version) -->
 <!-- ====================================================================== -->
 <!-- ACTION: Replace your existing 'index.html' code with this. -->
 <!-- ====================================================================== -->
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
     /* Your existing CSS... */
-    body { background-color: #ffeef5; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; color: #333; padding-top: 60px; }
+    body { background-color: #ffeef5; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; color: #333; padding-top: 70px; /* Increased padding for new nav height */ }
     header { text-align: center; padding: 40px 20px 20px; }
     .logo { font-size: 3rem; font-weight: bold; color: #f92672; }
     .subheadline { font-size: 1.3rem; margin-top: 10px; color: #555; }
@@ -24,36 +24,46 @@
     .feature-box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.05); text-align: left; }
     .feature-box h3 { color: #f92672; margin-bottom: 10px; font-size: 1.1rem; }
     .feature-box p { font-size: 0.95rem; color: #555; }
+
+    /* === FINAL PREMIUM NAVIGATION CSS === */
     .main-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      background-color: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 10px 25px;
+      background-color: transparent; /* White bar removed */
+      padding: 15px 25px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       box-sizing: border-box;
       z-index: 1000;
     }
-    .nav-right a {
-      color: #f92672;
+    .nav-right a.login-button { /* Target the login button specifically */
+      background-color: #f92672;
+      color: white;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.9rem;
-      padding: 8px 12px;
-      border-radius: 6px;
-      transition: background-color 0.2s ease-in-out;
+      font-size: 1rem; /* Font size increased */
+      padding: 10px 20px; /* Padding increased for bigger size */
+      border-radius: 50px; /* Fully rounded corners */
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3); /* Pink shadow */
     }
-    .nav-right a:hover {
-        background-color: #ffeef5;
+    .nav-right a.login-button:hover {
+        transform: translateY(-2px); /* Slight lift on hover */
+        box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
     }
     .nav-right span {
       margin-right: 15px;
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #333;
+      font-weight: bold;
+    }
+    .nav-right a.logout-link { /* Style for the logout link */
+        color: #f92672;
+        font-weight: bold;
+        text-decoration: none;
     }
   </style>
 </head>
@@ -63,11 +73,11 @@
   <nav class="main-nav">
     <div class="nav-right" id="user-status-container">
       <!-- This will be filled by JavaScript -->
-      <a href="login.html">Login</a>
+      <a href="login.html" class="login-button">Login</a>
     </div>
   </nav>
 
-  <!-- Header section without the main CTA buttons -->
+  <!-- Header section -->
   <header>
     <div class="logo">LoveBreakup</div>
     <div class="subheadline">Your AI Healing Partner & Virtual Therapist</div>
@@ -76,7 +86,7 @@
     </div>
   </header>
 
-  <!-- Features section remains the same -->
+  <!-- Features section -->
   <section>
     <h2>What You'll Get</h2>
     <div class="features">
@@ -128,11 +138,136 @@
         // User is signed in.
         userStatusContainer.innerHTML = `
           <span>Welcome, ${user.email.split('@')[0]}</span>
-          <a href="#" onclick="logoutUser()">Logout</a>
+          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
         `;
       } else {
         // No user is signed in.
-        userStatusContainer.innerHTML = '<a href="login.html">Login</a>';
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
+      }
+    });
+
+    // Logout Function
+    function logoutUser() {
+      auth.signOut().catch((error) => console.error("Sign out error", error));
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!-- ====================================================================== -->
+<!-- TEMPLATE for ALL OTHER PAGES (talk.html, journal.html, etc.) -->
+<!-- ====================================================================== -->
+<!-- ACTION: Use this code as a template for all your inner pages. -->
+<!-- This version has a transparent nav and a premium login button. -->
+<!-- ====================================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Page Title – LoveBreakup</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background-color: #ffeef5; margin: 0; padding: 0; padding-top: 70px; }
+    
+    /* === FINAL PREMIUM NAVIGATION CSS === */
+    .main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: transparent; /* White bar removed */
+      padding: 15px 25px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+    .nav-right a.login-button { /* Target the login button specifically */
+      background-color: #f92672;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem; /* Font size increased */
+      padding: 10px 20px; /* Padding increased for bigger size */
+      border-radius: 50px; /* Fully rounded corners */
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3); /* Pink shadow */
+    }
+    .nav-right a.login-button:hover {
+        transform: translateY(-2px); /* Slight lift on hover */
+        box-shadow: 0 6px 20px rgba(249, 38, 114, 0.4);
+    }
+    .nav-right span {
+      margin-right: 15px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: bold;
+    }
+    .nav-right a.logout-link { /* Style for the logout link */
+        color: #f92672;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .page-content {
+        padding: 40px;
+        max-width: 900px;
+        margin: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="main-nav">
+    <div class="nav-right" id="user-status-container">
+      <!-- This will be filled by JavaScript -->
+      <a href="login.html" class="login-button">Login</a>
+    </div>
+  </nav>
+
+  <!-- === YOUR PAGE CONTENT GOES HERE === -->
+  <div class="page-content">
+    <h1>Your Page Title</h1>
+    <p>This is where the content for your specific page (like Journal, SOS Mode, etc.) will go.</p>
+  </div>
+
+  <!-- Firebase SDK Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.firebasestorage.app",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Check user's login state and update UI
+    auth.onAuthStateChanged(function(user) {
+      const userStatusContainer = document.getElementById('user-status-container');
+      if (user) {
+        // User is signed in.
+        userStatusContainer.innerHTML = `
+          <span>Welcome, ${user.email.split('@')[0]}</span>
+          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
+        `;
+      } else {
+        // No user is signed in.
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
       }
     });
 
