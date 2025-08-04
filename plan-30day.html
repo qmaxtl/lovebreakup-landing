@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>30-Day Growth Plan</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
   <style>
     body {
       margin: 0;
@@ -15,6 +16,58 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
+      padding-top: 80px;
+    }
+
+    .main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff0f5;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    .nav-left a {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-right span {
+      margin-right: 15px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .nav-right a.login-button {
+      background-color: #f92672;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(249, 38, 114, 0.3);
+    }
+
+    .nav-right a.logout-link {
+      color: #f92672;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
     }
 
     .header {
@@ -58,8 +111,19 @@
   </style>
 </head>
 <body>
+
+  <!-- Nav Bar -->
+  <nav class="main-nav">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+    </div>
+    <div class="nav-right" id="user-status-container" style="display: none;"></div>
+  </nav>
+
+  <!-- Title -->
   <div class="header">📅 30-Day Growth Plan</div>
 
+  <!-- Main Content -->
   <div class="content">
     <h2>Emotional Growth After Heartbreak</h2>
     <p>This 30-day plan is designed to help you rediscover yourself, rebuild confidence, and set a foundation for lasting personal growth.</p>
@@ -94,5 +158,43 @@
 
     <p><strong>By the end of 30 days, you'll feel emotionally stronger, more connected to yourself, and ready for the next chapter of life.</strong></p>
   </div>
+
+  <!-- Firebase Auth Logic -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA--L9O0Y2niM-90QibLEGesUpLUWAe2n4",
+      authDomain: "lovebreakup-52bac.firebaseapp.com",
+      projectId: "lovebreakup-52bac",
+      storageBucket: "lovebreakup-52bac.appspot.com",
+      messagingSenderId: "367547931480",
+      appId: "1:367547931480:web:65dad44e077d93d093632d",
+      measurementId: "G-NWG6Z8J62T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(function(user) {
+      const userStatusContainer = document.getElementById('user-status-container');
+      userStatusContainer.style.display = 'flex';
+      if (user) {
+        const username = user.email.split('@')[0];
+        userStatusContainer.innerHTML = `
+          <span>Welcome, ${username}</span>
+          <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
+        `;
+      } else {
+        userStatusContainer.innerHTML = '<a href="login.html" class="login-button">Login</a>';
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => console.error("Sign out error", error));
+    }
+  </script>
 </body>
 </html>
