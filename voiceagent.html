@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Talk to Aira - LoveBreakup</title>
+  <title>Talk to Aira</title>
   <script src="https://unpkg.com/@vapi-ai/web-sdk"></script>
   <style>
     body {
@@ -50,57 +50,57 @@
   <div id="transcript"><i>Transcript will appear here...</i></div>
 
   <script>
-    const micBtn = document.getElementById('micBtn');
-    const transcriptDiv = document.getElementById('transcript');
+    let vapi;
     let isListening = false;
 
-    // Initialize Vapi instance
-    const vapi = new Vapi({
-      apiKey: "75c64877-597f-4833-ab36-9261f74dc5ea",
-      assistant: { id: "a039c975-4660-4630-92e3-51582df6b41f" },
-    });
+    const micBtn = document.getElementById('micBtn');
+    const transcriptDiv = document.getElementById('transcript');
 
-    // Make sure mic is allowed
-    async function ensureMicAccess() {
+    async function initVapiAndStart() {
       try {
+        // Force microphone access
         await navigator.mediaDevices.getUserMedia({ audio: true });
-        return true;
+
+        // Init Vapi
+        if (!vapi) {
+          vapi = new Vapi({
+            apiKey: "75c64877-597f-4833-ab36-9261f74dc5ea",
+            assistant: { id: "a039c975-4660-4630-92e3-51582df6b41f" },
+          });
+
+          vapi.on('transcript', (data) => {
+            transcriptDiv.innerHTML = `<b>You said:</b><br>${data.transcript}`;
+          });
+
+          vapi.on('end', () => {
+            micBtn.innerText = '🎙️ Tap to Talk';
+            isListening = false;
+          });
+
+          vapi.on('error', (err) => {
+            transcriptDiv.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
+            micBtn.innerText = '🎙️ Tap to Talk';
+            isListening = false;
+          });
+        }
+
+        if (!isListening) {
+          vapi.start();
+          micBtn.innerText = '🛑 Stop';
+          transcriptDiv.innerHTML = `<i>Listening...</i>`;
+          isListening = true;
+        } else {
+          vapi.stop();
+          micBtn.innerText = '🎙️ Tap to Talk';
+          isListening = false;
+        }
       } catch (err) {
-        alert("Microphone access denied. Please enable it in your browser settings.");
-        return false;
+        alert("Microphone access is required to use this feature. Please allow it.");
+        console.error("Mic permission error:", err);
       }
     }
 
-    micBtn.addEventListener('click', async () => {
-      const micAllowed = await ensureMicAccess();
-      if (!micAllowed) return;
-
-      if (!isListening) {
-        vapi.start();
-        micBtn.innerText = '🛑 Stop';
-        transcriptDiv.innerHTML = `<i>Listening...</i>`;
-        isListening = true;
-      } else {
-        vapi.stop();
-        micBtn.innerText = '🎙️ Tap to Talk';
-        isListening = false;
-      }
-    });
-
-    vapi.on('transcript', (data) => {
-      transcriptDiv.innerHTML = `<b>You said:</b><br>${data.transcript}`;
-    });
-
-    vapi.on('end', () => {
-      micBtn.innerText = '🎙️ Tap to Talk';
-      isListening = false;
-    });
-
-    vapi.on('error', (err) => {
-      transcriptDiv.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
-      micBtn.innerText = '🎙️ Tap to Talk';
-      isListening = false;
-    });
+    micBtn.addEventListener('click', initVapiAndStart);
   </script>
 </body>
 </html>
