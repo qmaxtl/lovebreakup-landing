@@ -11,9 +11,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* --- Main Page Styles --- */
     :root {
-      --primary-color: #d81b60; /* Matching the pink from your image */
+      --primary-color: #d81b60;
       --body-bg: #f7f8fc;
       --chatbox-bg: #ffffff;
       --chatbox-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -23,15 +22,12 @@
       --text-dark: #333;
       --text-light: #f9f9f9;
     }
-
     body {
       font-family: var(--font-family);
       background-color: var(--body-bg);
       margin: 0;
       padding: 0;
     }
-
-    /* --- Header Styles (Recreated from your image) --- */
     .main-header {
       background-color: var(--primary-color);
       padding: 1rem 2rem;
@@ -55,24 +51,21 @@
       margin-left: 1.5rem;
       font-size: 1rem;
       transition: opacity 0.2s;
+      cursor: pointer;
     }
     .main-header nav a:hover {
       opacity: 0.8;
     }
-
-    /* --- Main Content Area --- */
     main {
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* Align chatbox to the top */
+      align-items: flex-start;
       padding: 2rem;
     }
-
-    /* --- Chat Styles (Copied from our previous design) --- */
     .chat-box {
       width: 100%;
-      max-width: 800px; /* Made slightly wider for a main page */
-      height: calc(100vh - 150px); /* Adjust height based on header */
+      max-width: 800px;
+      height: calc(100vh - 150px);
       background: var(--chatbox-bg);
       box-shadow: var(--chatbox-shadow);
       border-radius: 1.5rem;
@@ -196,12 +189,10 @@
       LoveBreakup
     </div>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Journal</a>
-      <a href="#">AI Chat</a>
-      <a href="#">Recovery Store</a>
-      <a href="#">Welcome, amitg14</a>
-      <a href="#">Logout</a>
+      <a href="/index.html">Home</a>
+      <a href="/profile.html" title="View Profile">Welcome, amitg14</a>
+      
+      <a onclick="logout()">Logout</a>
     </nav>
   </header>
 
@@ -219,12 +210,9 @@
           </div>
         </div>
       </header>
-
       <div class="chat-area-wrapper">
-          <div id="chat-area">
-              </div>
+          <div id="chat-area"></div>
       </div>
-
       <div class="input-area">
           <div class="input-wrapper">
               <input id="userInput" type="text" placeholder="Type your message..." onkeypress="handleKey(event)" />
@@ -239,7 +227,6 @@
   <script src="./vapi-sdk.js"></script>
   
   <script>
-    // The JavaScript logic is the same and works within the new layout
     let session = null;
     let vapiInstance = null;
     const sendButton = document.getElementById('sendButton');
@@ -273,7 +260,6 @@
     document.addEventListener('DOMContentLoaded', async () => {
         const Vapi = await checkVapiReady();
         vapiInstance = new Vapi({
-            // IMPORTANT: Your Vapi Public Key
             publicKey: '75c64877-597f-4833-ab36-9261f74dc5ea',
             baseURL: 'https://api.vapi.ai' 
         });
@@ -291,9 +277,7 @@
 
       try {
         if (!session) {
-          console.log("Starting new Vapi session...");
           session = vapiInstance.start({
-            // IMPORTANT: Your Vapi Assistant ID
             assistantId: 'a039c975-4660-4630-92e3-51582df6b41f'
           });
           
@@ -328,6 +312,26 @@
         e.preventDefault();
         sendMessage();
       }
+    }
+
+    // स्टेप 3: Logout फंक्शन बनाएँ
+    function logout() {
+      // लॉग आउट करने से पहले यूजर से कन्फर्म करें
+      const isConfirmed = confirm("Are you sure you want to logout?");
+
+      if (isConfirmed) {
+        // एक असली वेबसाइट में, आप यहाँ अपने सर्वर (backend) को बताते कि यूजर लॉग आउट हो गया है।
+        // उदाहण के लिए: fetch('/api/logout', { method: 'POST' });
+        
+        // ब्राउज़र से यूजर का कोई भी डेटा साफ़ करें (अगर ज़रूरी हो)
+        // localStorage.removeItem('userToken');
+
+        // यूजर को बताएं कि वह लॉग आउट हो गया है और उसे लॉगइन पेज पर भेजें।
+        alert("You have been logged out successfully.");
+        // यहाँ अपने लॉगइन पेज का सही URL डालें
+        window.location.href = "/login.html"; 
+      }
+      // अगर यूजर 'Cancel' पर क्लिक करता है, तो कुछ नहीं होगा।
     }
   </script>
 </body>
