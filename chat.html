@@ -17,6 +17,18 @@
       border-radius: 1.5rem;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      height: 80vh; /* Added height to make it look more like a chat app */
+    }
+    .chat-area-wrapper {
+        flex-grow: 1;
+        overflow-y: auto; /* Allows messages to scroll */
+        margin-bottom: 1rem;
+    }
+    #chat-area {
+        display: flex;
+        flex-direction: column;
     }
     .message {
       padding: 1rem 1.2rem;
@@ -37,26 +49,33 @@
   </style>
 </head>
 <body>
-  <div class="chat-box flex flex-col">
-    <div id="chat-area" class="flex flex-col mb-4">
-      <!-- Chat messages will appear here -->
+  <div class="chat-box">
+    <div class="chat-area-wrapper">
+        <div id="chat-area">
+            </div>
     </div>
 
-    <!-- Input Section -->
     <div class="flex items-center">
       <input id="userInput" type="text" placeholder="Type your message..." class="flex-1 px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" onkeypress="handleKey(event)" />
       <button onclick="sendMessage()" class="ml-3 bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-xl">Send</button>
     </div>
   </div>
 
-  <!-- Load Vapi SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/index.umd.js"></script>
-
   <script>
-    const vapi = window.vapi;
-    let session;
+    // Initialize Vapi
+    const vapi = new window.Vapi("75c64877-597f-4833-ab36-9261f74dc5ea");
 
-    async function sendMessage() {
+    // Start the conversation
+    vapi.start("a039c975-4660-4630-92e3-51582df6b41f");
+
+    vapi.on('message', (message) => {
+        if (message.role === 'assistant' && message.message) {
+            appendMessage('ai', message.message);
+        }
+    });
+
+    function sendMessage() {
       const input = document.getElementById("userInput");
       const text = input.value.trim();
       if (text === "") return;
@@ -64,29 +83,28 @@
       appendMessage("user", text);
       input.value = "";
 
-      if (!session) {
-        session = await vapi.start({
-          assistantId: "a039c975-4660-4630-92e3-51582df6b41f",
-          apiKey: "75c64877-597f-4833-ab36-9261f74dc5ea",
-          config: { useText: true }
-        });
-      }
-
-      const reply = await session.sendText(text);
-      appendMessage("ai", reply.text);
+      // Send text message to Vapi
+      vapi.send({
+        type: 'add-message',
+        message: {
+          role: 'user',
+          content: text
+        }
+      });
     }
 
     function appendMessage(role, text) {
-      const chat = document.getElementById("chat-area");
+      const chatArea = document.getElementById("chat-area");
       const message = document.createElement("div");
-      message.className = `message ${role === "user" ? "user-message self-end" : "ai-message self-start"}`;
+      message.className = `message ${role === "user" ? "user-message" : "ai-message"}`;
       message.innerText = text;
-      chat.appendChild(message);
-      chat.scrollTop = chat.scrollHeight;
+      chatArea.appendChild(message);
+      chatArea.parentElement.scrollTop = chatArea.parentElement.scrollHeight; // Auto-scroll to the latest message
     }
 
     function handleKey(e) {
       if (e.key === "Enter") {
+        e.preventDefault();
         sendMessage();
       }
     }
