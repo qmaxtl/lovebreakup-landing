@@ -41,13 +41,12 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      // ✅ PERSIST login session
       firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(() => {
           return firebase.auth().signInWithEmailAndPassword(email, password);
         })
         .then((userCredential) => {
-          alert("Login successful ✅");
+          // ✅ No alert, direct redirect
           window.location.href = "index.html";
         })
         .catch((error) => {
