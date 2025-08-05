@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Talk to Aira</title>
   <script src="https://unpkg.com/@vapi-ai/web-sdk"></script>
+  <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js" async type="text/javascript"></script>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -49,6 +50,16 @@
 
   <div id="transcript"><i>Transcript will appear here...</i></div>
 
+  <!-- VAPI Floating Widget Embed -->
+  <vapi-widget
+    assistant-id="a039c975-4660-4630-92e3-51582df6b41f"
+    public-key="75c64877-597f-4833-ab36-9261f74dc5ea"
+    position="bottom-right"
+    width="80px"
+    height="80px"
+    theme="light">
+  </vapi-widget>
+
   <script>
     let vapi;
     let isListening = false;
@@ -70,6 +81,10 @@
 
           vapi.on('transcript', (data) => {
             transcriptDiv.innerHTML = `<b>You said:</b><br>${data.transcript}`;
+          });
+
+          vapi.on('speech', (data) => {
+            console.log("AI is speaking:", data);
           });
 
           vapi.on('end', () => {
