@@ -3,340 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Chat - LoveBreakup</title>
-  
+  <title>Chat with Smiriti - LoveBreakup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <style>
-    /* --- NEW COLOR THEME (as per your image) --- */
-    :root {
-      /* New gradient for the header */
-      --primary-gradient: linear-gradient(90deg, #8e44ad 0%, #d81b60 100%);
-      --body-bg: #f9fafb; /* Lighter background */
-      --chatbox-bg: #ffffff;
-      --chatbox-shadow: rgba(100, 100, 111, 0.15) 0px 7px 29px 0px;
-      
-      /* User message bubble gradient, this already matches well */
-      --user-msg-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --ai-msg-bg: #f1f3f6; /* Kept it neutral for readability */
-      
-      --font-family: 'Poppins', sans-serif;
-      --text-dark: #333;
-      --text-light: #ffffff;
-    }
-
-    body {
-      font-family: var(--font-family);
-      background-color: var(--body-bg);
-      margin: 0;
-      padding: 0;
-    }
-
-    /* --- Header Styles (Updated with Gradient) --- */
-    .main-header {
-      background: var(--primary-gradient); /* Using the new gradient */
-      padding: 1rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-    }
-    .main-header .logo {
-      display: flex;
-      align-items: center;
-      font-size: 1.6rem; /* Slightly bigger font */
-      font-weight: 700; /* Bolder font */
-      letter-spacing: 0.5px;
-    }
-    .main-header .logo svg {
-      margin-right: 0.75rem;
-      fill: white;
-    }
-    .main-header nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 1.75rem;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: opacity 0.2s;
-      cursor: pointer;
-    }
-    .main-header nav a:hover {
-      opacity: 0.8;
-    }
-
-    /* --- Main Content Area --- */
-    main {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 2.5rem;
-    }
-
-    /* --- Chat Styles (Mostly unchanged, they fit the new theme) --- */
-    .chat-box {
-      width: 100%;
-      max-width: 800px;
-      height: calc(100vh - 160px); /* Adjusted height for padding */
-      background: var(--chatbox-bg);
-      box-shadow: var(--chatbox-shadow);
-      border-radius: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      border: 1px solid #e5e7eb;
-    }
-    .chat-header {
-      background: #ffffff;
-      padding: 1.25rem;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-    }
-    .chat-header .avatar {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: var(--primary-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 1rem;
-    }
-    .chat-header .status-dot {
-      width: 10px;
-      height: 10px;
-      background-color: #2ecc71;
-      border-radius: 50%;
-      margin-left: 0.5rem;
-      border: 2px solid #ffffff;
-    }
-    .chat-area-wrapper {
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 1.5rem;
-    }
-    #chat-area {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .message-container {
-      display: flex;
-      gap: 0.75rem;
-      animation: fadeIn 0.3s ease-out;
-    }
-    .message-container.user { justify-content: flex-end; }
-    .message-container.ai { justify-content: flex-start; }
-    .message-container .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--primary-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .message {
-      padding: 0.8rem 1.2rem;
-      border-radius: 1.25rem;
-      max-width: 75%;
-      line-break: anywhere;
-    }
-    .ai-message {
-      background-color: var(--ai-msg-bg);
-      color: var(--text-dark);
-      border-top-left-radius: 0.5rem;
-    }
-    .user-message {
-      background: var(--user-msg-bg);
-      color: var(--text-light);
-      border-top-right-radius: 0.5rem;
-    }
-    .input-area {
-      padding: 1.25rem;
-      border-top: 1px solid #e5e7eb;
-      background: #f9fafb;
-    }
-    .input-wrapper {
-      display: flex;
-      align-items: center;
-      background: var(--chatbox-bg);
-      border-radius: 1.25rem;
-      padding: 0.5rem;
-      border: 1px solid #e5e7eb;
-    }
-    #userInput {
-      flex-grow: 1;
-      border: none;
-      outline: none;
-      background: transparent;
-      padding: 0.5rem 1rem;
-      color: var(--text-dark);
-    }
-    #sendButton {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: none;
-      background: var(--user-msg-bg);
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s;
-    }
-    #sendButton:hover { transform: scale(1.1); }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  
-  <header class="main-header">
-    <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-      LoveBreakup
-    </div>
-    <nav>
-      <a href="/index.html">Home</a>
-      <a href="/profile.html" title="View Profile">Welcome, amitg14</a>
-      <a onclick="logout()">Logout</a>
-    </nav>
-  </header>
 
-  <main>
-    <div class="chat-box">
-      <header class="chat-header">
-        <div class="avatar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-        </div>
-        <div>
-          <h2 class="font-semibold text-lg text-gray-800">Breakup Support AI</h2>
-          <div class="flex items-center">
-              <p class="text-sm text-gray-500">Online</p>
-              <div class="status-dot"></div>
-          </div>
-        </div>
-      </header>
-      <div class="chat-area-wrapper">
-          <div id="chat-area"></div>
-      </div>
-      <div class="input-area">
-          <div class="input-wrapper">
-              <input id="userInput" type="text" placeholder="Type your message..." onkeypress="handleKey(event)" />
-              <button id="sendButton" onclick="sendMessage()">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-              </button>
-          </div>
-      </div>
+<body class="bg-pink-50 text-gray-800 font-[Inter]">
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-pink-700 to-pink-500 text-white px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <span class="text-2xl">💔</span>
+      <span class="text-xl font-bold">LoveBreakup</span>
     </div>
-  </main>
+    <div class="space-x-6 text-sm md:text-base">
+      <a href="index.html" class="hover:underline">Home</a>
+      <span>Welcome, <strong>amitgt19</strong></span>
+      <a href="logout.html" class="hover:underline text-white">Logout</a>
+    </div>
+  </nav>
 
-  <script src="./vapi-sdk.js"></script>
-  
+  <!-- Chat Container -->
+  <section class="max-w-4xl mx-auto mt-8 p-4 bg-white rounded-xl shadow-md">
+    <h1 class="text-3xl font-extrabold text-pink-600 mb-4 text-center">Your Healing AI</h1>
+    <p class="text-center text-gray-500 mb-6">Open your heart. I'm listening...</p>
+
+    <!-- Chat Box -->
+    <div id="chat-box" class="bg-pink-100 h-[400px] overflow-y-auto p-4 rounded-lg border border-pink-200 mb-4">
+      <!-- Messages will appear here -->
+    </div>
+
+    <!-- Input -->
+    <div class="flex gap-2">
+      <input id="user-input" type="text" placeholder="Type your message..." class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" />
+      <button onclick="sendMessage()" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-lg">Send</button>
+    </div>
+  </section>
+
+  <!-- Botpress Script -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
   <script>
-    // The JavaScript logic remains the same
-    let session = null;
-    let vapiInstance = null;
-    const sendButton = document.getElementById('sendButton');
-    
-    function appendMessage(role, text) {
-      const chatArea = document.getElementById("chat-area");
-      const messageContainer = document.createElement("div");
-      messageContainer.className = `message-container ${role}`;
-      const messageDiv = document.createElement("div");
-      messageDiv.className = `message ${role}-message`;
-      messageDiv.innerText = text;
-      if (role === 'ai') {
-        const avatarDiv = document.createElement("div");
-        avatarDiv.className = 'avatar';
-        avatarDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`;
-        messageContainer.appendChild(avatarDiv);
-      }
-      messageContainer.appendChild(messageDiv);
-      chatArea.appendChild(messageContainer);
-      chatArea.parentElement.scrollTop = chatArea.parentElement.scrollHeight;
-    }
-
-    const checkVapiReady = () => {
-      return new Promise((resolve) => {
-        const interval = setInterval(() => {
-          if (window.Vapi) { clearInterval(interval); resolve(window.Vapi); }
-        }, 100);
-      });
-    };
-    
-    document.addEventListener('DOMContentLoaded', async () => {
-        const Vapi = await checkVapiReady();
-        vapiInstance = new Vapi({
-            publicKey: '75c64877-597f-4833-ab36-9261f74dc5ea',
-            baseURL: 'https://api.vapi.ai' 
-        });
-        appendMessage('ai', 'Welcome to the AI Chat! How are you feeling today?');
+    window.botpressWebChat.init({
+      "composerPlaceholder": "Type your message here",
+      "botId": "your-bot-id",
+      "hostUrl": "https://cdn.botpress.cloud/webchat/v3.2",
+      "messagingUrl": "https://messaging.botpress.cloud",
+      "clientId": "your-client-id",
+      "webhookId": "your-webhook-id",
+      "stylesheet": "https://your-custom-style.css"
     });
+  </script>
 
+  <!-- Chat JS -->
+  <script>
     async function sendMessage() {
-      const input = document.getElementById("userInput");
-      const text = input.value.trim();
-      if (text === "" || !vapiInstance) return;
-      
-      sendButton.disabled = true;
-      appendMessage("user", text);
-      input.value = "";
+      const input = document.getElementById('user-input');
+      const chatBox = document.getElementById('chat-box');
+      const message = input.value.trim();
+      if (!message) return;
 
-      try {
-        if (!session) {
-          session = vapiInstance.start({
-            assistantId: 'a039c975-4660-4630-92e3-51582df6b41f'
-          });
-          
-          session.on('message', (message) => {
-            if (message.role === 'assistant' && message.message) {
-              appendMessage('ai', message.message);
-            }
-          });
-          session.on('error', (e) => {
-            console.error("Vapi Session Error:", e);
-            appendMessage('ai', 'Sorry, an error occurred. Please try again.');
-          });
-          
-          await new Promise(resolve => setTimeout(resolve, 1000)); 
-        }
-        
-        session.send({
-            type: 'add-message',
-            message: { role: 'user', content: text }
-        });
+      // Show user message
+      const userMessage = document.createElement('div');
+      userMessage.className = 'mb-2 text-right';
+      userMessage.innerHTML = `<span class="inline-block bg-pink-600 text-white px-4 py-2 rounded-lg">${message}</span>`;
+      chatBox.appendChild(userMessage);
 
-      } catch (error) {
-        console.error("Failed to send message:", error);
-      } finally {
-        sendButton.disabled = false;
-        input.focus();
-      }
-    }
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
 
-    function handleKey(e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        sendMessage();
-      }
-    }
+      // Send to backend
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: message }),
+      });
 
-    function logout() {
-      const isConfirmed = confirm("Are you sure you want to logout?");
-      if (isConfirmed) {
-        alert("You have been logged out successfully.");
-        window.location.href = "/login.html"; 
-      }
+      const data = await response.json();
+      const botReply = document.createElement('div');
+      botReply.className = 'mb-2 text-left';
+      botReply.innerHTML = `<span class="inline-block bg-white border border-pink-300 px-4 py-2 rounded-lg">${data.reply}</span>`;
+      chatBox.appendChild(botReply);
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
   </script>
 </body>
