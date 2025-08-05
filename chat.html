@@ -11,7 +11,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* Custom CSS Variables for easy theme changes */
     :root {
       --body-bg: #f7f8fc;
       --chatbox-bg: #ffffff;
@@ -23,7 +22,6 @@
       --font-family: 'Poppins', sans-serif;
       --text-dark: #333;
       --text-light: #f9f9f9;
-      --text-secondary: #777;
     }
 
     body {
@@ -48,7 +46,6 @@
       overflow: hidden;
     }
 
-    /* Header Styling */
     .chat-header {
       background: var(--header-bg);
       padding: 1.25rem;
@@ -75,7 +72,6 @@
       border: 2px solid var(--header-bg);
     }
     
-    /* Chat Area Styling */
     .chat-area-wrapper {
       flex-grow: 1;
       overflow-y: auto;
@@ -84,10 +80,9 @@
     #chat-area {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem; /* Space between messages */
+      gap: 1.25rem;
     }
 
-    /* Message Styling */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -97,12 +92,9 @@
       gap: 0.75rem;
       animation: fadeIn 0.3s ease-out;
     }
-    .message-container.user {
-      justify-content: flex-end;
-    }
-    .message-container.ai {
-      justify-content: flex-start;
-    }
+    .message-container.user { justify-content: flex-end; }
+    .message-container.ai { justify-content: flex-start; }
+    
     .message-container .avatar {
       width: 40px;
       height: 40px;
@@ -130,7 +122,6 @@
       border-top-right-radius: 0.5rem;
     }
 
-    /* Input Area Styling */
     .input-area {
       padding: 1.25rem;
       border-top: 1px solid #e0e0e0;
@@ -164,9 +155,7 @@
       justify-content: center;
       transition: transform 0.2s;
     }
-    #sendButton:hover {
-      transform: scale(1.1);
-    }
+    #sendButton:hover { transform: scale(1.1); }
   </style>
 </head>
 <body>
@@ -186,19 +175,6 @@
 
     <div class="chat-area-wrapper">
         <div id="chat-area">
-            <div class="message-container ai">
-                <div class="avatar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                </div>
-                <div class="message ai-message">
-                    Hi there! This is the new design. How can I help you today?
-                </div>
-            </div>
-            <div class="message-container user">
-                <div class="message user-message">
-                    Wow, this looks amazing!
-                </div>
-            </div>
             </div>
     </div>
 
@@ -215,29 +191,23 @@
   <script src="./vapi-sdk.js"></script>
   
   <script>
-    // The JavaScript logic remains the same as the last working version.
     let session = null;
     let vapiInstance = null;
     const sendButton = document.getElementById('sendButton');
     
-    // Function to append messages with the new HTML structure
     function appendMessage(role, text) {
       const chatArea = document.getElementById("chat-area");
-
       const messageContainer = document.createElement("div");
       messageContainer.className = `message-container ${role}`;
-
       const messageDiv = document.createElement("div");
       messageDiv.className = `message ${role}-message`;
       messageDiv.innerText = text;
-
       if (role === 'ai') {
         const avatarDiv = document.createElement("div");
         avatarDiv.className = 'avatar';
         avatarDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`;
         messageContainer.appendChild(avatarDiv);
       }
-      
       messageContainer.appendChild(messageDiv);
       chatArea.appendChild(messageContainer);
       chatArea.parentElement.scrollTop = chatArea.parentElement.scrollHeight;
@@ -246,26 +216,18 @@
     const checkVapiReady = () => {
       return new Promise((resolve) => {
         const interval = setInterval(() => {
-          if (window.Vapi) {
-            clearInterval(interval);
-            resolve(window.Vapi);
-          }
+          if (window.Vapi) { clearInterval(interval); resolve(window.Vapi); }
         }, 100);
       });
     };
     
     document.addEventListener('DOMContentLoaded', async () => {
-        // Remove example messages
-        const chatArea = document.getElementById("chat-area");
-        chatArea.innerHTML = ''; 
-
         const Vapi = await checkVapiReady();
         vapiInstance = new Vapi({
+            // IMPORTANT: Your Vapi Public Key
             publicKey: '75c64877-597f-4833-ab36-9261f74dc5ea',
             baseURL: 'https://api.vapi.ai' 
         });
-        
-        appendMessage('ai', 'Hi there! How can I help you today?');
     });
 
     async function sendMessage() {
@@ -281,6 +243,7 @@
         if (!session) {
           console.log("Starting new Vapi session...");
           session = vapiInstance.start({
+            // IMPORTANT: Your Vapi Assistant ID
             assistantId: 'a039c975-4660-4630-92e3-51582df6b41f'
           });
           
@@ -289,10 +252,9 @@
               appendMessage('ai', message.message);
             }
           });
-
           session.on('error', (e) => {
             console.error("Vapi Session Error:", e);
-            appendMessage('ai', 'Sorry, I encountered an error. Please try again.');
+            appendMessage('ai', 'Sorry, an error occurred. Please try again.');
           });
           
           await new Promise(resolve => setTimeout(resolve, 1000)); 
@@ -300,4 +262,23 @@
         
         session.send({
             type: 'add-message',
-            message:
+            message: { role: 'user', content: text }
+        });
+
+      } catch (error) {
+        console.error("Failed to send message:", error);
+      } finally {
+        sendButton.disabled = false;
+        input.focus();
+      }
+    }
+
+    function handleKey(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+  </script>
+</body>
+</html>
