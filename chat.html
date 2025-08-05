@@ -69,6 +69,7 @@
     let vapiInstance = null;
     const sendButton = document.getElementById('sendButton');
 
+    // Function to ensure Vapi SDK is loaded
     const checkVapiReady = () => {
       return new Promise((resolve) => {
         const interval = setInterval(() => {
@@ -80,10 +81,18 @@
       });
     };
     
+    // Initialize Vapi when the page loads
     document.addEventListener('DOMContentLoaded', async () => {
         const Vapi = await checkVapiReady();
-        // IMPORTANT: Replace with your Public Key from Vapi Dashboard
-        vapiInstance = new Vapi("75c64877-597f-4833-ab36-9261f74dc5ea");
+        
+        // Correctly initializing Vapi with the server URL
+        vapiInstance = new Vapi({
+            // Replace with your Public Key from Vapi Dashboard
+            publicKey: '75c64877-597f-4833-ab36-9261f74dc5ea',
+            // This explicitly sets the correct server address to prevent connection errors
+            baseURL: 'https://api.vapi.ai' 
+        });
+        
         appendMessage('ai', 'Hi there! How can I help you today?');
     });
 
@@ -99,8 +108,12 @@
       try {
         if (!session) {
           console.log("Starting new Vapi session...");
-          // IMPORTANT: Replace with your Assistant ID from Vapi Dashboard
-          session = vapiInstance.start("a039c975-4660-4630-92e3-51582df6b41f");
+          
+          // Correctly passing the assistantId as part of an object
+          session = vapiInstance.start({
+            // Replace with your Assistant ID from Vapi Dashboard
+            assistantId: 'a039c975-4660-4630-92e3-51582df6b41f'
+          });
           
           session.on('message', (message) => {
             if (message.role === 'assistant' && message.message) {
