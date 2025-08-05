@@ -4,72 +4,245 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LoveBreakup AI</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <style>
-    body {
-      background: linear-gradient(to bottom right, #ffe8f0, #fff1f7);
-      font-family: 'Segoe UI', sans-serif;
+    /* Custom CSS Variables for easy theme changes */
+    :root {
+      --body-bg: #f7f8fc;
+      --chatbox-bg: #ffffff;
+      --chatbox-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      --header-bg: #f1f3f6;
+      --user-msg-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --ai-msg-bg: #eef2f7;
+      --input-bg: #f1f3f6;
+      --font-family: 'Poppins', sans-serif;
+      --text-dark: #333;
+      --text-light: #f9f9f9;
+      --text-secondary: #777;
     }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--body-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
     .chat-box {
-      max-width: 600px;
-      margin: 50px auto;
-      background: white;
+      width: 100%;
+      max-width: 700px;
+      height: 85vh;
+      background: var(--chatbox-bg);
+      box-shadow: var(--chatbox-shadow);
       border-radius: 1.5rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
       display: flex;
       flex-direction: column;
-      height: 80vh;
+      overflow: hidden;
     }
+
+    /* Header Styling */
+    .chat-header {
+      background: var(--header-bg);
+      padding: 1.25rem;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+    }
+    .chat-header .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+    }
+    .chat-header .status-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #2ecc71;
+      border-radius: 50%;
+      margin-left: 0.5rem;
+      border: 2px solid var(--header-bg);
+    }
+    
+    /* Chat Area Styling */
     .chat-area-wrapper {
       flex-grow: 1;
       overflow-y: auto;
-      margin-bottom: 1rem;
+      padding: 1.5rem;
     }
     #chat-area {
       display: flex;
       flex-direction: column;
+      gap: 1.25rem; /* Space between messages */
+    }
+
+    /* Message Styling */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .message-container {
+      display: flex;
+      gap: 0.75rem;
+      animation: fadeIn 0.3s ease-out;
+    }
+    .message-container.user {
+      justify-content: flex-end;
+    }
+    .message-container.ai {
+      justify-content: flex-start;
+    }
+    .message-container .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
     .message {
-      padding: 1rem 1.2rem;
-      border-radius: 1rem;
-      max-width: 80%;
-      margin-bottom: 1rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 1.25rem;
+      max-width: 75%;
       line-break: anywhere;
     }
     .ai-message {
-      background-color: #ffe4f0;
-      color: #1a1a1a;
-      align-self: flex-start;
+      background-color: var(--ai-msg-bg);
+      color: var(--text-dark);
+      border-top-left-radius: 0.5rem;
     }
     .user-message {
-      background-color: #f43f8f;
+      background: var(--user-msg-bg);
+      color: var(--text-light);
+      border-top-right-radius: 0.5rem;
+    }
+
+    /* Input Area Styling */
+    .input-area {
+      padding: 1.25rem;
+      border-top: 1px solid #e0e0e0;
+      background: var(--header-bg);
+    }
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      background: var(--chatbox-bg);
+      border-radius: 1.25rem;
+      padding: 0.5rem;
+    }
+    #userInput {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0.5rem 1rem;
+      color: var(--text-dark);
+    }
+    #sendButton {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      background: var(--user-msg-bg);
       color: white;
-      align-self: flex-end;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    #sendButton:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
   <div class="chat-box">
+    <header class="chat-header">
+      <div class="avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </div>
+      <div>
+        <h2 class="font-semibold text-lg text-gray-800">LoveBreakup AI</h2>
+        <div class="flex items-center">
+            <p class="text-sm text-gray-500">Online</p>
+            <div class="status-dot"></div>
+        </div>
+      </div>
+    </header>
+
     <div class="chat-area-wrapper">
         <div id="chat-area">
+            <div class="message-container ai">
+                <div class="avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </div>
+                <div class="message ai-message">
+                    Hi there! This is the new design. How can I help you today?
+                </div>
+            </div>
+            <div class="message-container user">
+                <div class="message user-message">
+                    Wow, this looks amazing!
+                </div>
+            </div>
             </div>
     </div>
 
-    <div class="flex items-center">
-      <input id="userInput" type="text" placeholder="Type your message..." class="flex-1 px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" onkeypress="handleKey(event)" />
-      <button id="sendButton" onclick="sendMessage()" class="ml-3 bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-xl">Send</button>
+    <div class="input-area">
+        <div class="input-wrapper">
+            <input id="userInput" type="text" placeholder="Type your message..." onkeypress="handleKey(event)" />
+            <button id="sendButton" onclick="sendMessage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
     </div>
   </div>
 
   <script src="./vapi-sdk.js"></script>
   
   <script>
+    // The JavaScript logic remains the same as the last working version.
     let session = null;
     let vapiInstance = null;
     const sendButton = document.getElementById('sendButton');
     
-    // This check is still good practice
+    // Function to append messages with the new HTML structure
+    function appendMessage(role, text) {
+      const chatArea = document.getElementById("chat-area");
+
+      const messageContainer = document.createElement("div");
+      messageContainer.className = `message-container ${role}`;
+
+      const messageDiv = document.createElement("div");
+      messageDiv.className = `message ${role}-message`;
+      messageDiv.innerText = text;
+
+      if (role === 'ai') {
+        const avatarDiv = document.createElement("div");
+        avatarDiv.className = 'avatar';
+        avatarDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`;
+        messageContainer.appendChild(avatarDiv);
+      }
+      
+      messageContainer.appendChild(messageDiv);
+      chatArea.appendChild(messageContainer);
+      chatArea.parentElement.scrollTop = chatArea.parentElement.scrollHeight;
+    }
+
     const checkVapiReady = () => {
       return new Promise((resolve) => {
         const interval = setInterval(() => {
@@ -82,8 +255,11 @@
     };
     
     document.addEventListener('DOMContentLoaded', async () => {
+        // Remove example messages
+        const chatArea = document.getElementById("chat-area");
+        chatArea.innerHTML = ''; 
+
         const Vapi = await checkVapiReady();
-        
         vapiInstance = new Vapi({
             publicKey: '75c64877-597f-4833-ab36-9261f74dc5ea',
             baseURL: 'https://api.vapi.ai' 
@@ -104,14 +280,12 @@
       try {
         if (!session) {
           console.log("Starting new Vapi session...");
-          
           session = vapiInstance.start({
             assistantId: 'a039c975-4660-4630-92e3-51582df6b41f'
           });
           
           session.on('message', (message) => {
             if (message.role === 'assistant' && message.message) {
-              console.log("Received AI message:", message.message);
               appendMessage('ai', message.message);
             }
           });
@@ -123,39 +297,7 @@
           
           await new Promise(resolve => setTimeout(resolve, 1000)); 
         }
-
-        console.log("Sending user message:", text);
-         session.send({
+        
+        session.send({
             type: 'add-message',
-            message: {
-              role: 'user',
-              content: text
-            }
-          });
-
-      } catch (error) {
-        console.error("Failed to send message:", error);
-        appendMessage('ai', 'Sorry, something went wrong while connecting.');
-      } finally {
-        sendButton.disabled = false;
-      }
-    }
-
-    function appendMessage(role, text) {
-      const chatArea = document.getElementById("chat-area");
-      const message = document.createElement("div");
-      message.className = `message ${role === "user" ? "user-message" : "ai-message"}`;
-      message.innerText = text;
-      chatArea.appendChild(message);
-      chatArea.parentElement.scrollTop = chatArea.parentElement.scrollHeight;
-    }
-
-    function handleKey(e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        sendMessage();
-      }
-    }
-  </script>
-</body>
-</html>
+            message:
