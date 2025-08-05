@@ -50,7 +50,7 @@
 
   <div id="transcript"><i>Transcript will appear here...</i></div>
 
-  <!-- VAPI Floating Widget Embed -->
+  <!-- Optional Vapi floating widget -->
   <vapi-widget
     assistant-id="a039c975-4660-4630-92e3-51582df6b41f"
     public-key="75c64877-597f-4833-ab36-9261f74dc5ea"
@@ -67,51 +67,42 @@
     const micBtn = document.getElementById('micBtn');
     const transcriptDiv = document.getElementById('transcript');
 
-    async function initVapiAndStart() {
-      try {
-        // Force microphone access
-        await navigator.mediaDevices.getUserMedia({ audio: true });
+    function initVapiAndStart() {
+      if (!vapi) {
+        vapi = new Vapi({
+          apiKey: "75c64877-597f-4833-ab36-9261f74dc5ea",
+          assistant: { id: "a039c975-4660-4630-92e3-51582df6b41f" },
+        });
 
-        // Init Vapi
-        if (!vapi) {
-          vapi = new Vapi({
-            apiKey: "75c64877-597f-4833-ab36-9261f74dc5ea",
-            assistant: { id: "a039c975-4660-4630-92e3-51582df6b41f" },
-          });
+        vapi.on('transcript', (data) => {
+          transcriptDiv.innerHTML = `<b>You said:</b><br>${data.transcript}`;
+        });
 
-          vapi.on('transcript', (data) => {
-            transcriptDiv.innerHTML = `<b>You said:</b><br>${data.transcript}`;
-          });
+        vapi.on('speech', (data) => {
+          console.log("AI is speaking:", data);
+        });
 
-          vapi.on('speech', (data) => {
-            console.log("AI is speaking:", data);
-          });
-
-          vapi.on('end', () => {
-            micBtn.innerText = '🎙️ Tap to Talk';
-            isListening = false;
-          });
-
-          vapi.on('error', (err) => {
-            transcriptDiv.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
-            micBtn.innerText = '🎙️ Tap to Talk';
-            isListening = false;
-          });
-        }
-
-        if (!isListening) {
-          vapi.start();
-          micBtn.innerText = '🛑 Stop';
-          transcriptDiv.innerHTML = `<i>Listening...</i>`;
-          isListening = true;
-        } else {
-          vapi.stop();
+        vapi.on('end', () => {
           micBtn.innerText = '🎙️ Tap to Talk';
           isListening = false;
-        }
-      } catch (err) {
-        alert("Microphone access is required to use this feature. Please allow it.");
-        console.error("Mic permission error:", err);
+        });
+
+        vapi.on('error', (err) => {
+          transcriptDiv.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
+          micBtn.innerText = '🎙️ Tap to Talk';
+          isListening = false;
+        });
+      }
+
+      if (!isListening) {
+        vapi.start();
+        micBtn.innerText = '🛑 Stop';
+        transcriptDiv.innerHTML = `<i>Listening...</i>`;
+        isListening = true;
+      } else {
+        vapi.stop();
+        micBtn.innerText = '🎙️ Tap to Talk';
+        isListening = false;
       }
     }
 
