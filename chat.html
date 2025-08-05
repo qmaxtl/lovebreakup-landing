@@ -7,30 +7,38 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
+    /* --- NEW COLOR THEME (as per your image) --- */
     :root {
-      --primary-color: #d81b60;
-      --body-bg: #f7f8fc;
+      /* New gradient for the header */
+      --primary-gradient: linear-gradient(90deg, #8e44ad 0%, #d81b60 100%);
+      --body-bg: #f9fafb; /* Lighter background */
       --chatbox-bg: #ffffff;
-      --chatbox-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      --chatbox-shadow: rgba(100, 100, 111, 0.15) 0px 7px 29px 0px;
+      
+      /* User message bubble gradient, this already matches well */
       --user-msg-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --ai-msg-bg: #eef2f7;
+      --ai-msg-bg: #f1f3f6; /* Kept it neutral for readability */
+      
       --font-family: 'Poppins', sans-serif;
       --text-dark: #333;
-      --text-light: #f9f9f9;
+      --text-light: #ffffff;
     }
+
     body {
       font-family: var(--font-family);
       background-color: var(--body-bg);
       margin: 0;
       padding: 0;
     }
+
+    /* --- Header Styles (Updated with Gradient) --- */
     .main-header {
-      background-color: var(--primary-color);
-      padding: 1rem 2rem;
+      background: var(--primary-gradient); /* Using the new gradient */
+      padding: 1rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -39,44 +47,52 @@
     .main-header .logo {
       display: flex;
       align-items: center;
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.6rem; /* Slightly bigger font */
+      font-weight: 700; /* Bolder font */
+      letter-spacing: 0.5px;
     }
     .main-header .logo svg {
-      margin-right: 0.5rem;
+      margin-right: 0.75rem;
+      fill: white;
     }
     .main-header nav a {
       color: white;
       text-decoration: none;
-      margin-left: 1.5rem;
+      margin-left: 1.75rem;
       font-size: 1rem;
+      font-weight: 500;
       transition: opacity 0.2s;
       cursor: pointer;
     }
     .main-header nav a:hover {
       opacity: 0.8;
     }
+
+    /* --- Main Content Area --- */
     main {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 2rem;
+      padding: 2.5rem;
     }
+
+    /* --- Chat Styles (Mostly unchanged, they fit the new theme) --- */
     .chat-box {
       width: 100%;
       max-width: 800px;
-      height: calc(100vh - 150px);
+      height: calc(100vh - 160px); /* Adjusted height for padding */
       background: var(--chatbox-bg);
       box-shadow: var(--chatbox-shadow);
       border-radius: 1.5rem;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      border: 1px solid #e5e7eb;
     }
     .chat-header {
-      background: #f1f3f6;
+      background: #ffffff;
       padding: 1.25rem;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e5e7eb;
       display: flex;
       align-items: center;
     }
@@ -84,7 +100,7 @@
       width: 45px;
       height: 45px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      background: var(--primary-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -96,7 +112,7 @@
       background-color: #2ecc71;
       border-radius: 50%;
       margin-left: 0.5rem;
-      border: 2px solid #f1f3f6;
+      border: 2px solid #ffffff;
     }
     .chat-area-wrapper {
       flex-grow: 1;
@@ -123,7 +139,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      background: var(--primary-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -147,8 +163,8 @@
     }
     .input-area {
       padding: 1.25rem;
-      border-top: 1px solid #e0e0e0;
-      background: #f1f3f6;
+      border-top: 1px solid #e5e7eb;
+      background: #f9fafb;
     }
     .input-wrapper {
       display: flex;
@@ -156,6 +172,7 @@
       background: var(--chatbox-bg);
       border-radius: 1.25rem;
       padding: 0.5rem;
+      border: 1px solid #e5e7eb;
     }
     #userInput {
       flex-grow: 1;
@@ -185,13 +202,12 @@
   
   <header class="main-header">
     <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#fff" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
       LoveBreakup
     </div>
     <nav>
       <a href="/index.html">Home</a>
       <a href="/profile.html" title="View Profile">Welcome, amitg14</a>
-      
       <a onclick="logout()">Logout</a>
     </nav>
   </header>
@@ -227,6 +243,7 @@
   <script src="./vapi-sdk.js"></script>
   
   <script>
+    // The JavaScript logic remains the same
     let session = null;
     let vapiInstance = null;
     const sendButton = document.getElementById('sendButton');
@@ -314,24 +331,12 @@
       }
     }
 
-    // स्टेप 3: Logout फंक्शन बनाएँ
     function logout() {
-      // लॉग आउट करने से पहले यूजर से कन्फर्म करें
       const isConfirmed = confirm("Are you sure you want to logout?");
-
       if (isConfirmed) {
-        // एक असली वेबसाइट में, आप यहाँ अपने सर्वर (backend) को बताते कि यूजर लॉग आउट हो गया है।
-        // उदाहण के लिए: fetch('/api/logout', { method: 'POST' });
-        
-        // ब्राउज़र से यूजर का कोई भी डेटा साफ़ करें (अगर ज़रूरी हो)
-        // localStorage.removeItem('userToken');
-
-        // यूजर को बताएं कि वह लॉग आउट हो गया है और उसे लॉगइन पेज पर भेजें।
         alert("You have been logged out successfully.");
-        // यहाँ अपने लॉगइन पेज का सही URL डालें
         window.location.href = "/login.html"; 
       }
-      // अगर यूजर 'Cancel' पर क्लिक करता है, तो कुछ नहीं होगा।
     }
   </script>
 </body>
