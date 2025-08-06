@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon - LoveBreakup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ff6ba2, #d92781);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      border: none;
+      border-radius: 50px;
+      background: #fff;
+      color: #d92781;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s ease;
+      box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn:hover {
+      background: #ffd1e5;
+      color: #d92781;
+    }
+
+    .coming-soon-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .countdown {
+      font-size: 2rem;
+      margin-top: 20px;
+      display: none; /* Show it only if using countdown */
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="coming-soon-box">
+    <div class="logo">💔 LoveBreakup</div>
+    <h1>Something Beautiful is Coming...</h1>
+    <p>We’re building your 24/7 emotional healing companion. Voice journals, AI support, recovery tools — all in one powerful place. Stay tuned for the launch.</p>
+    <a href="#" class="btn">Notify Me</a>
+    
+    <!-- Optional Countdown Timer -->
+    <div class="countdown" id="countdown">
+      Launching In: <span id="timer">00d 00h 00m 00s</span>
+    </div>
+  </div>
+
+  <!-- Countdown Script (Optional) -->
+  <script>
+    const countdownElement = document.getElementById('countdown');
+    const timerElement = document.getElementById('timer');
+
+    // Uncomment below to enable countdown
+    /*
+    countdownElement.style.display = 'block';
+    const launchDate = new Date("2025-08-15T00:00:00").getTime();
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        timerElement.innerHTML = "We're Live!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+    */
+  </script>
+</body>
+</html>
