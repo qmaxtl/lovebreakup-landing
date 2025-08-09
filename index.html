@@ -3,151 +3,657 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon - LoveBreakup.com</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>LoveBreakup – Your Heart’s Safe Place</title>
+  <meta name="description" content="Breakups hurt. Staying broken is not your destiny. LoveBreakup AI + human wisdom to help you heal and rise again." />
+  
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3', 300: '#fda4af',
+              400: '#fb7185', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c',
+              800: '#9f1239', 900: '#881337'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fdf0f5, #ffe1ec);
-      color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      padding: 20px;
-    }
-
-    .coming-soon-box {
-      background: #ffffff;
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 40px 30px;
-      max-width: 700px;
-      width: 100%;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 1.7rem;
-      font-weight: bold;
-      color: #d92781;
-      margin-bottom: 25px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      font-weight: 700;
-      background: linear-gradient(to right, #d92781, #ff6ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      color: #555;
-      line-height: 1.6;
-    }
-
-    .countdown {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .time-box {
-      background: #fff0f7;
-      border-radius: 15px;
-      padding: 20px 25px;
-      min-width: 80px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .time-box:hover {
-      transform: scale(1.05);
-    }
-
-    .time-box span {
-      display: block;
-      font-size: 2rem;
-      font-weight: bold;
-      color: #d92781;
-    }
-
-    .label {
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      .time-box {
-        min-width: 60px;
-        padding: 15px;
-      }
-
-      .time-box span {
-        font-size: 1.5rem;
-      }
-    }
+    html,body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif}
+    .glass{backdrop-filter: blur(10px); background: linear-gradient(120deg, rgba(255,255,255,.22), rgba(255,255,255,.08)); border:1px solid rgba(255,255,255,.25)}
+    .bg-gradient-hero{background: radial-gradient(60% 120% at 50% 0%, #ffe4e6 0%, #fff 45%, #e0e7ff 100%)}
+    .soft-shadow{box-shadow: 0 10px 30px rgba(16,24,40,.08)}
   </style>
 </head>
-<body>
-  <div class="coming-soon-box">
-    <div class="logo">💔 LoveBreakup.com</div>
-    <h1>Something Beautiful is Coming...</h1>
-    <p>We’re building your 24/7 emotional healing companion.<br>
-    Voice journals, AI support, recovery tools, all in one powerful place.<br>
-    Stay tuned for the launch.</p>
+<body class="text-gray-900 bg-white">
+  <!-- Top Announcement Bar -->
+  <div class="w-full bg-gradient-to-r from-brand-600 via-rose-600 to-pink-600 text-white text-center text-sm py-2">
+    Launch Special: Heart Reset Plan $19 • Healing Empire Bundle $49 • 7‑day feel‑lighter guarantee
+  </div>
 
-    <div class="countdown" id="countdown">
-      <div class="time-box"><span id="days">00</span><div class="label">Days</div></div>
-      <div class="time-box"><span id="hours">00</span><div class="label">Hours</div></div>
-      <div class="time-box"><span id="minutes">00</span><div class="label">Min</div></div>
-      <div class="time-box"><span id="seconds">00</span><div class="label">Sec</div></div>
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-2">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21s-7-4.438-7-10a4 4 0 0 1 7-2.646A4 4 0 0 1 19 11c0 5.562-7 10-7 10Z" fill="#e11d48"/>
+          </svg>
+          <span class="font-extrabold text-lg">LoveBreakup</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#tools" class="hover:text-brand-700">Healing Tools</a>
+          <a href="#lovebreakup-ai" class="hover:text-brand-700">LoveBreakup AI</a>
+          <a href="#stories" class="hover:text-brand-700">Stories</a>
+          <a href="#pricing" class="hover:text-brand-700">Pricing</a>
+          <a href="#quiz" class="hover:text-brand-700">Stage Quiz</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#login" class="hidden sm:inline-flex text-sm text-gray-700 hover:text-gray-900">Login</a>
+          <a href="#quiz" class="inline-flex items-center rounded-2xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 soft-shadow">Start Healing</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" class="bg-gradient-hero relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/70 glass px-3 py-1 text-xs font-medium text-rose-700 soft-shadow">
+            <span class="inline-block h-2 w-2 rounded-full bg-rose-600"></span>
+            Your Heart’s Safe Place to Break, Heal & Rise Again
+          </div>
+          <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
+            Breakups hurt. <span class="text-brand-700">Staying broken</span> is not your destiny.
+          </h1>
+          <p class="mt-4 text-lg text-gray-700 max-w-xl">Join a guided, science‑backed + heart‑centered journey with LoveBreakup AI, rituals, and daily micro‑wins. Start free or reset your heart in 30 days.</p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href="#quiz" class="inline-flex justify-center items-center rounded-2xl bg-brand-600 px-6 py-3 text-white font-semibold hover:bg-brand-700 soft-shadow">Start My Healing Journey</a>
+            <a href="#lovebreakup-ai" class="inline-flex justify-center items-center rounded-2xl border border-gray-300 px-6 py-3 font-semibold hover:bg-gray-50">Meet LoveBreakup AI</a>
+          </div>
+          <div class="mt-6 flex items-center gap-4 text-xs text-gray-600">
+            <div class="flex -space-x-2">
+              <img class="h-7 w-7 rounded-full border border-white" src="https://i.pravatar.cc/32?img=1" alt=""/>
+              <img class="h-7 w-7 rounded-full border border-white" src="https://i.pravatar.cc/32?img=2" alt=""/>
+              <img class="h-7 w-7 rounded-full border border-white" src="https://i.pravatar.cc/32?img=3" alt=""/>
+            </div>
+            <span>1,000,000+ tiny healing wins shared</span>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="rounded-3xl glass soft-shadow p-4">
+            <!-- Showcase card (replacing inline chat) -->
+            <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+              <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Calm sunrise – hope after heartbreak"/>
+              <div class="p-4">
+                <h3 class="font-semibold">What healing feels like inside</h3>
+                <p class="mt-1 text-sm text-gray-600">Guided rituals, tiny wins, and gentle nudges. Try it free chat opens from the corner when you’re ready.</p>
+              </div>
+            </div>
+            
+          <div class="absolute -bottom-6 -right-6 hidden lg:block">
+            <div class="rounded-2xl bg-white border border-gray-100 px-4 py-3 soft-shadow">
+              <p class="text-xs text-gray-700"><span class="font-semibold">Live:</span> Ananya just completed Day 12 of the 21‑Day Challenge</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof strip -->
+  <section class="bg-white border-t border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-wrap items-center justify-center gap-6 text-gray-500 text-xs">
+        <span class="uppercase tracking-wider">Trauma‑informed • AI‑assisted • Human‑reviewed • Ritual‑based</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools (Free + Highlights) -->
+  <section id="tools" class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Healing that actually moves you forward</h2>
+        <p class="mt-3 text-gray-600">Tiny daily actions + smart nudges beat endless overthinking. Start with free tools upgrade when you’re ready.</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="rounded-2xl border border-gray-200 p-6 soft-shadow">
+          <div class="h-10 w-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
+            <span class="text-rose-600 font-bold">✦</span>
+          </div>
+          <h3 class="font-semibold text-lg">Healing Stage Quiz</h3>
+          <p class="mt-2 text-sm text-gray-600">2‑minute quiz → instant PDF roadmap tailored to your patterns.</p>
+          <a href="#quiz" class="mt-4 inline-flex text-sm font-semibold text-brand-700 hover:underline">Take the quiz</a>
+        </div>
+        <div class="rounded-2xl border border-gray-200 p-6 soft-shadow">
+          <div class="h-10 w-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
+            <span class="text-rose-600 font-bold">❤</span>
+          </div>
+          <h3 class="font-semibold text-lg">Voice Journal + Summary</h3>
+          <p class="mt-2 text-sm text-gray-600">Speak your truth. Get auto‑summaries + patterns detected for you.</p>
+          <a href="#pricing" class="mt-4 inline-flex text-sm font-semibold text-brand-700 hover:underline">Unlock in $19 plan</a>
+        </div>
+        <div class="rounded-2xl border border-gray-200 p-6 soft-shadow">
+          <div class="h-10 w-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
+            <span class="text-rose-600 font-bold">⚡</span>
+          </div>
+          <h3 class="font-semibold text-lg">Relapse Map Alerts</h3>
+          <p class="mt-2 text-sm text-gray-600">We warn you before you text them. Pattern spikes trigger gentle nudges.</p>
+          <a href="#pricing" class="mt-4 inline-flex text-sm font-semibold text-brand-700 hover:underline">See plans</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LoveBreakup AI -->
+  <section id="lovebreakup-ai" class="bg-gradient-to-b from-white to-rose-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Meet <span class="text-brand-700">LoveBreakup AI</span> your 24/7 heart companion</h2>
+          <p class="mt-3 text-gray-700">Not a therapist. Not a cliché quote bot. LoveBreakup AI blends evidence‑based micro‑interventions with deep empathy. Late‑night spirals, morning triggers, midday crashes you’re not alone.</p>
+          <ul class="mt-6 space-y-3 text-sm text-gray-700">
+            <li>• Unlimited premium chat in the $19 plan</li>
+            <li>• Voice journal understanding + pattern detection</li>
+            <li>• SOS scripts for urges and loneliness</li>
+            <li>• Progress dashboard and milestone badges</li>
+          </ul>
+          <div class="mt-6 flex gap-3">
+            <a href="#buy-19" class="inline-flex rounded-2xl bg-brand-600 px-6 py-3 text-white font-semibold hover:bg-brand-700">Start My Heart Reset $19</a>
+            <a href="#buy-49" class="inline-flex rounded-2xl border border-gray-300 px-6 py-3 font-semibold hover:bg-gray-50">Own All Tools $49</a>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-gray-200 bg-white p-6 soft-shadow">
+          <img class="w-full rounded-2xl" src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200&auto=format&fit=crop" alt="Gentle sunrise over ocean – symbolizing healing"/>
+          <p class="text-xs text-gray-500 mt-3">Real people. Real relief. Built with care in India for the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories -->
+  <section id="stories" class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Healing wins from our community</h2>
+        <p class="mt-3 text-gray-600">Tiny steps, big shifts. Shareable, anonymous milestones that inspire others to keep going.</p>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="stories-grid"></div>
+      <div class="mt-8 text-center">
+        <a href="#quiz" class="inline-flex rounded-2xl border border-gray-300 px-5 py-3 text-sm font-semibold hover:bg-gray-50">Find your healing stage</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Choose Your Healing Path</h2>
+        <p class="mt-3 text-gray-600">Start free. Upgrade when you’re ready. 7‑day feel‑lighter guarantee.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3 items-stretch">
+        <div class="rounded-2xl border border-gray-200 p-6 flex flex-col">
+          <div class="mb-4">
+            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium">Free</span>
+          </div>
+          <h3 class="text-xl font-semibold">Starter Sanctuary</h3>
+          <p class="mt-2 text-gray-600">Begin gently. Get daily support and a personalized roadmap.</p>
+          <div class="mt-6">
+            <div class="text-4xl font-bold">$0</div>
+            <div class="text-sm text-gray-500 mt-1">No card needed</div>
+          </div>
+          <ul class="mt-6 space-y-3 text-sm text-gray-700">
+            <li>• 15 AI messages/day (LoveBreakup AI)</li>
+            <li>• Healing Stage Quiz + PDF plan</li>
+            <li>• Mood check‑ins + streaks</li>
+            <li>• “Letter to My Ex” wall (anon)</li>
+          </ul>
+          <a id="start-free" href="#quiz" class="mt-auto inline-flex justify-center rounded-xl border border-gray-300 px-4 py-3 text-sm font-medium hover:bg-gray-50">Try Free</a>
+        </div>
+
+        <div class="relative rounded-2xl border-2 border-rose-300 p-6 shadow-sm bg-rose-50/30 flex flex-col">
+          <div class="absolute -top-3 left-6">
+            <span class="inline-flex items-center rounded-full bg-rose-600 px-3 py-1 text-xs font-semibold text-white">Most Chosen</span>
+          </div>
+          <div class="mb-4">
+            <span class="inline-flex items-center rounded-full bg-rose-100 px-3 py-1 text-sm font-medium">Heart Reset Plan</span>
+          </div>
+          <h3 class="text-xl font-semibold">30‑Day Heart Reset</h3>
+          <p class="mt-2 text-gray-700">Guided daily system to stop pain cycles and rebuild self‑worth.</p>
+          <div class="mt-6 flex items-end gap-3">
+            <div class="text-4xl font-bold">$19</div>
+            <div class="text-sm text-gray-500 line-through">$100</div>
+          </div>
+          <div class="text-xs text-gray-600 mt-1">Perceived value $1,000 launch price</div>
+          <ul class="mt-6 space-y-3 text-sm text-gray-800">
+            <li>• LoveBreakup AI Premium (unlimited)</li>
+            <li>• 21‑Day Challenge + audio rituals</li>
+            <li>• Voice Journal + auto‑summary</li>
+            <li>• Forgiveness & Closure Kit</li>
+            <li>• Self‑Worth Rebuild Protocol</li>
+            <li>• SOS Mode + Relapse Map alerts</li>
+            <li>• Progress dashboard + badges</li>
+          </ul>
+          <a id="buy-19" href="#checkout" class="mt-6 inline-flex justify-center rounded-xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white hover:bg-rose-700">Start My Heart Reset $19</a>
+          <p class="mt-3 text-xs text-gray-500">7‑day feel‑lighter guarantee</p>
+          <label class="mt-4 flex items-start gap-3 rounded-xl border border-rose-200 bg-white p-3 text-sm cursor-pointer">
+            <input type="checkbox" class="mt-1 h-4 w-4" id="bump" />
+            <span><strong>Add Lifetime Bundle</strong> now for +$30 (total $49). Get all tools & updates forever.</span>
+          </label>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 p-6 flex flex-col">
+          <div class="mb-4">
+            <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium">All Tools</span>
+          </div>
+          <h3 class="text-xl font-semibold">Healing Empire Bundle</h3>
+          <p class="mt-2 text-gray-600">Own the full library for life. Future updates included.</p>
+          <div class="mt-6 flex items-end gap-3">
+            <div class="text-4xl font-bold">$49</div>
+            <div class="text-sm text-gray-500 line-through">$299</div>
+          </div>
+          <div class="text-xs text-gray-600 mt-1">Lifetime access. No subscription.</div>
+          <ul class="mt-6 space-y-3 text-sm text-gray-700">
+            <li>• Everything in Heart Reset</li>
+            <li>• 30 guided meditations</li>
+            <li>• Rewire Pack (audio + routines)</li>
+            <li>• No‑Contact Automations</li>
+            <li>• Date‑Readiness & attachment scan</li>
+            <li>• Breakup Navigation mini‑courses</li>
+            <li>• Priority roadmap reviews</li>
+          </ul>
+          <a id="buy-49" href="#checkout" class="mt-auto inline-flex justify-center rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white hover:bg-indigo-700">Own the Entire Healing Empire  $49</a>
+          <p class="mt-3 text-xs text-gray-500">Lifetime updates included</p>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center text-xs text-gray-500">Prices in USD. Taxes may apply. Instant access after purchase.</div>
+    </div>
+  </section>
+
+  <!-- CTA Deep -->
+  <section class="bg-gradient-to-r from-rose-50 via-white to-indigo-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="rounded-3xl border border-gray-200 bg-white p-8 text-center soft-shadow">
+        <h3 class="text-2xl md:text-3xl font-extrabold">Feel lighter in 7 days or your money back</h3>
+        <p class="mt-3 text-gray-700">No subscriptions. No pressure. Just a clear path out of the pain loop.</p>
+        <div class="mt-6 flex flex-col sm:flex-row justify-center gap-3">
+          <a href="#buy-19" class="inline-flex rounded-2xl bg-brand-600 px-6 py-3 text-white font-semibold hover:bg-brand-700">Start My Heart Reset $19</a>
+          <a href="#buy-49" class="inline-flex rounded-2xl border border-gray-300 px-6 py-3 font-semibold hover:bg-gray-50">Own All Tools $49</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21s-7-4.438-7-10a4 4 0 0 1 7-2.646A4 4 0 0 1 19 11c0 5.562-7 10-7 10Z" fill="#e11d48"/>
+            </svg>
+            <span class="font-extrabold">LoveBreakup</span>
+          </div>
+          <p class="mt-3 text-sm text-gray-600">Built in India for the world. Trauma‑informed, privacy‑first healing.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold">Explore</h4>
+          <ul class="mt-3 space-y-2 text-sm text-gray-700">
+            <li><a href="#tools" class="hover:underline">Healing Tools</a></li>
+            <li><a href="#lovebreakup-ai" class="hover:underline">LoveBreakup AI</a></li>
+            <li><a href="#stories" class="hover:underline">Stories</a></li>
+            <li><a href="#pricing" class="hover:underline">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold">Company</h4>
+          <ul class="mt-3 space-y-2 text-sm text-gray-700">
+            <li><a href="#" class="hover:underline">About</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+            <li><a href="#" class="hover:underline">Blog</a></li>
+            <li><a href="#" class="hover:underline">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold">Legal</h4>
+          <ul class="mt-3 space-y-2 text-sm text-gray-700">
+            <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+            <li><a href="#" class="hover:underline">Terms of Use</a></li>
+          </ul>
+          <form class="mt-4">
+            <label class="sr-only">Email</label>
+            <div class="flex gap-2">
+              <input type="email" placeholder="Get 60‑sec healing tips" class="flex-1 rounded-xl border-gray-300 focus:ring-brand-600 focus:border-brand-600 px-3 py-2"/>
+              <button type="button" class="rounded-xl bg-brand-600 px-4 py-2 text-white text-sm font-semibold hover:bg-brand-700">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="mt-8 text-xs text-gray-500">© <span id="year"></span> LoveBreakup. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Floating Chat Widget -->
+  <button id="chatFloatBtn" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-3 text-white font-semibold shadow-xl hover:bg-brand-700">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H9l-4 4v-4H7a3 3 0 0 1-3-3V5Z" fill="currentColor"/></svg>
+    Chat with LoveBreakup AI
+  </button>
+  <div id="chatBackdrop" class="fixed inset-0 z-40 hidden bg-black/40"></div>
+  <aside id="chatPanel" class="fixed top-0 right-0 z-50 h-full w-full sm:w-[420px] bg-gradient-to-b from-rose-50 via-white to-white border-l border-gray-200 shadow-2xl translate-x-full transition-transform duration-300">
+    <!-- Header -->
+    <div class="flex items-center justify-between px-4 py-3 border-b bg-white/70 backdrop-blur">
+      <div class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold">L</div>
+        <div>
+          <div class="font-semibold leading-tight">LoveBreakup AI</div>
+          <div class="text-xs text-gray-500 flex items-center gap-1">
+            <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
+            Online now
+          </div>
+        </div>
+      </div>
+      <button id="chatClose" class="rounded-lg p-2 hover:bg-gray-100" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Messages area with subtle watermark -->
+    <div class="relative h-[calc(100%-160px)] overflow-y-auto">
+      <div class="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
+        <div class="text-5xl font-extrabold tracking-tight text-rose-100/50 rotate-[-18deg]">LoveBreakup AI</div>
+      </div>
+      <div class="p-4 space-y-3" id="chatMessages"><!-- Empty on load --></div>
+    </div>
+
+    <!-- Composer -->
+    <div class="px-4 py-3 border-t bg-white/80 backdrop-blur">
+      <div class="text-xs text-gray-500 mb-2">Live API coming soon. Demo only.</div>
+      <div class="flex items-center gap-2">
+        <input disabled class="flex-1 rounded-full border-gray-300 bg-gray-50 text-gray-400 px-4 py-3 shadow-sm" placeholder="Type to chat… (disabled in demo)"/>
+        <button disabled class="rounded-full px-5 py-3 text-sm font-semibold text-white bg-gray-300 shadow-sm">Send</button>
+      </div>
+      <div class="mt-2 flex items-center gap-2 text-[11px] text-gray-500">
+        <span class="h-2 w-2 rounded-full bg-emerald-500"></span> Safe • Private • Judgment‑free
+      </div>
+    </div>
+  </aside>
+
+  <!-- Quiz Modal (7-step, engaging) -->
+  <div id="quizModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div id="quizBackdropDim" class="absolute inset-0 bg-black/40"></div>
+    <div class="relative w-full max-w-lg rounded-2xl bg-white p-6 soft-shadow" id="quizCard">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-xl font-bold">Healing Stage Quiz</h3>
+          <p class="mt-1 text-sm text-gray-600">Answer honestly. Private & judgment‑free.</p>
+        </div>
+        <button class="text-gray-500" onclick="toggleQuiz(false)">✕</button>
+      </div>
+      <div class="mt-4">
+        <div class="flex items-center justify-between mb-2 text-xs text-gray-500">
+          <span id="quizStepCount">Step 1 of 7</span>
+          <span id="quizPercent">14%</span>
+        </div>
+        <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+          <div id="quizProgress" class="h-2 bg-brand-600 rounded-full" style="width:14%"></div>
+        </div>
+      </div>
+      <div id="quizStep" class="mt-6"></div>
+      <div class="mt-6 flex items-center justify-between">
+        <button id="quizBack" class="rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-50 disabled:opacity-40" disabled>Back</button>
+        <button id="quizNext" class="rounded-xl bg-brand-600 px-5 py-2.5 text-white text-sm font-semibold hover:bg-brand-700">Next</button>
+      </div>
+      <div class="mt-3 text-xs text-gray-500">We’ll email your PDF plan after you finish. No spam, ever.</div>
     </div>
   </div>
 
   <script>
-    const launchDate = new Date("2025-08-15T04:30:00Z").getTime(); // 10 AM IST
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
+    // Stories mock data
+    const stories = [
+      { name:'Ananya, 27', text:'"Deleted their number today. Felt strong for the first time in months."', day:'Day 12' },
+      { name:'David, 34', text:'"I slept 7 hours after the breathing ritual. No midnight spiral."', day:'Day 7' },
+      { name:'Isha, 23', text:'"Sent my closure letter to myself. Felt lighter instantly."', day:'Day 3' },
+      { name:'Ravi, 29', text:'"Did not check their Instagram for 48 hours. Huge win."', day:'Day 5' },
+      { name:'Lia, 31', text:'"Voice journal helped me hear my own strength."', day:'Day 9' },
+      { name:'Arun, 26', text:'"Relapse Map pinged me right before texting. Saved me."', day:'Day 15' },
+    ];
+    const grid = document.getElementById('stories-grid');
+    stories.forEach((s, i)=>{
+      const card = document.createElement('div');
+      card.className = 'rounded-2xl border border-gray-200 p-6 soft-shadow transition hover:-translate-y-0.5 hover:shadow-md';
+      card.innerHTML = `<div class="text-xs text-rose-600 font-semibold">${s.day}</div>
+                        <p class="mt-2 text-gray-800">${s.text}</p>
+                        <div class="mt-3 text-sm text-gray-600"> ${s.name}</div>`;
+      card.style.opacity = 0; card.style.transform = 'translateY(6px)';
+      setTimeout(()=>{ card.style.transition='all .5s'; card.style.opacity=1; card.style.transform='translateY(0)'; }, 120*i);
+      grid.appendChild(card);
+    });
 
-      if (distance < 0) {
-        clearInterval(interval);
-        document.querySelector('.countdown').innerHTML = "🎉 We're Live!";
-        return;
+    // Quiz modal (7 steps)
+    const qData = [
+      {
+        q: '💌 How often do you feel an urge to contact them?', name: 'urge',
+        options: ['Often','Sometimes','Rarely','Never']
+      },
+      {
+        q: '😴 Sleep quality in the last 7 days?', name: 'sleep',
+        options: ['Poor','Okay','Good','Great']
+      },
+      {
+        q: '🚫 Are you currently in no‑contact?', name: 'nocontact',
+        options: ['Yes','Partial','No','Not sure']
+      },
+      {
+        q: '❤️ When you think of them, what’s your first body reaction?', name: 'body',
+        options: ['Stomach knot','Heart racing','Tear up','Neutral']
+      },
+      {
+        q: '📱 Time spent re‑reading old chats/photos weekly?', name: 'ruminate',
+        options: ['Over 3 hours','1–3 hours','Less than 1 hour','None']
+      },
+      {
+        q: '🌅 How often do you feel hopeful about the future?', name: 'hope',
+        options: ['Every day','Sometimes','Rarely','Never']
+      },
+      {
+        q: '💪 If healing was a ladder, where are you now?', name: 'ladder',
+        options: ['Just started','A few steps in','Halfway there','Almost at the top']
       }
+    ];
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let qIndex = 0; const answers = {}; let quizDone = false;
+    const quizModal = document.getElementById('quizModal');
+    const quizStep = document.getElementById('quizStep');
+    const quizBack = document.getElementById('quizBack');
+    const quizNext = document.getElementById('quizNext');
+    const quizProgress = document.getElementById('quizProgress');
+    const quizStepCount = document.getElementById('quizStepCount');
+    const quizPercent = document.getElementById('quizPercent');
 
-      daysEl.textContent = days;
-      hoursEl.textContent = hours;
-      minutesEl.textContent = minutes;
-      secondsEl.textContent = seconds;
-    }, 1000);
+    function renderStep(){
+      quizDone = false;
+      const item = qData[qIndex];
+      const selected = answers[item.name] || '';
+      const opts = item.options.map(o => `
+        <label class=\"group border rounded-2xl p-3 cursor-pointer flex items-center gap-3 transition hover:shadow-sm hover:-translate-y-0.5 ${selected===o? 'border-brand-600 ring-2 ring-brand-100' : 'border-gray-200'}\">
+          <input type=\"radio\" name=\"${item.name}\" value=\"${o}\" class=\"sr-only\">
+          <span class=\"inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-600\">•</span>
+          <span class=\"text-sm\">${o}</span>
+        </label>`).join('');
+
+      quizStep.innerHTML = `
+        <div class=\"text-base font-semibold\">${item.q}</div>
+        <div class=\"mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3\">${opts}</div>
+      `;
+
+      // Progress
+      const pct = Math.round(((qIndex+1)/qData.length)*100);
+      quizProgress.style.width = pct + '%';
+      quizStepCount.textContent = `Step ${qIndex+1} of ${qData.length}`;
+      quizPercent.textContent = pct + '%';
+
+      // Buttons
+      quizBack.disabled = qIndex===0;
+      quizNext.textContent = (qIndex === qData.length-1) ? 'See My Stage' : 'Next';
+
+      // Bind to radio change (stable; prevents backdrop clicks after re-render)
+      quizStep.querySelectorAll('input[type=\"radio\"]').forEach((inp)=>{
+        inp.addEventListener('change', (e)=>{
+          e.stopPropagation();
+          answers[item.name] = inp.value;
+          // Defer to next frame so pointerup can't hit the backdrop
+          requestAnimationFrame(()=>{ goNext(); });
+        }, { once: true });
+      });
+    }
+
+    function renderResult(){
+      // Lock progress to 100% and show stage without closing the modal
+      const { stage, summary } = computeStage();
+      // Move index to last so Back leads to last question
+      qIndex = qData.length - 1;
+      quizDone = true;
+
+      // Progress bar full
+      quizProgress.style.width = '100%';
+      quizStepCount.textContent = 'Result';
+      quizPercent.textContent = '100%';
+
+      // Result UI
+      quizStep.innerHTML = `
+        <div class="text-base font-semibold">Your Healing Stage: <span class="text-brand-700">${stage}</span></div>
+        <div class="mt-3 text-sm text-gray-700">${summary}</div>
+        <ul class="mt-4 grid grid-cols-1 gap-2 text-sm text-gray-700">
+          <li>• Personalized PDF roadmap (email)</li>
+          <li>• 3 daily rituals picked for you</li>
+          <li>• Relapse Map tips for next 72 hours</li>
+        </ul>
+      `;
+
+      // Buttons
+      quizBack.disabled = false; // goBack -> returns to Q7
+      quizNext.textContent = 'Get My PDF Plan';
+    }
+
+    function computeStage(){
+      // Simple heuristic scoring
+      const scoreMap = {
+        urge: { 'Often':3, 'Sometimes':2, 'Rarely':1, 'Never':0 },
+        sleep: { 'Poor':3, 'Okay':2, 'Good':1, 'Great':0 },
+        nocontact: { 'Yes':0, 'Partial':1, 'No':2, 'Not sure':1 },
+        body: { 'Stomach knot':2, 'Heart racing':2, 'Tear up':1, 'Neutral':0 },
+        ruminate: { 'Over 3 hours':3, '1–3 hours':2, 'Less than 1 hour':1, 'None':0 },
+        hope: { 'Every day':0, 'Sometimes':1, 'Rarely':2, 'Never':3 },
+        ladder: { 'Just started':3, 'A few steps in':2, 'Halfway there':1, 'Almost at the top':0 }
+      };
+      let total = 0; Object.keys(scoreMap).forEach(k=>{ const v = answers[k]; if(v!=null && scoreMap[k][v]!=null) total += scoreMap[k][v]; });
+      let stage = 'Stabilizing';
+      if(total >= 13) stage = 'Crisis Loop';
+      else if(total >= 8) stage = 'Acute Heartbreak';
+      else if(total >= 4) stage = 'Stabilizing';
+      else stage = 'Rebuild Ready';
+      const desc = {
+        'Crisis Loop':'High-intensity pain patterns. We’ll use SOS routines, strict no‑contact aids, and body‑downshifts first.',
+        'Acute Heartbreak':'Waves are heavy but respond to structure. We’ll reinforce sleep, breathwork, and relapse shields.',
+        'Stabilizing':'You’re gaining control. We’ll build consistency and self‑worth reps.',
+        'Rebuild Ready':'Solid baseline. Time to reopen joy and future focus.'
+      };
+      return { stage, summary: desc[stage] };
+    }
+
+    function goNext(){
+      if(qIndex < qData.length-1){
+        qIndex++;
+        renderStep();
+      } else {
+        // Show result INSIDE the modal do NOT close
+        renderResult();
+      }
+    }
+    function goBack(){ if(qIndex>0){ qIndex--; renderStep(); } }
+
+    quizBack.addEventListener('click', goBack);
+    function onQuizNext(){
+      if(!quizDone){ goNext(); }
+      else {
+        // Finalize result action
+        alert('Great! We will generate your personalized PDF next (connect email/API).');
+        // Keep modal open for now or close if you prefer:
+        // toggleQuiz(false);
+      }
+    }
+    quizNext.addEventListener('click', onQuizNext);
+
+    function toggleQuiz(show){
+      if(show){
+        quizModal.classList.remove('hidden');
+        quizModal.classList.add('flex');
+        qIndex=0; renderStep();
+      } else {
+        quizModal.classList.add('hidden');
+        quizModal.classList.remove('flex');
+      }
+    }
+
+    // Prevent accidental close: clicks inside card won't bubble to backdrop
+    document.getElementById('quizCard').addEventListener('click', (e)=> e.stopPropagation());
+    document.getElementById('quizBackdropDim').addEventListener('click', ()=> toggleQuiz(false));
+
+    // Open quiz from any #quiz link
+    document.querySelectorAll('a[href="#quiz"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{ e.preventDefault(); toggleQuiz(true); });
+    });
+
+    // Order bump checkbox
+    const bump = document.getElementById('bump');
+    if(bump){
+      bump.addEventListener('change', ()=>{
+        if(bump.checked){ /* Optionally scroll to $49 */ }
+      });
+    }
+
+    // Floating chat open/close
+    const chatBtn = document.getElementById('chatFloatBtn');
+    const chatPanel = document.getElementById('chatPanel');
+    const chatBackdrop = document.getElementById('chatBackdrop');
+    const chatClose = document.getElementById('chatClose');
+
+    function openChat(){
+      chatPanel.classList.remove('translate-x-full');
+      chatBackdrop.classList.remove('hidden');
+    }
+    function closeChat(){
+      chatPanel.classList.add('translate-x-full');
+      chatBackdrop.classList.add('hidden');
+    }
+
+    if(chatBtn) chatBtn.addEventListener('click', openChat);
+    if(chatClose) chatClose.addEventListener('click', closeChat);
+    if(chatBackdrop) chatBackdrop.addEventListener('click', closeChat);
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeChat(); });
+
+    // --- Self-tests (non-blocking) ---
+    try {
+      console.assert(typeof toggleQuiz === 'function', 'toggleQuiz should be defined');
+      console.assert(document.getElementById('quizNext'), '#quizNext exists');
+      console.assert(document.querySelectorAll('[data-open-chat]').length === 0, 'No extra chat triggers');
+    } catch (e) { console.warn('Self-test warning:', e); }
   </script>
 </body>
 </html>
